@@ -156,7 +156,7 @@ html,body{height:100%;background:var(--ink);color:var(--body);font-family:var(--
 .nav-logo span{color:var(--body);font-size:.9rem}
 .navlink{
   font-family:var(--ui);font-size:.75rem;font-weight:600;
-  letter-spacing:.06em;text-transform:uppercase;
+  letter-spacing Side:.06em;text-transform:uppercase;
   color:var(--dim);padding:0 14px;height:50px;
   display:flex;align-items:center;cursor:pointer;
   border-bottom:2px solid transparent;transition:all .15s;position:relative;
@@ -230,7 +230,7 @@ html,body{height:100%;background:var(--ink);color:var(--body);font-family:var(--
 #lab-sidebar{width:260px;flex-shrink:0;background:var(--ink2);border-right:1px solid var(--wire);display:flex;flex-direction:column;overflow:hidden;}
 #lab-sidebar-header{padding:14px 16px;border-bottom:1px solid var(--wire);flex-shrink:0;}
 #lab-sidebar-header h3{font-family:var(--ui);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--dim);margin-bottom:2px;}
-#active-chal-name{font-family:var(--display);font-size:1.1rem;color:var(--orange);letter-spacing Side:.04em;}
+#active-chal-name{font-family:var(--display);font-size:1.1rem;color:var(--orange);letter-spacing:.04em;}
 #lab-flags-list{flex:1;overflow-y:auto}
 .lab-flag-item{display:flex;align-items:center;gap:8px;padding:8px 14px;border-bottom:1px solid var(--wire);font-size:.75rem;cursor:pointer;transition:background .1s;}
 .lab-flag-item:hover{background:var(--ink3)}
@@ -303,7 +303,7 @@ html,body{height:100%;background:var(--ink);color:var(--body);font-family:var(--
 #modal.open{display:flex}
 #mbox{background:var(--ink2);border:1px solid var(--wire2);border-top:2px solid var(--orange);max-width:560px;width:100%;padding:28px;animation:popIn .18s ease;}
 @keyframes popIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-#mbox h2{font-family:var(--display);font-size:1.4rem;color:var(--white);letter-spacing Side:.06em;margin-bottom:4px;}
+#mbox h2{font-family:var(--display);font-size:1.4rem;color:var(--white);letter-spacing:.06em;margin-bottom:4px;}
 .m-cat{font-family:var(--ui);font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--orange);margin-bottom:14px;}
 .m-desc{font-size:.82rem;color:var(--body);line-height:1.8;margin-bottom:16px}
 .m-hint-box{background:var(--ink3);border-left:3px solid var(--teal);padding:12px 16px;font-size:.8rem;color:var(--body);line-height:1.7;margin-bottom:16px;}
@@ -1193,7 +1193,6 @@ function pipeCmd(raw){
   }
   if(content){
     const out=esc(content).replace(/FLAG\{[^}]+\}/g,m=>`<span class="t-flag">${m}</span>`);
-    custom auto capture loop verification triggers here
     tpr(`<span class="t-out">${out}</span>`);
   }
 }
