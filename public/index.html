@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OPSEC CTF Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── DESIGN TOKENS ───────────────────────────── */
+:root{
+  --ink:    #07090f;   /* near-black base */
+  --ink2:   #0e1118;
+  --ink3:   #141925;
+  --ink4:   #1c2333;
+  --wire:   #252f42;
+  --wire2:  #2e3a52;
+  --dim:    #4a5878;
+  --body:   #7f92b0;
+  --pale:   #b8c8de;
+  --white:  #e4edf8;
+  --orange: #e8622a;   /* blood orange — primary accent */
+  --orange2:#ff8c5a;
+  --orange3:rgba(232,98,42,.12);
+  --teal:   #1db8a8;
+  --teal2:  rgba(29,184,168,.1);
+  --red:    #e03535;
+  --yellow: #d4a017;
+  --green:  #2db37a;
+  --font:   'Courier Prime', monospace;
+  --ui:     'Inter', sans-serif;
+  --display:'Bebas Neue', sans-serif;
+  --r:      3px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--ink);color:var(--body);font-family:var(--font);overflow:hidden}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-thumb{background:var(--wire2);border-radius:2px}
+
+.page{display:none;width:100%;height:100%;position:absolute;inset:0}
+.page.active{display:flex;flex-direction:column}
+
+/* ── LOGIN ── */
+#page-login{background:var(--ink);align-items:center;justify-content:center;display:flex;}
+.login-box{background:var(--ink2);border:1px solid var(--wire2);border-top:2px solid var(--orange);padding:36px 32px;width:400px;}
+.field{margin-bottom:16px}
+.field label{display:block;font-family:var(--ui);font-size:.65rem;font-weight:700;text-transform:uppercase;color:var(--dim);margin-bottom:6px;}
+.field input{width:100%;background:var(--ink3);border:1px solid var(--wire);border-radius:var(--r);color:var(--white);padding:10px 14px;outline:none;}
+.field input:focus{border-color:var(--orange)}
+.btn-primary{width:100%;background:var(--orange);color:#fff;font-family:var(--ui);font-size:.82rem;font-weight:700;text-transform:uppercase;padding:11px;border:none;cursor:pointer;}
+
+/* ── SHARED NAV ── */
+#topnav{background:var(--ink2);border-bottom:1px solid var(--wire);height:50px;display:flex;align-items:center;padding:0 20px;}
+.nav-logo{font-family:var(--display);font-size:1.4rem;color:var(--orange);margin-right:28px;cursor:pointer;}
+.navlink{font-family:var(--ui);font-size:.75rem;font-weight:600;text-transform:uppercase;color:var(--dim);padding:0 14px;height:50px;display:flex;align-items:center;cursor:pointer;}
+.navlink.active{color:var(--orange);border-bottom:2px solid var(--orange)}
+.nav-spacer{flex:1}
+
+/* ── MONITOR LAYOUT ── */
+#page-monitor{background:var(--ink);overflow-y:auto;padding:28px 24px;}
+.admin-card{background:var(--ink2);border:1px solid var(--wire);padding:20px;margin-bottom:24px;}
+.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
+.ctrl-group{background:var(--ink3);border:1px solid var(--wire2);padding:16px;border-radius:var(--r);}
+.ctrl-group h3{font-family:var(--ui);color:var(--white);font-size:.85rem;margin-bottom:12px;text-transform:uppercase;}
+
+.board-header-row, .board-row{display:grid;grid-template-columns:80px 1fr 100px 100px 120px;gap:12px;padding:10px 16px;align-items:center;}
+.board-header-row{font-family:var(--ui);font-size:.65rem;color:var(--dim);border-bottom:1px solid var(--wire);font-weight:700;text-transform:uppercase;}
+.board-row{background:var(--ink2);border-bottom:1px solid var(--wire);font-size:.8rem;color:var(--white);}
+
+#page-dash, #page-board, #page-lab {overflow-y:auto; padding:28px 24px;}
+#toast{display:none;position:fixed;bottom:20px;right:20px;z-index:600;padding:12px 18px;background:var(--ink2);border-left:3px solid var(--orange);color:var(--white);font-family:var(--ui);font-size:.8rem;}
+</style>
+</head>
+<body>
+
+<div id="page-login" class="page active">
+  <div class="login-box">
+    <div style="font-family:var(--display); font-size:2rem; color:var(--white); margin-bottom:10px;">OPSEC SYSTEM ENTRY</div>
+    <div id="login-err" style="color:var(--red); font-size:.75rem; margin-bottom:10px;"></div>
+    <div class="field">
+      <label>Operator ID / Assign New Handle</label>
+      <input id="li-user" type="text" placeholder="Username (Auto-registers if new)">
+    </div>
+    <div class="field">
+      <label>Access Key</label>
+      <input id="li-pass" type="password" placeholder="Password">
+    </div>
+    <button class="btn-primary" onclick="doLogin()">Authenticate</button>
+  </div>
+</div>
+
+<nav id="topnav" style="display:none">
+  <div class="nav-logo" onclick="goPage('dash')">OPSEC<span>CTF</span></div>
+  <div class="navlink active" id="nav-dash" onclick="goPage('dash')">Dashboard</div>
+  <div class="navlink" id="nav-lab" onclick="goPage('lab')">Terminal Lab</div>
+  <div class="navlink" id="nav-board" onclick="goPage('board')">Scoreboard</div>
+  <div class="navlink" id="nav-monitor" onclick="goPage('monitor')" style="display:none; color:var(--orange)">Admin Monitor</div>
+  <div class="nav-spacer"></div>
+  <div style="font-family:var(--ui); font-size:.75rem; padding-right:15px;" id="user-display"></div>
+  <button onclick="doLogout()" style="background:transparent; color:var(--dim); border:1px solid var(--wire); padding:5px 10px; cursor:pointer;">Exit</button>
+</nav>
+
+<div id="page-dash" class="page">
+  <div style="font-family:var(--display); font-size:1.8rem; color:var(--white); margin-bottom:20px;">Challenges Directory</div>
+  <div style="color:var(--teal); margin-bottom:15px;" id="local-score-box">Score: 0 pts</div>
+  <div style="color:var(--body); font-size:.9rem; line-height:1.6;">
+    * Navigate to the **Terminal Lab** route workspace to execute commands against the environment variables, hidden filesystems, and custom response hooks to hunt down operational hashes.
+  </div>
+</div>
+
+<div id="page-lab" class="page">
+  <div style="background:#000; border:1px solid var(--wire); padding:20px; min-height:300px; border-radius:var(--r);">
+    <div style="color:var(--green); font-family:var(--font); font-size:.85rem; margin-bottom:15px;">root@opsec-ctf:~# Environment Intercept Ready.</div>
+    <div style="display:flex; gap:10px; margin-top:40px;">
+      <input id="flag-input" type="text" placeholder="FLAG{...}" style="flex:1; background:var(--ink3); border:1px solid var(--wire); color:var(--teal); padding:10px; font-family:var(--font); outline:none;">
+      <button class="btn-primary" onclick="submitFlag()" style="width:150px;">Submit Hash</button>
+    </div>
+  </div>
+</div>
+
+<div id="page-board" class="page">
+  <div class="board-header-row"><div>Rank</div><div>Operator</div><div>Score</div><div>Flags</div><div>Last Action</div></div>
+  <div id="board-rows"></div>
+</div>
+
+<div id="page-monitor" class="page">
+  <div class="admin-card">
+    <div style="font-family:var(--display); font-size:1.5rem; color:var(--orange); margin-bottom:15px;">System Console Command Dashboard</div>
+    
+    <div class="admin-grid">
+      <div class="ctrl-group">
+        <h3>Remap Operator Access Key</h3>
+        <input id="adm-target-user" type="text" placeholder="Target Operator ID" style="width:100%; background:var(--ink); border:1px solid var(--wire); padding:8px; color:#fff; margin-bottom:10px;">
+        <input id="adm-new-pass" type="password" placeholder="New Access Code String" style="width:100%; background:var(--ink); border:1px solid var(--wire); padding:8px; color:#fff; margin-bottom:10px;">
+        <button class="btn-primary" onclick="executeAdminAction('reset_pass')" style="background:var(--yellow); color:#000;">Commit Reset</button>
+      </div>
+
+      <div class="ctrl-group">
+        <h3>Purge Operator Account</h3>
+        <input id="adm-purge-user" type="text" placeholder="Target Operator ID" style="width:100%; background:var(--ink); border:1px solid var(--wire); padding:8px; color:#fff; margin-bottom:10px;">
+        <button class="btn-primary" onclick="executeAdminAction('delete')" style="background:var(--red);">Evict Profile From Database</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="board-header-row"><div>Identity</div><div>Operator Code</div><div>Current Score</div><div>Flags Popped</div><div>Last Intercept</div></div>
+  <div id="admin-monitor-rows"></div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+'use strict';
+
+let sessionUser = null;
+let sessionRole = null;
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 4000);
+}
+
+async function doLogin() {
+  const user = document.getElementById('li-user').value;
+  const pass = document.getElementById('li-pass').value;
+
+  const res = await fetch('/api/auth', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ user, pass })
+  });
+
+  if (res.status !== 200) {
+    const data = await res.json();
+    document.getElementById('login-err').textContent = data.err || 'Access Denied.';
+    return;
+  }
+
+  const data = await res.json();
+  sessionUser = data.user;
+  sessionRole = data.role;
+
+  document.getElementById('page-login').style.display = 'none';
+  document.getElementById('topnav').style.display = 'flex';
+  document.getElementById('user-display').textContent = `Operator: ${sessionUser.toUpperCase()} (${sessionRole})`;
+  
+  if(sessionRole === 'admin') {
+    document.getElementById('nav-monitor').style.display = 'flex';
+  }
+
+  goPage('dash');
+}
+
+function doLogout() {
+  sessionUser = null; sessionRole = null;
+  window.location.reload();
+}
+
+function goPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+  document.querySelectorAll('.navlink').forEach(n => n.classList.remove('active'));
+  
+  document.getElementById('page-' + name).style.display = 'flex';
+  const tab = document.getElementById('nav-' + name);
+  if(tab) tab.classList.add('active');
+
+  if (name === 'board' || name === 'monitor') syncDatabaseStates();
+}
+
+async function syncDatabaseStates() {
+  const res = await fetch('/api/state');
+  const directory = await res.json();
+
+  // Render Public Scoreboard
+  const boardRows = document.getElementById('board-rows');
+  if (boardRows) {
+    const sorted = [...directory].sort((a,b) => b.score - a.score);
+    boardRows.innerHTML = sorted.map((u, i) => `
+      <div class="board-row"><div>#${i+1}</div><div>${u.user}</div><div>${u.score} pts</div><div>${u.flagsCount}</div><div>${u.last}</div></div>
+    `).join('');
+  }
+
+  // Render Rebuilt Admin Monitor telemetry
+  const adminRows = document.getElementById('admin-monitor-rows');
+  if (adminRows && sessionRole === 'admin') {
+    adminRows.innerHTML = directory.map(u => `
+      <div class="board-row">
+        <div style="color:${u.user === 'admin' ? 'var(--teal)' : 'var(--orange)'}">${u.user === 'admin' ? '● ROOT' : '▲ COMPAT'}</div>
+        <div>${u.user} (${u.role})</div>
+        <div>${u.score} pts</div>
+        <div>${u.flagsCount} / 33</div>
+        <div>${u.last}</div>
+      </div>
+    `).join('');
+  }
+}
+
+async function submitFlag() {
+  const inputFlag = document.getElementById('flag-input').value;
+  if(!inputFlag) return;
+
+  const res = await fetch('/api/submit-flag', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ user: sessionUser, inputFlag })
+  });
+
+  const data = await res.json();
+  toast(data.msg);
+  if (data.status === 'ok') {
+    document.getElementById('local-score-box').textContent = `Score: ${data.newScore} pts`;
+    document.getElementById('flag-input').value = '';
+  }
+}
+
+async function executeAdminAction(action) {
+  let payload = { adminUser: sessionUser, action };
+  
+  if (action === 'reset_pass') {
+    payload.targetUser = document.getElementById('adm-target-user').value;
+    payload.newPassword = document.getElementById('adm-new-pass').value;
+  } else if (action === 'delete') {
+    payload.targetUser = document.getElementById('adm-purge-user').value;
+  }
+
+  const res = await fetch('/api/admin-ctrl', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+
+  if (res.status === 200) {
+    toast(`Operation complete: ${action.toUpperCase()} executed successfully.`);
+    syncDatabaseStates();
+    // Flush input fields
+    document.getElementById('adm-target-user').value = '';
+    document.getElementById('adm-new-pass').value = '';
+    document.getElementById('adm-purge-user').value = '';
+  } else {
+    toast('Execution error processing structural task context.');
+  }
+}
+</script>
+</body>
+</html>
