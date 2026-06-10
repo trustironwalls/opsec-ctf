@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>OPSEC CTF Platform</title>
+<title>Trust Iron Walls Platform</title>
 <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ── DESIGN TOKENS ───────────────────────────── */
@@ -156,7 +156,7 @@ html,body{height:100%;background:var(--ink);color:var(--body);font-family:var(--
 .nav-logo span{color:var(--body);font-size:.9rem}
 .navlink{
   font-family:var(--ui);font-size:.75rem;font-weight:600;
-  letter-spacing Side:.06em;text-transform:uppercase;
+  letter-spacing:.06em;text-transform:uppercase;
   color:var(--dim);padding:0 14px;height:50px;
   display:flex;align-items:center;cursor:pointer;
   border-bottom:2px solid transparent;transition:all .15s;position:relative;
@@ -306,8 +306,6 @@ html,body{height:100%;background:var(--ink);color:var(--body);font-family:var(--
 #mbox h2{font-family:var(--display);font-size:1.4rem;color:var(--white);letter-spacing:.06em;margin-bottom:4px;}
 .m-cat{font-family:var(--ui);font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--orange);margin-bottom:14px;}
 .m-desc{font-size:.82rem;color:var(--body);line-height:1.8;margin-bottom:16px}
-.m-hint-box{background:var(--ink3);border-left:3px solid var(--teal);padding:12px 16px;font-size:.8rem;color:var(--body);line-height:1.7;margin-bottom:16px;}
-.m-hint-label{font-family:var(--ui);font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--teal);margin-bottom:6px;}
 .m-actions{display:flex;gap:8px;justify-content:flex-end}
 .mbtn{font-family:var(--ui);font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:7px 14px;border:none;border-radius:var(--r);cursor:pointer;}
 .mbtn-ghost{background:transparent;color:var(--dim);border:1px solid var(--wire)}
@@ -337,7 +335,7 @@ html,body{height:100%;background:var(--ink);color:var(--body);font-family:var(--
     </div>
     <div class="login-box">
       <div class="login-eyebrow">Operational Security Platform</div>
-      <div class="login-title">OPSEC CTF</div>
+      <div class="login-title">Trust Iron Walls</div>
       <div class="login-sub">Authenticate to access the challenge environment.</div>
       <div id="login-err"></div>
       <div class="field">
@@ -357,7 +355,7 @@ html,body{height:100%;background:var(--ink);color:var(--body);font-family:var(--
 </div>
 
 <nav id="topnav" style="display:none">
-  <div class="nav-logo" onclick="goPage('dash')">OPSEC<span>CTF</span></div>
+  <div class="nav-logo" onclick="goPage('dash')">Trust Iron Walls<span></span></div>
   <div class="navlink active" id="nav-dash" onclick="goPage('dash')">Dashboard</div>
   <div class="navlink" id="nav-lab" onclick="goPage('lab')">Terminal Lab</div>
   <div class="navlink" id="nav-board" onclick="goPage('board')">Scoreboard</div>
@@ -450,9 +448,8 @@ html,body{height:100%;background:var(--ink);color:var(--body);font-family:var(--
         <div class="tdot td-r"></div>
         <div class="tdot td-y"></div>
         <div class="tdot td-g"></div>
-        <div id="term-titlelabel">root@opsec-ctf:~</div>
+        <div id="term-titlelabel">root@trust-iron-walls:~</div>
       </div>
-      <div id="term-hint-bar"></div>
       <div id="term-output"></div>
       <div id="term-input-row">
         <div id="term-ps1">root@opsec:~# </div>
@@ -478,10 +475,6 @@ html,body{height:100%;background:var(--ink);color:var(--body);font-family:var(--
     <div class="m-cat" id="m-cat"></div>
     <h2 id="m-title"></h2>
     <div class="m-desc" id="m-desc"></div>
-    <div id="m-hint-wrap">
-      <div class="m-hint-label">Intel</div>
-      <div class="m-hint-box" id="m-hint"></div>
-    </div>
     <div class="m-actions">
       <button class="mbtn mbtn-ghost" onclick="closeModal()">Close</button>
       <button class="mbtn mbtn-orange" onclick="openLab()">Open in Lab →</button>
@@ -502,6 +495,43 @@ let activeChalId = null;
 let cmdHist = [];
 let histIdx = -1;
 let cwd = '/home/operator';
+
+const CHALLENGES = [
+  {id:'w1',cat:'Web Recon',name:'View Source',diff:'easy',pts:50,desc:'Every hacker starts by reading the page source. Something valuable is hidden on the login page.'},
+  {id:'w2',cat:'Web Recon',name:'Inspect Element',diff:'easy',pts:75,desc:'The scoreboard chart element has a secret attribute. Browser DevTools → Elements tab.'},
+  {id:'w3',cat:'Web Recon',name:'Dashboard Source',diff:'easy',pts:75,desc:'The dashboard HTML source contains a hidden comment. You know what to do.'},
+  {id:'w4',cat:'Web Recon',name:'Cookie Monster',diff:'med',pts:125,desc:'The platform sets a session cookie with a suspicious value. Check your browser cookies.'},
+  {id:'w5',cat:'Web Recon',name:'Local Storage',diff:'med',pts:125,desc:'Something was stored in localStorage that should not be there. Check your browser storage.'},
+  {id:'w6',cat:'Web Recon',name:'robots.txt',diff:'easy',pts:75,desc:'The platform has a robots.txt. It lists paths that should not be indexed — including one with a flag.'},
+  {id:'w7',cat:'Web Recon',name:'API Endpoint',diff:'hard',pts:200,desc:'There is a hidden API debug endpoint. Call /api/v1/debug in the terminal with curl to retrieve the flag.'},
+  {id:'w8',cat:'Web Recon',name:'HTTP Headers',diff:'hard',pts:200,desc:'The server leaks a flag in a custom HTTP response header. Use curl -I to see response headers.'},
+  {id:'l1',cat:'Linux: Basics',name:'The Dotfile',diff:'easy',pts:50,desc:'A hidden file in /home/operator contains a flag. Hidden files start with a dot.'},
+  {id:'l2',cat:'Linux: Basics',name:'MOTD Message',diff:'easy',pts:50,desc:'The message of the day (/etc/motd) was customised by the sysadmin and hides a flag.'},
+  {id:'l3',cat:'Linux: Basics',name:'Passwd Comment',diff:'easy',pts:75,desc:'The GECOS field (field 5) of one entry in /etc/passwd contains a flag instead of a real name.'},
+  {id:'l4',cat:'Linux: Basics',name:'End of Log',diff:'easy',pts:75,desc:'/var/log/syslog has 900+ lines. The flag is on the very last line.'},
+  {id:'l5',cat:'Linux: Basics',name:'Root Home',diff:'easy',pts:100,desc:'Navigate to /root and list all files, including hidden ones. The flag is in a hidden file.'},
+  {id:'l6',cat:'Linux: Text',name:'Base64 Decode',diff:'med',pts:125,desc:'cat /home/operator/.encoded — the file contains base64 data. Decode it.'},
+  {id:'l7',cat:'Linux: Text',name:'Grep the Log',diff:'med',pts:125,desc:'1000 lines in /var/log/app.log. One line contains the word TROPHY. Use grep.'},
+  {id:'l8',cat:'Linux: Text',name:'AWK Fields',diff:'med',pts:150,desc:'/opt/data/ops.csv is a CSV. Extract field 6 from the row where field 2 equals SPECTRE.'},
+  {id:'l9',cat:'Linux: Text',name:'Reversed String',diff:'med',pts:125,desc:'/opt/encoded/mirror.txt contains the flag written backwards. Use rev to flip it.'},
+  {id:'l10',cat:'Linux: Text',name:'ROT13 Cipher',diff:'med',pts:150,desc:'/opt/encoded/cipher.txt is ROT13 encoded. Decode it with tr.'},
+  {id:'l11',cat:'Linux: Text',name:'Three Fragments',diff:'med',pts:175,desc:'The flag is split across /opt/fragments/alpha, beta, gamma. Concatenate them in order.'},
+  {id:'l12',cat:'Linux: Text',name:'Hex Decode',diff:'hard',pts:200,desc:'/opt/encoded/hex.txt contains a hex string. Decode it with xxd or python3.'},
+  {id:'l13',cat:'Linux: Advanced',name:'Deep Directory',diff:'hard',pts:200,desc:'A flag is hidden 9 directories deep inside /opt/maze. Use find or keep cd-ing.'},
+  {id:'l14',cat:'Linux: Advanced',name:'Cron Script',diff:'hard',pts:200,desc:'A cron job runs every minute. Find it in /etc/crontab and read the script it calls.'},
+  {id:'l15',cat:'Linux: Advanced',name:'SUID Binary',diff:'hard',pts:225,desc:'Find all SUID binaries on the system. One path is suspiciously named.'},
+  {id:'l16',cat:'Linux: Advanced',name:'Environment Leak',diff:'med',pts:150,desc:'A secret is exported inside /home/operator/.bashrc as an environment variable.'},
+  {id:'l17',cat:'Linux: Advanced',name:'World Writable',diff:'hard',pts:225,desc:'A world-writable file (chmod 777) contains a flag. Use find with -perm 777.'},
+  {id:'l18',cat:'Linux: Advanced',name:'Strings in Binary',diff:'hard',pts:225,desc:'/opt/bin/agent.elf looks like a binary. Use strings or grep to extract readable text.'},
+  {id:'l19',cat:'Linux: Advanced',name:'Auth Log',diff:'hard',pts:200,desc:'grep /var/log/auth.log for lines containing OPERATION — a flag is embedded.'},
+  {id:'l20',cat:'Linux: Advanced',name:'Symlink Target',diff:'hard',pts:225,desc:'/opt/links/ contains symlinks. One points to an unusual target that holds a flag.'},
+  {id:'l21',cat:'Linux: Expert',name:'/proc Secrets',diff:'expert',pts:300,desc:'A fake /proc entry contains a flag. Not all /proc files are kernel-generated.'},
+  {id:'l22',cat:'Linux: Expert',name:'Heredoc Flag',diff:'expert',pts:300,desc:'/opt/scripts/deploy.sh uses a heredoc. Read every line — the flag is inside the heredoc block.'},
+  {id:'l23',cat:'Linux: Expert',name:'Recursive Config',diff:'expert',pts:325,desc:'grep -r through /opt/config for the string MASTER_KEY. The flag is its value.'},
+  {id:'l24',cat:'Linux: Expert',name:'sudoers Vector',diff:'expert',pts:325,desc:'/etc/sudoers reveals a NOPASSWD command. Read that script — it contains a flag.'},
+  {id:'l25',cat:'Linux: Expert',name:'Newest File',diff:'expert',pts:300,desc:'Find the most recently modified file under /var using find -newer. It holds a flag.'},
+  {id:'f1',cat:'Final Boss',name:'THE FINAL DECRYPTION',diff:'expert',pts:500,desc:'Three files: /opt/final/shard_1, shard_2, shard_3. Each is ROT13 encoded. Decode each, then concatenate in order to get the flag.'},
+];
 
 // ══════════════════════════════════════════════════════════════
 //  CONTROLLERS & API CONTEXT BRIDGE
@@ -574,7 +604,6 @@ async function syncDatabaseStates() {
   const res = await fetch('/api/state');
   const directory = await res.json();
 
-  // Render Public Scoreboard
   const boardRows = document.getElementById('board-rows');
   if (boardRows) {
     const sorted = [...directory].sort((a,b) => b.score - a.score);
@@ -593,7 +622,6 @@ async function syncDatabaseStates() {
     drawChart(sorted.map(u => ({ name: u.user, score: u.score, isMe: u.user === currentUser?.user })));
   }
 
-  // Render Admin Monitoring panel
   const adminRows = document.getElementById('admin-monitor-rows');
   if (adminRows && currentUser?.role === 'admin') {
     adminRows.innerHTML = directory.map(u => `
@@ -648,7 +676,6 @@ function openChallenge(id){
   document.getElementById('m-cat').innerHTML=`${c.cat} &nbsp;<span class="tag ${diffMap[c.diff]}">${c.diff}</span>&nbsp;<span style="color:var(--orange)">${c.pts} pts</span>`;
   document.getElementById('m-title').textContent=c.name;
   document.getElementById('m-desc').textContent=c.desc;
-  document.getElementById('m-hint').textContent=c.hint;
   document.getElementById('modal').classList.add('open');
 }
 function closeModal(){ document.getElementById('modal').classList.remove('open'); }
@@ -657,9 +684,6 @@ function openLab(){
   activeChalId = modalChalId;
   const c = CHALLENGES.find(x=>x.id===activeChalId);
   if(c) document.getElementById('active-chal-name').textContent=c.name;
-  const hint=CHALLENGES.find(x=>x.id===activeChalId)?.hint||'';
-  const hb=document.getElementById('term-hint-bar');
-  hb.textContent='Intel: '+hint; hb.style.display='block';
   renderLabFlags();
   goPage('lab');
 }
@@ -1261,7 +1285,7 @@ function startTimer(){
 })();
 
 (function bootMsg(){
-  tpr(`<span class="t-dim">┌─────────────────────────────────────────────────────┐</span>\n<span class="t-dim">│</span>  <span class="t-ok">OPSEC CTF Terminal v3.1</span>                               <span class="t-dim">│</span>\n└─────────────────────────────────────────────────────┘`);
+  tpr(`<span class="t-dim">┌─────────────────────────────────────────────────────┐</span>\n<span class="t-dim">│</span>  <span class="t-ok">Trust Iron Walls Terminal v3.1</span>                         <span class="t-dim">│</span>\n└─────────────────────────────────────────────────────┘`);
 })();
 </script>
 </body>
