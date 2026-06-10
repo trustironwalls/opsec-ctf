@@ -36,8 +36,19 @@ html,body{height:100%;background:var(--ink);color:var(--body);font-family:var(--
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-thumb{background:var(--wire2);border-radius:2px}
 
-.page{display:none;width:100%;height:100%;position:absolute;inset:0}
-.page.active{display:flex;flex-direction:column}
+/* ── PAGES ───────────────────────────────────── */
+.page {
+  display: none;
+  width: 100%;
+  height: calc(100vh - 50px); /* Account cleanly for the top navigation bar */
+  overflow-y: auto;          /* Allows scrolling if text overflows */
+  padding: 28px 24px;         /* Adds uniform padding around the content */
+}
+.page.active {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;                  /* Prevents elements from overlapping */
+}
 
 /* ── LOGIN ── */
 #page-login{background:var(--ink);align-items:center;justify-content:center;display:flex;}
@@ -72,19 +83,35 @@ html,body{height:100%;background:var(--ink);color:var(--body);font-family:var(--
 </head>
 <body>
 
-<div id="page-login" class="page active">
-  <div class="login-box">
-    <div style="font-family:var(--display); font-size:2rem; color:var(--white); margin-bottom:10px;">OPSEC SYSTEM ENTRY</div>
-    <div id="login-err" style="color:var(--red); font-size:.75rem; margin-bottom:10px;"></div>
-    <div class="field">
-      <label>Operator ID / Assign New Handle</label>
-      <input id="li-user" type="text" placeholder="Username (Auto-registers if new)">
+<div id="page-dash" class="page">
+  <div style="font-family:var(--display); font-size:1.8rem; color:var(--white);">Challenges Directory</div>
+  <div style="color:var(--teal); font-weight: bold;" id="local-score-box">Score: 0 pts</div>
+  
+  <div class="stats-row" style="margin-top: 10px;">
+    <div class="stat-card" style="--c:var(--orange)">
+      <div class="stat-label">Your Score</div>
+      <div class="stat-value" id="ds-score">0</div>
+      <div class="stat-sub">total points</div>
     </div>
-    <div class="field">
-      <label>Access Key</label>
-      <input id="li-pass" type="password" placeholder="Password">
+    <div class="stat-card" style="--c:var(--teal)">
+      <div class="stat-label">Flags Found</div>
+      <div class="stat-value" id="ds-flags">0</div>
+      <div class="stat-sub">of 33 total</div>
     </div>
-    <button class="btn-primary" onclick="doLogin()">Authenticate</button>
+    <div class="stat-card" style="--c:var(--yellow)">
+      <div class="stat-label">Rank</div>
+      <div class="stat-value" id="ds-rank">#—</div>
+      <div class="stat-sub">on scoreboard</div>
+    </div>
+    <div class="stat-card" style="--c:var(--green)">
+      <div class="stat-label">Elapsed</div>
+      <div class="stat-value" id="ds-time" style="font-size:1.5rem;margin-top:6px">00:00</div>
+      <div class="stat-sub">hh:mm</div>
+    </div>
+  </div>
+
+  <div style="color:var(--body); font-size:.9rem; line-height:1.6; background: var(--ink2); border: 1px solid var(--wire); padding: 16px; margin-top: 10px;">
+    * Navigate to the <strong>Terminal Lab</strong> route workspace to execute commands against the environment variables, hidden filesystems, and custom response hooks to hunt down operational hashes.
   </div>
 </div>
 
