@@ -1,372 +1,396 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Hack me thon Platform</title>
-<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700&family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-/* ── HACKER EMERALD DESIGN TOKENS ──────────────── */
-:root{
-  --ink:    #020406;   /* Pure Void */
-  --ink2:   #070d12;   /* Deep Slate Panel */
-  --ink3:   #0d161f;   /* Input/Sidebar Background */
-  --wire:   #0f2d1d;   /* Muted Grid Matrix Green */
-  --wire2:  #1d4f35;   /* Active Frame Border */
-  --dim:    #4fa879;   /* Readout Label Hex */
-  --body:   #86dfa7;   /* Matrix Text stream */
-  --white:  #d2f5e3;   /* Highlighted Cleartext */
-  --orange: #00ff66;   /* RADIOACTIVE MATRIX NEON GREEN */
-  --teal:   #00f5ff;   /* Cyber Cyan Accents */
-  --red:    #ff3b3b;   /* Threat Vector Red */
-  --yellow: #ffd700;   /* Warning Parameter Yellow */
-  --font:   'Courier Prime', monospace;
-  --ui:     'Inter', sans-serif;
-  --display:'Bebas Neue', sans-serif;
-  --r:      2px;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;background:var(--ink);color:var(--body);font-family:var(--font);overflow:hidden}
-::-webkit-scrollbar{width:4px;height:4px}
-::-webkit-scrollbar-thumb{background:var(--wire2);border-radius:var(--r)}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HACKMETHON :: Cyber Operations Command Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #04060a;
+            --ink2: #0c0f19;
+            --ink3: #121826;
+            --wire: #1e2942;
+            --wire2: #2b3d63;
+            --dim: #7388a8;
+            --body: #a5bccc;
+            --white: #e2e8f0;
+            --orange: #00ff66;
+            --teal: #00f5ff;
+            --red: #ff4a4a;
+            --yellow: #ffcc00;
+            --brand-blue: #1f6feb;
+            --font: 'Fira Code', monospace;
+            --ui: 'Inter', sans-serif;
+            --display: 'Bebas Neue', sans-serif;
+            --r: 6px;
+        }
 
-/* ── MAIN APPARATUS SPA LAYOUT ─────────────────── */
-#app-wrapper {
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-}
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { height: 100%; background: var(--ink); color: var(--body); font-family: var(--ui); overflow: hidden; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-thumb { background: var(--wire2); border-radius: var(--r); }
 
-/* ── SIDEBAR CONSOLE NAVIGATION ────────────────── */
-#sidebar-nav {
-  width: 250px;
-  background: var(--ink2);
-  border-right: 1px solid var(--wire);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  z-index: 100;
-  transition: transform 0.3s ease;
-}
-.sidebar-header {
-  padding: 20px 16px;
-  border-bottom: 1px solid var(--wire);
-}
-.sidebar-logo {
-  font-family: var(--display);
-  font-size: 1.8rem;
-  color: var(--orange);
-  letter-spacing: .05em;
-  text-shadow: 0 0 10px rgba(0,255,102,0.3);
-}
-.sidebar-menu {
-  display: flex;
-  flex-direction: column;
-  margin-top: 16px;
-  flex: 1;
-}
-.navlink {
-  font-family: var(--ui);
-  font-size: .78rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: var(--dim);
-  padding: 14px 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border-left: 3px solid transparent;
-  transition: all .15s;
-}
-.navlink:hover, .navlink.active {
-  color: var(--white);
-  background: rgba(0,255,102,0.04);
-  border-left-color: var(--orange);
-}
+        #app-wrapper { display: flex; width: 100vw; height: 100vh; position: relative; }
+        
+        /* Sidebar layout styles */
+        #sidebar-nav { width: 260px; background: var(--ink2); border-right: 1px solid var(--wire); display: flex; flex-direction: column; justify-content: space-between; z-index: 100; box-shadow: 4px 0 20px rgba(0,0,0,0.4); }
+        .sidebar-header { padding: 28px 20px; border-bottom: 1px solid var(--wire); }
+        .sidebar-logo { font-family: var(--display); font-size: 2.2rem; color: var(--brand-blue); letter-spacing: .05em; text-shadow: 0 0 15px rgba(31,111,235,0.4); }
+        .sidebar-menu { display: flex; flex-direction: column; margin-top: 16px; flex: 1; }
+        .navlink { font-size: .85rem; font-weight: 600; text-transform: uppercase; color: var(--dim); padding: 14px 24px; cursor: pointer; display: flex; align-items: center; gap: 14px; border-left: 4px solid transparent; transition: all .2s ease; letter-spacing: 0.5px; }
+        .navlink:hover, .navlink.active { color: var(--white); background: linear-gradient(90deg, rgba(31,111,235,0.08) 0%, transparent 100%); border-left-color: var(--brand-blue); }
+        .sidebar-user-footer { padding: 20px; background: var(--ink3); border-top: 1px solid var(--wire); }
+        .user-identity { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+        .user-avatar { width: 40px; height: 40px; background: var(--ink); border: 1px solid var(--wire2); display: flex; align-items: center; justify-content: center; font-family: var(--display); color: var(--teal); font-size: 1.4rem; border-radius: var(--r); overflow: hidden; }
+        .user-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
-.sidebar-user-footer {
-  padding: 16px;
-  background: var(--ink3);
-  border-top: 1px solid var(--wire);
-}
-.user-identity {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
-}
-.user-avatar {
-  width: 32px;
-  height: 32px;
-  background: var(--ink);
-  border: 1px solid var(--wire2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--display);
-  color: var(--teal);
-  font-size: 1.1rem;
-}
+        /* General layout components */
+        .page { display: none; flex: 1; height: 100vh; overflow-y: auto; padding: 32px; position: relative; }
+        .page.active { display: flex; flex-direction: column; gap: 24px; }
+        
+        /* PUBLIC HACKMETHON HOMEPAGE PORTAL */
+        #page-home { display: flex; flex-direction: column; width: 100vw; height: 100vh; background: #020306; overflow-y: auto; position: fixed; top: 0; left: 0; z-index: 1000; }
+        .ticker-wrap { background: #07090e; border-bottom: 1px solid var(--wire); padding: 12px; overflow: hidden; white-space: nowrap; font-family: var(--font); font-size: 0.8rem; color: var(--orange); }
+        .ticker-stream { display: inline-block; padding-left: 100%; animation: ticker-kf 25s linear infinite; }
+        @keyframes ticker-kf { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
+        
+        .hero-banner { display: flex; flex-direction: column; flex: 1; justify-content: center; align-items: center; max-width: 900px; width: 100%; margin: 0 auto; padding: 60px 24px; text-align: center; gap: 32px; }
+        .hero-text-block h1 { font-family: var(--display); font-size: 5rem; color: var(--white); line-height: 1.1; margin-bottom: 20px; letter-spacing: 1px; }
+        .hero-text-block h1 span { color: var(--brand-blue); text-shadow: 0 0 20px rgba(31,111,235,0.3); }
+        .hero-metrics { display: flex; justify-content: center; gap: 32px; margin-top: 40px; width: 100%; }
+        .metric-card { background: var(--ink2); border: 1px solid var(--wire); padding: 20px 40px; border-radius: var(--r); min-width: 200px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); }
+        .metric-card div:first-child { font-size: 2.2rem; font-family: var(--display); color: var(--teal); }
+        .metric-card div:last-child { font-size: 0.75rem; font-weight: 700; color: var(--dim); text-transform: uppercase; margin-top: 4px; letter-spacing: 0.5px; }
 
-/* ── PAGE VIEWPORT PANELS ──────────────────────── */
-.page {
-  display: none;
-  flex: 1;
-  height: 100vh;
-  overflow-y: auto;
-  padding: 24px;
-  position: relative;
-}
-.page.active { display: flex; flex-direction: column; gap: 16px; }
+        /* OVERLAY AUTHENTICATION GATEWAY */
+        #auth-overlay { display: none; position: fixed; inset: 0; background: rgba(2, 3, 6, 0.9); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+        .login-box { background: var(--ink2); border: 1px solid var(--wire2); border-top: 4px solid var(--brand-blue); padding: 40px; width: 440px; border-radius: var(--r); box-shadow: 0 20px 50px rgba(0,0,0,0.8); position: relative; }
+        .close-auth-box { position: absolute; top: 16px; right: 20px; color: var(--dim); font-size: 1.2rem; cursor: pointer; font-family: var(--font); text-decoration: none; }
+        .close-auth-box:hover { color: var(--red); }
+        
+        .field { margin-bottom: 20px; }
+        .field label { display: block; font-size: .72rem; font-weight: 700; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; letter-spacing: 0.5px; }
+        .field input, .profile-grid input { width: 100%; background: var(--ink3); border: 1px solid var(--wire); border-radius: var(--r); color: var(--white); font-family: var(--font); padding: 14px; outline: none; font-size: 0.9rem; transition: border-color 0.2s; }
+        .field input:focus, .profile-grid input:focus { border-color: var(--brand-blue); }
+        
+        .btn-primary { width: 100%; background: var(--wire); color: var(--brand-blue); border: 1px solid var(--brand-blue); font-size: .85rem; font-weight: 700; text-transform: uppercase; padding: 14px; cursor: pointer; border-radius: var(--r); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); letter-spacing: 0.5px; text-align: center; }
+        .btn-primary:hover { background: var(--brand-blue); color: var(--white); box-shadow: 0 0 15px rgba(31,111,235,0.4); }
 
-/* ── LOGIN APPARATUS ── */
-#page-login {
-  display: flex; width: 100vw; height: 100vh; position: fixed;
-  top: 0; left: 0; background: var(--ink); align-items: center;
-  justify-content: center; overflow: hidden; z-index: 1000;
-}
-#page-login::before {
-  content: ''; position: absolute; inset: 0;
-  background-image: linear-gradient(rgba(0,255,102,.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,102,.02) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-.login-box { background: var(--ink2); border: 1px solid var(--wire2); border-top: 3px solid var(--orange); padding: 32px; width: 380px; }
-.field { margin-bottom: 16px; }
-.field label { display: block; font-family: var(--ui); font-size: .65rem; font-weight: 700; text-transform: uppercase; color: var(--dim); margin-bottom: 6px; }
-.field input, .profile-grid input { width: 100%; background: var(--ink3); border: 1px solid var(--wire); border-radius: var(--r); color: var(--white); font-family: var(--font); padding: 10px; outline: none; }
-.field input:focus, .profile-grid input:focus { border-color: var(--orange); }
-.btn-primary { width: 100%; background: var(--wire); color: var(--orange); border: 1px solid var(--orange); font-family: var(--ui); font-size: .8rem; font-weight: 700; text-transform: uppercase; padding: 10px; cursor: pointer; }
-.btn-primary:hover { background: var(--orange); color: var(--ink); }
+        /* General structural styles */
+        .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        .stat-card { background: var(--ink2); border: 1px solid var(--wire); padding: 20px; position: relative; border-radius: var(--r); }
+        .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--c); border-radius: var(--r) var(--r) 0 0; }
+        .stat-label { font-size: .7rem; font-weight: 700; text-transform: uppercase; color: var(--dim); letter-spacing: 0.5px; }
+        .stat-value { font-family: var(--display); font-size: 2.6rem; color: var(--white); margin-top: 4px; }
+        .section-head { display: flex; align-items: center; gap: 16px; margin-top: 8px; }
+        .section-head h2 { font-family: var(--display); font-size: 1.8rem; color: var(--white); letter-spacing: 0.5px; }
+        .section-head .sh-line { flex: 1; height: 1px; background: var(--wire); }
+        
+        .chal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; padding-bottom: 30px; }
+        .chal-card { background: var(--ink2); border: 1px solid var(--wire); padding: 22px; display: flex; flex-direction: column; justify-content: space-between; min-height: 260px; border-radius: var(--r); }
+        .chal-card.solved { border-left: 4px solid var(--orange); background: linear-gradient(90deg, rgba(0, 255, 102, 0.015) 0%, transparent 100%); }
+        .action-btn-lab { width: 100%; background: rgba(31, 111, 235, 0.04); color: var(--teal); border: 1px solid var(--wire2); padding: 12px; font-size: .75rem; font-weight: 700; text-transform: uppercase; cursor: pointer; margin-top: auto; border-radius: var(--r); }
+        .action-btn-lab:hover { background: var(--brand-blue); color: var(--white); }
 
-/* ── DASHBOARD BLOCKS ── */
-.stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
-.stat-card { background: var(--ink2); border: 1px solid var(--wire); padding: 16px; position: relative; }
-.stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--c); }
-.stat-label { font-family: var(--ui); font-size: .6rem; font-weight: 700; text-transform: uppercase; color: var(--dim); }
-.stat-value { font-family: var(--display); font-size: 2.2rem; color: var(--white); }
-.section-head { display: flex; align-items: center; gap: 12px; }
-.section-head h2 { font-family: var(--display); font-size: 1.4rem; color: var(--white); }
-.section-head .sh-line { flex: 1; height: 1px; background: var(--wire); }
-.chal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
-.chal-card { background: var(--ink2); border: 1px solid var(--wire); padding: 16px; display: flex; flex-direction: column; justify-content: space-between; min-height: 180px; }
-.chal-card.solved { border-left: 3px solid var(--orange); background: rgba(0,255,102,0.02); }
-.action-btn-lab { width: 100%; background: rgba(0,245,255,0.04); color: var(--teal); border: 1px solid var(--wire2); padding: 8px; font-family: var(--ui); font-size: .68rem; font-weight: 700; text-transform: uppercase; cursor: pointer; margin-top: auto; }
-.action-btn-lab:hover { background: var(--teal); color: var(--ink); }
+        /* Terminal View elements Layout updates */
+        #page-lab { padding: 0; }
+        #lab-body { flex: 1; display: flex; height: 100%; width: 100%; overflow: hidden; position: relative; }
+        #lab-sidebar { width: 320px; flex-shrink: 0; background: var(--ink2); border-right: 1px solid var(--wire); display: flex; flex-direction: column; overflow: hidden; }
+        #lab-sidebar-header { padding: 20px; border-bottom: 1px solid var(--wire); background: var(--ink3); }
+        #lab-flags-list { flex: 1; overflow-y: auto; }
+        .lab-flag-item { display: flex; align-items: center; gap: 12px; padding: 14px 20px; border-bottom: 1px solid var(--ink); font-size: .82rem; cursor: pointer; }
+        .lab-flag-item.found { background: rgba(0, 255, 102, 0.02); color: var(--white); border-left: 3px solid var(--orange); }
+        
+        #lab-terminal { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: #020305; position: relative; }
+        #term-topbar { background: #090c12; border-bottom: 1px solid var(--wire); padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+        #term-hint-bar { background: rgba(0, 245, 255, 0.04); border-bottom: 1px solid rgba(0, 245, 255, 0.15); padding: 14px 20px; font-size: .85rem; color: var(--teal); display: none; line-height: 1.5; border-left: 3px solid var(--teal); }
+        #term-output { flex: 1; overflow-y: auto; padding: 20px; font-size: .9rem; line-height: 1.6; color: var(--body); font-family: var(--font); white-space: pre-wrap; scroll-behavior: smooth; }
+        
+        /* Unified Terminal Input Panel Row */
+        #term-input-row { display: flex; align-items: flex-start; padding: 16px 20px; border-top: 1px solid var(--wire); background: #06090e; min-height: 64px; }
+        #term-ps1 { color: var(--brand-blue); font-size: .88rem; padding-right: 8px; font-weight: 700; font-family: var(--font); line-height: 1.5; white-space: pre-wrap; }
+        #term-input { flex: 1; background: transparent; border: none; outline: none; color: var(--white); font-family: var(--font); font-size: .9rem; resize: none; height: 32px; line-height: 1.5; }
 
-/* ── WORKSPACE LAB TERMINAL (RESPONSIVE) ── */
-#page-lab { padding: 0; }
-#lab-body { flex: 1; display: flex; height: 100%; width: 100%; overflow: hidden; }
-#lab-sidebar { width: 260px; flex-shrink: 0; background: var(--ink2); border-right: 1px solid var(--wire); display: flex; flex-direction: column; overflow: hidden; }
-#lab-sidebar-header { padding: 14px 16px; border-bottom: 1px solid var(--wire); }
-#lab-flags-list { flex: 1; overflow-y: auto; }
-.lab-flag-item { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--ink); font-size: .75rem; cursor: pointer; }
-.lab-flag-item:hover { background: var(--ink3); }
-.lab-flag-item.found { background: rgba(0,255,102,0.03); color: var(--orange); }
-#lab-submit { padding: 12px; background: var(--ink3); border-top: 1px solid var(--wire); }
-#lab-flag-input { width: 100%; background: var(--ink); border: 1px solid var(--wire); padding: 8px; color: var(--teal); font-family: var(--font); font-size: .8rem; outline: none; margin-bottom: 6px; }
+        #term-codex-drawer { position: absolute; right: -360px; top: 49px; bottom: 0; width: 360px; background: var(--ink2); border-left: 1px solid var(--wire); z-index: 50; display: flex; flex-direction: column; transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: -10px 0 30px rgba(0,0,0,0.5); }
+        #term-codex-drawer.open { right: 0; }
+        .codex-header { padding: 16px; background: var(--ink3); border-bottom: 1px solid var(--wire); display: flex; justify-content: space-between; align-items: center; }
+        .codex-body { padding: 20px; overflow-y: auto; flex: 1; font-size: 0.85rem; line-height: 1.6; color: var(--body); }
+        .codex-section-title { font-size: 0.75rem; text-transform: uppercase; color: var(--teal); letter-spacing: 0.5px; font-weight: 700; margin-bottom: 8px; font-family: var(--font); }
+        .codex-hint-card { background: var(--ink3); border-left: 3px solid var(--brand-blue); padding: 12px; border-radius: var(--r); margin-bottom: 16px; }
 
-#lab-terminal { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: #010203; }
-#term-topbar { background: var(--ink2); border-bottom: 1px solid var(--wire); padding: 8px 16px; display: flex; align-items: center; gap: 8px; }
-.tdot { width: 8px; height: 8px; border-radius: 50%; }
-.td-r { background: var(--red); } .td-y { background: var(--yellow); } .td-g { background: var(--orange); }
-#term-hint-bar { background: rgba(0,245,255,0.04); border-bottom: 1px solid rgba(0,245,255,0.12); padding: 10px 16px; font-size: .75rem; color: var(--teal); display: none; font-family: var(--ui); }
-#term-output { flex: 1; overflow-y: auto; padding: 16px; font-size: .85rem; line-height: 1.6; color: var(--body); }
-#term-input-row { display: flex; align-items: center; padding: 10px 16px; border-top: 1px solid var(--wire); background: var(--ink2); }
-#term-input { flex: 1; background: transparent; border: none; outline: none; color: var(--white); font-family: var(--font); }
+        #admin-audit-deck { flex: 1; padding: 24px; background: var(--ink); display: flex; flex-direction: column; gap: 16px; overflow-y: auto; }
+        .audit-row-header { display: grid; grid-template-columns: 200px 1fr; gap: 16px; padding: 12px 20px; background: var(--ink3); border: 1px solid var(--wire); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--dim); border-radius: var(--r); }
+        .audit-card-item { display: grid; grid-template-columns: 200px 1fr; gap: 16px; padding: 18px 20px; background: var(--ink2); border: 1px solid var(--wire); align-items: center; border-radius: var(--r); box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        .audit-user-box { display: flex; align-items: center; gap: 12px; }
+        .audit-flags-stream { font-family: var(--font); font-size: 0.85rem; color: var(--orange); word-break: break-all; line-height: 1.4; }
 
-/* ── DATA GRIDS & TABLES ── */
-.board-header-row { display: grid; grid-template-columns: 80px 1fr 120px 100px 140px; gap: 12px; padding: 10px 16px; background: var(--ink3); font-family: var(--ui); font-size: .65rem; font-weight: 700; text-transform: uppercase; color: var(--dim); border: 1px solid var(--wire); }
-.board-row { display: grid; grid-template-columns: 80px 1fr 120px 100px 140px; gap: 12px; padding: 12px 16px; border: 1px solid var(--wire); background: var(--ink2); align-items: center; font-size: .82rem; margin-bottom: 4px; }
-.board-row.me { border-left: 3px solid var(--orange); background: rgba(0,255,102,0.05); }
+        .board-header-row { display: grid; grid-template-columns: 80px 1fr 140px 140px 180px; gap: 12px; padding: 14px 20px; background: var(--ink3); font-size: .75rem; font-weight: 700; text-transform: uppercase; color: var(--dim); border: 1px solid var(--wire); border-radius: var(--r) var(--r) 0 0; }
+        .board-row { display: grid; grid-template-columns: 80px 1fr 140px 140px 180px; gap: 12px; padding: 16px 20px; border: 1px solid var(--wire); background: var(--ink2); align-items: center; font-size: .9rem; margin-bottom: 4px; border-radius: var(--r); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .board-row.me { border-left: 4px solid var(--orange); background: rgba(0, 255, 102, 0.03); color: var(--white); }
+        .board-avatar { width: 24px; height: 24px; border-radius: var(--r); overflow: hidden; display: flex; align-items: center; justify-content: center; background: var(--ink3); border: 1px solid var(--wire2); }
+        .board-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        
+        #chart-section { background: var(--ink2); border: 1px solid var(--wire); padding: 24px; border-radius: var(--r); margin-bottom: 8px; }
+        .profile-container { display: grid; grid-template-columns: 240px 1fr; gap: 32px; background: var(--ink2); border: 1px solid var(--wire); padding: 32px; border-radius: var(--r); }
+        .profile-avatar-box { display: flex; flex-direction: column; align-items: center; gap: 16px; border-right: 1px solid var(--wire); padding-right: 32px; }
+        .profile-image-frame { width: 150px; height: 150px; border: 1px solid var(--wire2); background: var(--ink); display: flex; align-items: center; justify-content: center; border-radius: var(--r); overflow: hidden; }
+        .profile-image-frame img { width: 100%; height: 100%; object-fit: cover; }
+        .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
-.profile-container { display: grid; grid-template-columns: 200px 1fr; gap: 24px; background: var(--ink2); border: 1px solid var(--wire); padding: 24px; }
-.profile-avatar-box { display: flex; flex-direction: column; align-items: center; gap: 12px; border-right: 1px solid var(--wire); padding-right: 24px; }
-.profile-image-frame { width: 130px; height: 130px; border: 1px solid var(--wire2); background: var(--ink); display: flex; align-items: center; justify-content: center; }
-.profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .file-upload-wrapper { position: relative; width: 100%; margin-top: 8px; }
+        .file-upload-btn { display: block; width: 100%; background: var(--ink3); border: 1px dashed var(--wire2); color: var(--dim); padding: 10px; text-align: center; font-size: 0.72rem; text-transform: uppercase; font-weight: bold; border-radius: var(--r); cursor: pointer; }
+        .file-upload-wrapper input[type="file"] { position: absolute; left: 0; top: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
+        #toast { display: none; position: fixed; bottom: 24px; right: 24px; z-index: 2000; padding: 16px 24px; background: var(--ink2); border-left: 4px solid var(--brand-blue); color: var(--white); font-size: .88rem; border-radius: var(--r); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .tag { display: inline-block; font-size: .65rem; font-weight: 700; text-transform: uppercase; padding: 4px 10px; border-radius: var(--r); margin-top: 6px; font-family: var(--ui); }
+        
+        /* OVERLAY STYLES */
+        #cert-overlay { display: none; position: fixed; inset: 0; background: rgba(2,3,5,0.95); z-index: 3000; align-items: center; justify-content: center; padding: 20px; }
+        .cert-container { background: #07090e; border: 4px double var(--brand-blue); width: 100%; max-width: 800px; padding: 40px; border-radius: var(--r); position: relative; text-align: center; font-family: var(--ui); box-shadow: 0 0 50px rgba(31,111,235,0.2); }
+        .cert-container::before { content: 'HACKMETHON OPERATIONS GUARD'; position: absolute; top: 10px; left: 10px; font-size: 0.6rem; font-family: var(--font); color: var(--wire2); }
+        .cert-title { font-family: var(--display); font-size: 3rem; color: var(--white); letter-spacing: 2px; }
+        .cert-sub { font-size: 0.75rem; text-transform: uppercase; color: var(--teal); letter-spacing: 3px; margin-top: 4px; font-family: var(--font); }
+        .cert-body { font-size: 1rem; color: var(--body); margin: 32px 0; line-height: 1.6; }
+        .cert-recipient { font-family: var(--font); font-size: 1.8rem; color: var(--orange); font-weight: 700; margin: 16px 0; text-shadow: 0 0 10px rgba(0,255,102,0.2); }
+        .cert-level-badge { font-family: var(--font); font-size: 1.1rem; color: var(--teal); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: -10px; margin-bottom: 20px; }
+        .close-cert-btn { margin-top: 20px; background: var(--wire); color: var(--white); border: 1px solid var(--wire2); padding: 8px 16px; cursor: pointer; font-size: 0.8rem; border-radius: var(--r); text-transform: uppercase; font-family: var(--font); margin-right: 10px; }
 
-.admin-card { background: var(--ink2); border: 1px solid var(--wire); padding: 20px; }
-.admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.ctrl-group { background: var(--ink3); border: 1px solid var(--wire2); padding: 16px; }
+        /* ADJUSTMENT: NON-INTRUSIVE TOP RIGHT CORNER VICTORY CELEBRATIONS TOAST CONTAINER */
+        #celebration-overlay { display: none; position: fixed; top: 24px; right: 24px; width: 350px; background: var(--ink2); border: 2px solid var(--orange); z-index: 4000; padding: 18px; border-radius: var(--r); box-shadow: 0 10px 40px rgba(0,255,102,0.3); flex-direction: column; animation: slide-in-toast 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes slide-in-toast { from { transform: translateX(400px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        .pwned-title { font-family: var(--display); font-size: 1.8rem; color: var(--orange); letter-spacing: 1px; margin-bottom: 4px; display: flex; align-items: center; justify-content: space-between; }
+        .pwned-close-btn { font-family: var(--font); font-size: 0.85rem; color: var(--dim); cursor: pointer; text-transform: uppercase; font-weight: bold; border: none; background: transparent; }
+        .pwned-close-btn:hover { color: var(--red); }
+        .pwned-sub { font-family: var(--ui); font-size: 0.82rem; color: var(--white); line-height: 1.4; margin-top: 4px; font-weight: 500; }
 
-#toast { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 2000; padding: 12px 18px; background: var(--ink2); border-left: 3px solid var(--orange); color: var(--white); font-family: var(--ui); font-size: .8rem; }
-.tag { display: inline-block; font-family: var(--ui); font-size: .6rem; font-weight: 700; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; margin-top: 4px; }
-.tag-easy { background: rgba(0,255,102,0.1); color: var(--orange); }
-.tag-med { background: rgba(255,215,0,0.1); color: var(--yellow); }
-.tag-hard { background: rgba(0,245,255,0.1); color: var(--teal); }
-.tag-expert { background: rgba(255,59,59,0.1); color: var(--red); }
+        @media print {
+            body, html, #app-wrapper, .page, #page-home, #sidebar-nav, #auth-overlay, #celebration-overlay, .close-cert-btn { display: none !important; }
+            #cert-overlay { display: flex !important; position: absolute !important; inset: 0 !important; background: #ffffff !important; z-index: 9999 !important; padding: 0 !important; margin: 0 !important; }
+            .cert-container { border: 6px double #1f6feb !important; background: #ffffff !important; color: #000000 !important; box-shadow: none !important; width: 100% !important; max-width: 100% !important; height: auto !important; padding: 50px !important; }
+            .cert-title { color: #0c0f19 !important; } .cert-sub { color: #1f6feb !important; } .cert-body { color: #222222 !important; }
+            .cert-recipient { color: #00aa44 !important; text-shadow: none !important; } .cert-level-badge { color: #1f6feb !important; }
+            .cert-footer-row { border-top: 1px solid #cccccc !important; color: #555555 !important; } .cert-stamp { color: #1f6feb !important; border-color: #1f6feb !important; }
+        }
 
-@media(max-width: 900px) {
-  #app-wrapper { flex-direction: column; }
-  #sidebar-nav { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--wire); }
-  .sidebar-menu { flex-direction: row; overflow-x: auto; margin-top: 0; }
-  .sidebar-user-footer { display: none; }
-  .page { height: calc(100vh - 120px); top: 0; margin-top: 0; }
-  #lab-body { flex-direction: column; }
-  #lab-sidebar { width: 100%; height: 180px; border-right: none; border-bottom: 1px solid var(--wire); }
-  .profile-container { grid-template-columns: 1fr; }
-  .profile-avatar-box { border-right: none; padding-right: 0; border-bottom: 1px solid var(--wire); padding-bottom: 12px; }
-  .profile-grid { grid-template-columns: 1fr; }
-  .admin-grid { grid-template-columns: 1fr; }
-}
-</style>
+        @media(max-width: 1024px) { .stats-row { grid-template-columns: 1fr 1fr; } .hero-banner { text-align: center; } .audit-row-header, .audit-card-item { grid-template-columns: 1fr; } }
+    </style>
 </head>
 <body>
 
-<div id="page-login" class="page active">
-  <div class="login-box">
-    <div style="text-align:center; margin-bottom:12px;">
-      <div class="classified-stamp">HANDSHAKE</div>
+<audio id="sfx-click" src="data:audio/wav;base64,UklGRlQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAYmRhdGEAAAAA//8AAP///wD//wEA//8BAP//AQD//wEA//8BAP//AQD//wEA//8BAP//AQD//wEA//8BAP//AQD//wEA//8=" preload="auto"></audio>
+<audio id="sfx-success" src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAYmRhdGEAAAAA/wEA/wEA/wEA" preload="auto"></audio>
+<audio id="sfx-error" src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAYmRhdGEAAAAA/78A/78A/78A" preload="auto"></audio>
+
+<div id="page-home">
+    <div class="ticker-wrap">
+        <div class="ticker-stream">
+            [+] INTERCEPT ACTIVE: Node operator_401 completed Target Block [l2] (+40 PTS) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [!] FIREWALL WARNING: SUID intrusion vectors tracked on Cluster E &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [+] MILESTONE UNLOCKED: Operator root synced metadata directories (+50 PTS)
+        </div>
     </div>
-    <div id="login-err"></div>
-    <div class="field">
-      <label>Operator Token ID</label>
-      <input id="li-user" type="text" placeholder="Identity pointer" autocomplete="off" spellcheck="false">
+    <div class="hero-banner">
+        <div class="hero-text-block">
+            <h1>OPERATIONAL SECURITY COMMAND<br><span>HACKMETHON</span></h1>
+            <p style="font-size:1.25rem; line-height:1.6; max-width:700px; margin: 0 auto 24px auto;">
+                Accelerated Linux VAPT training infrastructure pipeline. Connect to automated terminal sandboxes, compile processing maps, and compromise network clusters safely.
+            </p>
+            <button class="btn-primary" onclick="openAuthenticationGateway()" style="max-width:320px; font-size:1rem; box-shadow: 0 0 20px rgba(31,111,235,0.2);">[ INITIALIZE INTERACTION GATEWAY ]</button>
+            <div class="hero-metrics">
+                <div class="metric-card">
+                    <div id="hm-m1">18,492</div>
+                    <div>Exploits Defaced</div>
+                </div>
+                <div class="metric-card">
+                    <div id="hm-m2">53</div>
+                    <div>Active Target Nodes</div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="field">
-      <label>Access Verification Key</label>
-      <input id="li-pass" type="password" placeholder="Passphrase matrix key">
+</div>
+
+<div id="auth-overlay">
+    <div class="login-box">
+        <a class="close-auth-box" onclick="closeAuthenticationGateway()">[X]</a>
+        <div style="text-align:center; margin-bottom:20px;">
+            <div id="home-auth-stamp" style="color:var(--brand-blue); font-family:var(--font); font-weight:700; font-size:1.1rem;">┌──(operator㉿HACKMETHON)-[auth]</div>
+        </div>
+        <div id="home-login-err" style="color:var(--red); font-size:0.82rem; margin-bottom:14px; text-align:center; font-family:var(--font); font-weight:600;"></div>
+        <div class="field">
+          <label>HACKMETHON Identity Handle</label>
+          <input id="home-user" type="text" placeholder="username" autocomplete="off" spellcheck="false">
+        </div>
+        <div class="field">
+          <label>Access Verification Key</label>
+          <input id="home-pass" type="password" placeholder="passphrase key signature">
+        </div>
+        <button id="home-auth-btn" class="btn-primary" onclick="handleHomeAuthAction()">Establish Site Sync</button>
+        <div style="text-align:center; margin-top:24px;">
+            <a id="home-toggle-mode" href="#" onclick="toggleHomeAuthMode()" style="color:var(--teal); font-size:0.75rem; text-decoration:none; font-weight:600; text-transform:uppercase;">[ Deploy New Operator Instance ]</a>
+        </div>
     </div>
-    <button class="btn-primary" onclick="doLogin()">Establish Sync Loop</button>
-  </div>
+</div>
+
+<div id="celebration-overlay">
+    <div class="pwned-title">
+        <span>⚡ NODE COMPROMISED</span>
+        <button class="pwned-close-btn" onclick="closeCelebrationsOverlay()">[X]</button>
+    </div>
+    <div class="pwned-sub" id="pwned-details-banner">LAB TARGET MUTATED SUCCESSFULLY</div>
+</div>
+
+<div id="cert-overlay">
+    <div class="cert-container">
+        <div class="cert-title">CERTIFICATE OF COMPLETION</div>
+        <div class="cert-sub">HACKMETHON CYBER OPERATIONS SANDBOX</div>
+        <div class="cert-body">
+            This cryptographic token certifies that independent network operator
+            <div class="cert-recipient" id="cert-user-target">OPERATOR</div>
+            has successfully traversed the high-density laboratory pipeline models, demonstrated proficiency in structural Linux terminal utilities, and successfully secured the operational status boundaries of the platform.
+        </div>
+        <div class="cert-level-badge">OPERATIONAL TIER RANK: <span id="cert-user-level" style="color:var(--teal);">SCRIPT KIDDIE</span></div>
+        <div class="cert-footer-row">
+            <div>Verification ID: <span id="cert-uuid-hash" style="color:var(--teal);">HM-XXXX-XXXX</span></div>
+            <div class="cert-stamp">VERIFIED ROOT</div>
+            <div>Timestamp: <span id="cert-date-string">2026-06-11</span></div>
+        </div>
+        <button class="close-cert-btn" onclick="document.getElementById('cert-overlay').style.display='none'">Close Document</button>
+        <button class="close-cert-btn" onclick="window.print()" style="border-color:var(--orange); color:var(--orange);">[ PRINT PORTFOLIO CERTIFICATE ]</button>
+    </div>
 </div>
 
 <div id="app-wrapper">
-
   <aside id="sidebar-nav" style="display:none">
-    <div class="sidebar-header">
-      <div class="sidebar-logo">Hack me thon</div>
-    </div>
-    
+    <div class="sidebar-header"><div class="sidebar-logo">HACKMETHON</div></div>
     <div class="sidebar-menu">
       <div class="navlink active" id="nav-dash" onclick="goPage('dash')">Dashboard</div>
       <div class="navlink" id="nav-lab" onclick="goPage('lab')">Terminal Lab</div>
       <div class="navlink" id="nav-board" onclick="goPage('board')">Scoreboard</div>
       <div class="navlink" id="nav-profile" onclick="goPage('profile')">User Profile</div>
-      <div class="navlink" id="nav-monitor" onclick="goPage('monitor')" style="display:none; color:var(--teal)">Node Monitor</div>
+      <div class="navlink" id="nav-monitor" onclick="goPage('monitor')" style="display:none; color:var(--red)">User Management</div>
     </div>
-
     <div class="sidebar-user-footer">
       <div class="user-identity">
         <div class="user-avatar" id="nav-avatar">?</div>
         <div>
-          <div id="nav-username" style="font-family:var(--ui); font-size:.8rem; font-weight:700; color:var(--white);"></div>
-          <div id="nav-score-badge" style="font-size:.68rem; color:var(--orange);">0 pts</div>
+          <div id="nav-username" style="font-size:.85rem; font-weight:700; color:var(--white); overflow:hidden; text-overflow:ellipsis; max-width:140px;"></div>
+          <div id="nav-score-badge" style="font-size:.75rem; color:var(--orange); font-family:var(--font); font-weight:600;">0 PTS</div>
+          <div id="nav-title-badge" style="font-size:0.65rem; color:var(--teal); font-weight:700; text-transform:uppercase; margin-top:2px;">Script Kiddie</div>
         </div>
       </div>
-      <button class="btn-primary" onclick="doLogout()" style="padding:5px; font-size:.7rem;">Kill Session</button>
+      <button id="sidebar-claim-cert" class="btn-primary" onclick="triggerCertificateGenerationLoop()" style="padding:4px; font-size:0.65rem; color:var(--yellow); border-color:var(--yellow); margin-bottom:8px;">Claim Certificate</button>
+      <button class="btn-primary" onclick="doLogout()" style="padding:6px; font-size:.7rem; border-color:var(--wire2)">Kill Connection</button>
     </div>
   </aside>
 
   <main id="page-dash" class="page">
-    <div class="stats-row">
-      <div class="stat-card" style="--c:var(--orange)">
-        <div class="stat-label">Your Progress</div>
-        <div class="stat-value" id="ds-score">0</div>
-      </div>
-      <div class="stat-card" style="--c:var(--teal)">
-        <div class="stat-label">Nodes Owned</div>
-        <div class="stat-value" id="ds-flags">0</div>
-      </div>
-      <div class="stat-card" style="--c:var(--yellow)">
-        <div class="stat-label">Rank Pointer</div>
-        <div class="stat-value" id="ds-rank">#—</div>
-      </div>
-      <div class="stat-card" style="--c:var(--red)">
-        <div class="stat-label">Runtime Delta</div>
-        <div class="stat-value" id="ds-time" style="font-size:1.6rem; margin-top:4px;">00:00</div>
-      </div>
-    </div>
-
-    <div id="admin-warning-banner" style="display:none; background:rgba(255,59,59,0.08); border:1px solid var(--red); color:var(--red); padding:12px; font-size:.78rem;">
-      ⚠️ ROOT BYPASS DIRECTIVE: Score commitment mechanics are inactive inside admin workspace profiles.
-    </div>
-
-    <div class="section-head" style="margin-top:12px;">
-      <h2>Operational Targets Directory</h2>
+    <div class="stats-row" id="dash-metrics-container"></div>
+    <div class="section-head">
+      <h2>HACKMETHON Targets Map (53 Targets Available)</h2>
       <div class="sh-line"></div>
-      <div class="sh-count" id="sh-count">0 / 50 owned</div>
+      <div id="sh-count" style="font-size:0.85rem; font-family:var(--font); color:var(--teal);">0 / 53 nodes</div>
     </div>
     <div class="chal-grid" id="chal-grid"></div>
   </main>
 
   <main id="page-lab" class="page">
-    <div id="lab-body">
+    <div id="student-lab-layout" style="display:flex; width:100%; height:100%;">
       <div id="lab-sidebar">
         <div id="lab-sidebar-header">
-          <h3>Target Selection Deck</h3>
-          <div id="active-chal-name">Awaiting target assignment</div>
+          <h3 style="font-size:0.8rem; color:var(--dim); font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">Target Selection Deck</h3>
+          <div id="active-chal-name" style="color:var(--white); font-size:0.85rem; margin-top:4px; font-weight:700;">Select Target Node...</div>
         </div>
         <div id="lab-flags-list"></div>
-        <div id="lab-submit">
-          <input id="lab-flag-input" type="text" placeholder="FLAG{...}" autocomplete="off" spellcheck="false">
-          <button class="btn-primary" onclick="labSubmit()" style="padding:6px; font-size:.7rem;">Commit Token</button>
-          <div id="lab-submit-msg" style="font-family:var(--ui); font-size:.68rem; margin-top:4px; min-height:12px;"></div>
-        </div>
       </div>
+      
       <div id="lab-terminal">
         <div id="term-topbar">
-          <div class="tdot td-r"></div><div class="tdot td-y"></div><div class="tdot td-g"></div>
-          <div id="term-titlelabel">operator@hackmethon:~</div>
+          <div style="display:flex; align-items:center; gap:8px;">
+             <div class="tdot td-r"></div><div class="tdot td-y"></div><div class="tdot td-g"></div>
+             <div id="term-titlelabel" style="font-size:0.75rem; color:var(--dim); font-family:var(--font); margin-left:4px;">operator@HACKMETHON: ~</div>
+          </div>
+          <button onclick="toggleCodexDrawer()" style="background:var(--wire); color:var(--teal); border:1px solid var(--wire2); font-family:var(--font); font-size:0.7rem; padding:4px 8px; cursor:pointer; border-radius:var(--r);">[ UTILITIES_CODEX ]</button>
         </div>
         <div id="term-hint-bar"></div>
         <div id="term-output"></div>
+        
         <div id="term-input-row">
-          <div id="term-ps1" style="color:var(--orange); font-size:.85rem; padding-right:4px;">root@hackmethon:~#</div>
-          <input id="term-input" type="text" autocomplete="off" spellcheck="false">
+           <div id="term-ps1">┌──(operator㉿HACKMETHON)-[~]<br>└─$ </div>
+           <textarea id="term-input" placeholder="Execute terminal strings... (Submit flags via: submit FLAG{...})" autocomplete="off" spellcheck="false" rows="1"></textarea>
+        </div>
+        
+        <div id="term-codex-drawer">
+            <div class="codex-header">
+                <span style="font-weight:700; font-size:0.8rem; color:var(--white);">OPERATIONS BLUEPRINT</span>
+                <a onclick="toggleCodexDrawer()" style="color:var(--red); cursor:pointer; font-family:var(--font); font-size:0.8rem;">[X]</a>
+            </div>
+            <div class="codex-body" id="term-codex-content-hook"></div>
         </div>
       </div>
+    </div>
+
+    <div id="root-audit-layout" style="display:none; width:100%; height:100%; flex-direction:column; padding:10px 0;">
+        <div class="section-head" style="margin-bottom:16px;">
+            <h2>System Audit Deck :: Student Compromise Logs</h2>
+            <div class="sh-line"></div>
+        </div>
+        <div class="audit-row-header">
+            <div>Operator Handle Username</div>
+            <div>Successfully Compromised Flags Vector Readout</div>
+        </div>
+        <div id="admin-audit-deck"></div>
     </div>
   </main>
 
   <main id="page-board" class="page">
-    <div id="score-chart-wrap">
-      <h3>Global Nodes Progression Matrix</h3>
-      <canvas id="score-canvas"></canvas>
+    <div class="section-head" style="margin-bottom:8px;"><h2>HACKMETHON Analytics Board</h2><div class="sh-line"></div></div>
+    <div id="chart-section">
+        <h3 style="font-size:0.8rem; color:var(--dim); font-weight:700; text-transform:uppercase; margin-bottom:16px; letter-spacing:0.5px;">Matrix Score Progression Delta</h3>
+        <svg id="live-progress-chart" width="100%" height="140" style="background:#070a10; border-radius:var(--r); border:1px solid var(--wire);"></svg>
     </div>
-    <div class="board-header-row"><div>Rank</div><div>Operator Pointer</div><div>Total Score</div><div>Nodes Owned</div><div>Last Flag Intercept</div></div>
+    <div class="board-header-row"><div>Rank</div><div>Operator Pointer</div><div>Total Score</div><div>Targets Compromised</div><div>Last Synchronization</div></div>
     <div id="board-rows"></div>
   </main>
 
   <main id="page-profile" class="page">
+    <div class="section-head" style="margin-bottom:8px;"><h2>Operator Profiles Data Matrices</h2><div class="sh-line"></div></div>
     <div class="profile-container">
       <div class="profile-avatar-box">
-        <div class="profile-image-frame">
-          <img id="prof-render-src" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100' fill='%23070d12'/><circle cx='50' cy='40' r='18' fill='%1d4f35'/><path d='M20,85 C20,65 35,55 50,55 C65,55 80,65 80,85' fill='%231d4f35'/></svg>" alt="Avatar" style="width:100%; height:100%; object-fit:cover;">
+        <div class="profile-image-frame" id="prof-frame-container">
+          <div id="avatar-fallback-icon" style="font-family:var(--display); color:var(--teal); font-size:3.5rem;">?</div>
+          <img id="prof-render-src" src="" alt="Avatar" style="display:none; width:100%; height:100%; object-fit:cover;">
         </div>
-        <input type="text" id="prof-img-url" placeholder="Image Link URL" oninput="updateProfileAvatar()" style="font-size:.65rem; text-align:center;">
+        <input type="text" id="prof-img-url" placeholder="Direct Image URL Link" oninput="updateProfileAvatarViaLink()" style="width:100%; font-size:.65rem; background:var(--ink3); border:1px solid var(--wire); color:var(--white); padding:6px; text-align:center; outline:none; border-radius:var(--r);">
+        <div class="file-upload-wrapper">
+            <div class="file-upload-btn">Upload Image File</div>
+            <input type="file" id="prof-img-file" accept="image/*" onchange="updateProfileAvatarViaFile(event)">
+        </div>
       </div>
       <div class="profile-grid">
-        <div class="field"><label>Communications Email</label><input type="email" id="prof-email" placeholder="operator@internal.node"></div>
-        <div class="field"><label>Telephony Route Intercept</label><input type="text" id="prof-phone" placeholder="Line sequence pointer"></div>
-        <div class="field"><label>Geographic Hub Coordinates</label><input type="text" id="prof-loc" placeholder="City, Region Node"></div>
-        <div class="field" style="display:flex; align-items:flex-end;"><button class="btn-primary" onclick="saveProfileMatrix()">Commit Metadata changes</button></div>
+        <div class="field"><label>Communications Route Email</label><input type="email" id="prof-email" oninput="checkForProfileMilestoneFlags()"></div>
+        <div class="field"><label>Telephony Intercept Node</label><input type="text" id="prof-phone" oninput="checkForProfileMilestoneFlags()"></div>
+        <div class="field"><label>Geographic Hub Node Coordinates</label><input type="text" id="prof-loc" oninput="checkForProfileMilestoneFlags()"></div>
+        <div class="field" style="display:flex; align-items:flex-end;"><button class="btn-primary" onclick="saveProfileMatrix()">Commit Changes to Local Storage Context</button></div>
       </div>
     </div>
   </main>
 
   <main id="page-monitor" class="page">
+    <div class="section-head" style="margin-bottom:8px;"><h2>HACKMETHON Administration Control Core</h2><div class="sh-line"></div></div>
     <div class="admin-card">
-      <div style="font-family:var(--display); font-size:1.5rem; color:var(--orange); margin-bottom:15px;">Administrative Override Matrix</div>
-      <div class="admin-grid">
-        <div class="ctrl-group">
-          <h3>Remap Operator Access passkey</h3>
-          <input id="adm-target-user" type="text" placeholder="Target Operator Username" style="margin-bottom:8px;">
-          <input id="adm-new-pass" type="password" placeholder="New Passphrase Matrix" style="margin-bottom:8px;">
-          <button class="btn-primary" onclick="executeAdminAction('reset_pass')" style="color:var(--yellow); border-color:var(--yellow)">Force Reset</button>
-        </div>
-        <div class="ctrl-group">
-          <h3>Evict Operator Profile</h3>
-          <input id="adm-purge-user" type="text" placeholder="Target Operator Username" style="margin-bottom:8px;">
-          <button class="btn-primary" onclick="executeAdminAction('delete')" style="color:var(--red); border-color:var(--red)">Purge Records</button>
-        </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+         <div class="ctrl-group" style="background:var(--ink3); border:1px solid var(--wire); padding:20px; border-radius:var(--r);">
+            <h3 style="color:var(--white); font-size:0.95rem; margin-bottom:14px; font-weight:600;">Remap Operator Key Parameter</h3>
+            <input id="adm-tgt" class="input-field" type="text" placeholder="Operator Handle Username" style="width:100%; margin-bottom:12px; background:var(--ink); border:1px solid var(--wire); color:#fff; padding:12px; outline:none; border-radius:var(--r);">
+            <input id="adm-pwd" class="input-field" type="password" placeholder="New Passphrase Entry" style="width:100%; margin-bottom:12px; background:var(--ink); border:1px solid var(--wire); color:#fff; padding:12px; outline:none; border-radius:var(--r);">
+            <h3 style="color:var(--white); font-size:0.95rem; margin-bottom:14px; font-weight:600;">Evict Identity Metrics Node</h3>
+            <input id="adm-purge" class="input-field" type="text" placeholder="Operator Target Username" style="width:100%; margin-bottom:12px; background:var(--ink); border:1px solid var(--wire); color:#fff; padding:12px; outline:none; border-radius:var(--r);">
+            <button class="btn-primary" onclick="adminPurgeUser()" style="color:var(--red); border-color:var(--red);">Purge Profile Directory Block</button>
+         </div>
       </div>
     </div>
-    <div class="board-header-row" style="margin-top:16px;"><div>Handshake</div><div>Operator ID</div><div>Current Score</div><div>Flags Owned</div><div>Last Tracking Intercept</div></div>
-    <div id="admin-monitor-rows"></div>
+    <div class="board-header-row" style="margin-top:14px;"><div>Status</div><div>Operator ID</div><div>Stored Passphrase Hash</div><div>Calculated Score</div><div>Task Progress</div></div>
+    <div id="admin-user-rows"></div>
   </main>
-
 </div>
 
 <div id="toast"></div>
@@ -374,920 +398,630 @@ html,body{height:100%;background:var(--ink);color:var(--body);font-family:var(--
 <script>
 'use strict';
 
+// Master Session Parameters
+let currentUser = null;
 let score = 0;
 let found = [];
-let currentUser = null;
 let startTime = null;
 let activeChalId = null;
 let cmdHist = [];
 let histIdx = -1;
 let cwd = '/home/operator';
+let isRegisterMode = false;
+let celebrationTimeoutTracker = null;
 
-const CHALLENGES = [
-  // ── WEB RECONNAISSANCE (1-10) ──
-  {id:'w1',cat:'Web Recon',name:'Page Architecture View',diff:'easy',pts:50,desc:'Analyze static page markup configurations for unlinked comments.',focus:'Locate hidden developer notes or commented lines embedded inside the initial landing page markup framework.'},
-  {id:'w2',cat:'Web Recon',name:'DOM Attribute Inspection',diff:'easy',pts:75,desc:'Enumerate deep object properties inside interface canvas render matrices.',focus:'Analyze properties on structural UI nodes, particularly elements rendering live tracking metrics.'},
-  {id:'w3',cat:'Web Recon',name:'Asynchronous Layout Audit',diff:'easy',pts:75,desc:'Inspect localized frontend view configurations for client-side storage leaks.',focus:'Investigate hidden page elements or background containers that render exclusively during verified dashboard sessions.'},
-  {id:'w4',cat:'Web Recon',name:'Session Cookie Parameterization',diff:'med',pts:125,desc:'Analyze volatile state parameters passed inside ambient HTTP cookie headers.',focus:'Inspect active storage values issued by the application browser wrapper tracking your connection state.'},
-  {id:'w5',cat:'Web Recon',name:'Persistent Storage Enumeration',diff:'med',pts:125,desc:'Audit keys initialized within localStorage execution boundaries.',focus:'Enumerate all local persistent keys stored on disk inside the host browser configuration.'},
-  {id:'w6',cat:'Web Recon',name:'Index Indexing Analysis',diff:'easy',pts:75,desc:'Investigate public manifest policies governing crawl state parameters.',focus:'Check the system server instructions explicitly left behind for search engine crawler software paths.'},
-  {id:'w7',cat:'Web Recon',name:'API Parameter Fuzzing',diff:'hard',pts:200,desc:'Discover hidden structural application routes serving debugging states.',focus:'Find the active server route handling diagnostic variables or live telemetry exports.'},
-  {id:'w8',cat:'Web Recon',name:'Custom Response Headers',diff:'hard',pts:200,desc:'Intercept custom downstream environmental variable indicators emitted by backends.',focus:'Analyze the metadata returned by server network responses when requesting operational metrics.'},
-  {id:'w9',cat:'Web Recon',name:'Content Security Assessment',diff:'med',pts:150,desc:'Evaluate inline policy rules for cross-origin tracking vectors.',focus:'Evaluate inline source safety parameters or response attributes checking script permissions.'},
-  {id:'w10',cat:'Web Recon',name:'Hidden Form Input Audit',diff:'easy',pts:50,desc:'Enumerate hidden transaction states inside operational login structures.',focus:'Enumerate unlisted input nodes or legacy fields inside standard session entry parameters.'},
-
-  // ── LINUX BASICS (11-20) ──
-  {id:'l1',cat:'Linux: Basics',name:'Dotfile Discovery',diff:'easy',pts:50,desc:'Locate system initialization files hidden via leading file system indicators.',focus:'Locate an unindexed configuration profile hidden from plain view inside the operator user home directory root.'},
-  {id:'l2',cat:'Linux: Basics',name:'System Banner Parsing',diff:'easy',pts:50,desc:'Read custom environmental message structures pushed on terminal initialization.',focus:'Review the default greeting message generated dynamically by the host server logic.'},
-  {id:'l3',cat:'Linux: Basics',name:'User Directory GECOS Audit',diff:'easy',pts:75,desc:'Verify user account metadata parameters inside systemic identity catalogs.',focus:'Audit descriptive metadata comments assigned to system account identity logs.'},
-  {id:'l4',cat:'Linux: Basics',name:'Log Append Interception',diff:'easy',pts:75,desc:'Isolate anomalies appended directly to volatile log outputs.',focus:'Extract the final entry committed to standard kernel error tracking files.'},
-  {id:'l5',cat:'Linux: Basics',name:'Elevated Context Enumeration',diff:'easy',pts:100,desc:'Enumerate protected directory configurations for access privilege leaks.',focus:'Access the restricted superuser fallback zone and list all files saved inside.'},
-  {id:'l6',cat:'Linux: Basics',name:'Process Environment Scan',diff:'med',pts:125,desc:'Inspect exported environmental settings tracking operational runtime parameters.',focus:'Inspect active tracking profiles assigned to background shells monitoring software parameters.'},
-  {id:'l7',cat:'Linux: Basics',name:'Fake Kernel Interface Review',diff:'hard',pts:200,desc:'Audit non-standard parameters registered within simulated physical metrics.',focus:'Audit the active pseudo-filesystem nodes for data files written by system administrators.'},
-  {id:'l8',cat:'Linux: Basics',name:'System Path Enumeration',diff:'easy',pts:50,desc:'Scan systemic binary directories for unregistered terminal software.',focus:'Scan structural core binary paths to isolate execution tools dropped outside default locations.'},
-  {id:'l9',cat:'Linux: Basics',name:'Hidden History Inspection',diff:'easy',pts:75,desc:'Review tracking sequences generated by legacy bash interaction queues.',focus:'Review tracking sequences generated by historical terminal commands run by past console interactions.'},
-  {id:'l10',cat:'Linux: Basics',name:'Network Port Interception',diff:'med',pts:125,desc:'Map structural transmission protocols bound to internal local loopbacks.',focus:'Map structural transmission endpoints listening exclusively inside internal local system contexts.'},
-
-  // ── TEXT PROCESSING (21-30) ──
-  {id:'t1',cat:'Linux: Text',name:'Base64 Transport Decoding',diff:'med',pts:125,desc:'Decode raw encoded binary streams passed via cleartext storage.',focus:'Locate text lines stored using cleartext obfuscation algorithms and normalize the stream.'},
-  {id:'t2',cat:'Linux: Text',name:'Pattern Extraction Filter',diff:'med',pts:125,desc:'Filter high-density log streams to isolate explicit transaction identifiers.',focus:'Isolate the specific application log record carrying the TROPHY keyword attribute.'},
-  {id:'t3',cat:'Linux: Text',name:'Delimited CSV Extraction',diff:'med',pts:150,desc:'Extract explicit dimensional records from structured tabular layouts.',focus:'Audit high-density comma-separated operation records to find data bound to the SPECTRE unit.'},
-  {id:'t4',cat:'Linux: Text',name:'Symmetrical Mirror Inversion',diff:'easy',pts:50,desc:'Invert reversed payload parameters to restore functional strings.',focus:'Reverse text maps written backwards to recover the standard token string configuration.'},
-  {id:'t5',cat:'Linux: Text',name:'ROT13 Alpha Rotation',diff:'med',pts:150,desc:'Decrypt cipher configurations shifted using standard modular rotation alphabets.',focus:'Decode an alphabet-shifted string using an offset cipher matrix mapping.'},
-  {id:'t6',cat:'Linux: Text',name:'Fragment Aggregation Assembly',diff:'med',pts:175,desc:'Reconstruct separate files distributed chronologically across local memory fragments.',focus:'Merge separate consecutive code fragments scattered within the processing folder.'},
-  {id:'t7',cat:'Linux: Text',name:'Hexadecimal Format Inversion',diff:'hard',pts:200,desc:'Convert raw hexadecimal text maps back into normal structural bytes.',focus:'Convert raw hexadecimal digit sequences saved on disk back into functional text characters.'},
-  {id:'t8',cat:'Linux: Text',name:'Regex Boundary Validation',diff:'hard',pts:225,desc:'Construct explicit lookahead expressions to strip nested credential maps.',focus:'Isolate specific credential formats embedded inside chaotic alphanumeric configurations using explicit structural formulas.'},
-  {id:'t9',cat:'Linux: Text',name:'Stream Line Enumeration',diff:'easy',pts:50,desc:'Count dimensional parameters within high-volume config text files.',focus:'Evaluate high-volume parameters inside data objects to count the total lines processed.'},
-  {id:'t10',cat:'Linux: Text',name:'Character Set Inversion',diff:'med',pts:100,desc:'Transpose case configurations using explicit translator algorithms.',focus:'Transpose alphabetical layouts using software strings to switch text layers safely.'},
-
-  // ── ADVANCED SYSTEMS & ESCALATION (31-45) ──
-  {id:'a1',cat:'Linux: Advanced',name:'Deep Tree Traversal',diff:'hard',pts:200,desc:'Navigate deep, multi-tier hidden structures to uncover targeted evidence blocks.',focus:'Traverse a dense 9-tier directory maze to discover an unlisted evidence file.'},
-  {id:'a2',cat:'Linux: Advanced',name:'Automated Task Analysis',diff:'hard',pts:200,desc:'Identify scripts executed recurrently by scheduling engines.',focus:'Find background jobs scheduled to launch automatically every 60 seconds on the server.'},
-  {id:'a3',cat:'Linux: Advanced',name:'SUID Flag Investigation',diff:'hard',pts:225,desc:'Locate high-privilege context parameters assigned to anomalous path files.',focus:'Enumerate all file handles assigned elevated master context tokens during processing.'},
-  {id:'a4',cat:'Linux: Advanced',name:'World-Writable Directory Scan',diff:'hard',pts:225,desc:'Enumerate systemic objects configured with globally insecure file permissions.',focus:'Locate global write permission structures allowing any user to write text updates.'},
-  {id:'a5',cat:'Linux: Advanced',name:'Compiled Object String Extraction',diff:'hard',pts:225,desc:'Extract cleartext indicators embedded within binary compile footprints.',focus:'Parse compiled non-human-readable data blocks to discover text lines embedded in code.'},
-  {id:'a6',cat:'Linux: Advanced',name:'Symbolic Link Vector Track',diff:'hard',pts:225,desc:'Follow relative pointer endpoints mapping outside sandboxed boundaries.',focus:'Follow system shortcut pathways pointing to protected locations outside standard storage loops.'},
-  {id:'a7',cat:'Linux: Advanced',name:'Privileged Sudoer Matrix Analysis',diff:'expert',pts:325,desc:'Analyze nopasswd execution paths to determine root escalation opportunities.',focus:'Analyze authorization rules granting regular accounts access to execute commands without keys.'},
-  {id:'a8',cat:'Linux: Advanced',name:'Recursive Text Search Drill',diff:'expert',pts:325,desc:'Perform system-wide variable searching across all secure directories.',focus:'Recursively look through all configuration layers to find the MASTER_KEY parameter declaration.'},
-  {id:'a9',cat:'Linux: Advanced',name:'Timestamp Delta Isolation',diff:'expert',pts:300,desc:'Isolate the most recently initialized file configuration on the filesystem.',focus:'Perform time delta mapping to locate the newest modified file object inside variable storage folders.'},
-  {id:'a10',cat:'Linux: Advanced',name:'Hidden Heredoc Context Parsing',diff:'expert',pts:300,desc:'Locate text lines processed inside volatile block documentation script segments.',focus:'Analyze inline code blocks passed inside scripts via standard multiline container strings.'},
-  {id:'a11',cat:'Linux: Advanced',name:'Umask Default Configuration Review',diff:'med',pts:150,desc:'Audit creation permissions generated by legacy account execution groups.',focus:'Audit creation policies tracking default permissions assigned to dynamically populated file contexts.'},
-  {id:'a12',cat:'Linux: Advanced',name:'Broken Descriptor Analysis',diff:'hard',pts:200,desc:'Track hidden output streams mapping to decoupled file handles.',focus:'Investigate error routing parameters where logs are sent to alternative terminal streams.'},
-  {id:'a13',cat:'Linux: Advanced',name:'Shared Memory Telemetry Intercept',diff:'hard',pts:250,desc:'Inspect temporary operational buffers initialized within local RAM locations.',focus:'Audit systemic temporary files tracking short-term network metrics inside processing caches.'},
-  {id:'a14',cat:'Linux: Advanced',name:'Mount Point Parameter Audit',diff:'med',pts:150,desc:'Evaluate file execution rules configured across external system node configurations.',focus:'Isolate block hardware configurations mapped into live processing loops.'},
-  {id:'a15',cat:'Linux: Advanced',name:'Zombie Process Parameter Map',diff:'hard',pts:200,desc:'Track lingering process tracking tables for legacy network pointers.',focus:'Examine abandoned execution handles that retain background descriptors inside internal allocation fields.'},
-
-  // ── FINAL CRITICAL BOSS (46-50) ──
-  {id:'f1',cat:'Final Boss',name:'Multi-Stage Shard Assembly I',diff:'expert',pts:250,desc:'Decrypt and combine sequential ROT13 parameters from segment directory alpha.',focus:'Locate, isolate, and reverse early block shard maps tucked inside complex deployment segments.'},
-  {id:'f2',cat:'Final Boss',name:'Multi-Stage Shard Assembly II',diff:'expert',pts:250,desc:'Isolate secondary block configurations inside historical buffer parameters.',focus:'Trace background deployment fragments across final assembly locations.'},
-  {id:'f3',cat:'Final Boss',name:'Cryptographic Hash Consolidation',diff:'expert',pts:300,desc:'Consolidate multiple decrypted structural blocks into a unified system token.',focus:'Perform data collation across all isolated decryption parts to establish a clean token configuration.'},
-  {id:'f4',cat:'Final Boss',name:'Hidden API Verification Loop',diff:'expert',pts:400,desc:'Pass consolidated hashes through secret server endpoints to test system defenses.',focus:'Query the ultimate operational API endpoints to verify the consolidated token payload.'},
-  {id:'f5',cat:'Final Boss',name:'Core Perimeter Wall Completion',diff:'expert',pts:500,desc:'Initialize the complete structural verification protocol across all 50 operational nodes.',focus:'Trigger the full continuous validation system to secure the entire Trust Iron Walls structure.'}
-];
-
-// ══════════════════════════════════════════════════════════════
-//  CONTROLLERS & CORE NAVIGATION ROUTING
-// ══════════════════════════════════════════════════════════════
-async function doLogin(){
-  const u = document.getElementById('li-user').value.trim();
-  const p = document.getElementById('li-pass').value;
-  const err = document.getElementById('login-err');
-  if(!u||!p){ err.textContent='All fields required.'; return; }
-
-  const res = await fetch('/api/auth', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ user: u, pass: p })
-  });
-
-  if (res.status !== 200) {
-    const data = await res.json();
-    err.textContent = data.err || 'Authentication failed.';
-    return;
-  }
-
-  const account = await res.json();
-  currentUser = account;
-  found = account.flags || [];
-  score = account.score || 0;
-  
-  startTime = parseInt(localStorage.getItem('opsec_start_' + account.user) || Date.now());
-  localStorage.setItem('opsec_start_' + account.user, startTime);
-  
-  if (currentUser.role === 'admin') {
-    document.getElementById('nav-monitor').style.display = 'flex';
-    document.getElementById('admin-warning-banner').style.display = 'block';
-  } else {
-    document.getElementById('nav-monitor').style.display = 'none';
-    document.getElementById('admin-warning-banner').style.display = 'none';
-  }
-  
-  document.getElementById('page-login').style.display = 'none';
-  document.getElementById('sidebar-nav').style.display = 'flex';
-  document.getElementById('nav-username').textContent = currentUser.user;
-  document.getElementById('nav-avatar').textContent = currentUser.user[0].toUpperCase();
-  
-  loadLocalProfileMetadata();
-  updateNavScore();
-  goPage('dash');
-  startTimer();
-}
-
-function doLogout(){
-  if(!confirm('Terminate current console session sync?')) return;
-  currentUser = null; found = []; score = 0; startTime = null;
-  window.location.reload();
-}
-
-function goPage(name){
-  if(!currentUser && name !== 'login') return;
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.navlink').forEach(n => n.classList.remove('active'));
-  
-  document.getElementById('page-' + name).classList.add('active');
-  const nl = document.getElementById('nav-' + name);
-  if(nl) nl.classList.add('active');
-  
-  if(name === 'dash') renderDash();
-  if(name === 'board' || name === 'monitor') syncDatabaseStates();
-  if(name === 'lab'){ renderLabFlags(); document.getElementById('term-input').focus(); }
-}
-
-async function syncDatabaseStates() {
-  const res = await fetch('/api/state');
-  const directory = await res.json();
-
-  const boardRows = document.getElementById('board-rows');
-  if (boardRows) {
-    const sorted = [...directory].sort((a,b) => b.score - a.score);
-    boardRows.innerHTML = sorted.map((u, i) => `
-      <div class="board-row ${u.user === currentUser?.user ? 'me' : ''}">
-        <div class="board-rank">#${i+1}</div>
-        <div class="board-name">
-          <div class="board-avatar">${u.user[0].toUpperCase()}</div>
-          <div><div class="board-username">${u.user}</div><div class="board-tag">${u.role.toUpperCase()}</div></div>
-        </div>
-        <div class="board-score">${u.score}</div>
-        <div class="board-flags">${u.flagsCount} / 50</div>
-        <div class="board-last">${u.last}</div>
-      </div>
-    `).join('');
-    drawChart(sorted.map(u => ({ name: u.user, score: u.score, isMe: u.user === currentUser?.user })));
-  }
-
-  const adminRows = document.getElementById('admin-monitor-rows');
-  if (adminRows && currentUser?.role === 'admin') {
-    adminRows.innerHTML = directory.map(u => {
-      const metaMail = localStorage.getItem(`meta_mail_${u.user}`) || 'Unset Node';
-      const metaPhone = localStorage.getItem(`meta_phone_${u.user}`) || 'Unset Intercept';
-      const metaLoc = localStorage.getItem(`meta_loc_${u.user}`) || 'Unset Coordinates';
-      
-      return `
-        <div class="board-row" style="grid-template-columns: 100px 1.5fr 1fr 1fr 1.2fr; font-size: 0.78rem;">
-          <div style="font-family:var(--ui); font-weight:700; color:${u.user === currentUser?.user ? 'var(--orange)' : 'var(--dim)'}">
-            ${u.user === currentUser?.user ? '● ONLINE' : '○ DISCONN'}
-          </div>
-          <div>
-            <div style="font-weight:700; color:#fff;">${u.user} (${u.role})</div>
-            <div style="font-size:0.68rem; color:var(--dim); margin-top:2px;">E: ${metaMail} \| P: ${metaPhone} \| L: ${metaLoc}</div>
-          </div>
-          <div class="board-score">${u.score}</div>
-          <div class="board-flags">${u.flagsCount} / 50</div>
-          <div class="board-last">${u.last}</div>
-        </div>
-      `;
-    }).join('');
-  }
-}
-
-async function executeAdminAction(action) {
-  let payload = { adminUser: currentUser.user, action };
-  if (action === 'reset_pass') {
-    payload.targetUser = document.getElementById('adm-target-user').value;
-    payload.newPassword = document.getElementById('adm-new-pass').value;
-  } else if (action === 'delete') {
-    payload.targetUser = document.getElementById('adm-purge-user').value;
-  }
-
-  const res = await fetch('/api/admin-ctrl', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  });
-
-  if (res.status === 200) {
-    toast(`Operation executed successfully.`, 'green');
-    syncDatabaseStates();
-    document.getElementById('adm-target-user').value = '';
-    document.getElementById('adm-new-pass').value = '';
-    document.getElementById('adm-purge-user').value = '';
-  } else {
-    toast('Execution error processing task vector.', 'red');
-  }
-}
-
-// ══════════════════════════════════════════════════════════════
-//  PROFILE LOCAL STORAGE CACHING
-// ══════════════════════════════════════════════════════════════
-function saveProfileMatrix() {
-  if(!currentUser) return;
-  const u = currentUser.user;
-  localStorage.setItem(`meta_mail_${u}`, document.getElementById('prof-email').value);
-  localStorage.setItem(`meta_phone_${u}`, document.getElementById('prof-phone').value);
-  localStorage.setItem(`meta_loc_${u}`, document.getElementById('prof-loc').value);
-  localStorage.setItem(`meta_img_${u}`, document.getElementById('prof-img-url').value);
-  toast('Profile mutations committed to metadata context.', 'green');
-}
-
-function loadLocalProfileMetadata() {
-  if(!currentUser) return;
-  const u = currentUser.user;
-  document.getElementById('prof-email').value = localStorage.getItem(`meta_mail_${u}`) || '';
-  document.getElementById('prof-phone').value = localStorage.getItem(`meta_phone_${u}`) || '';
-  document.getElementById('prof-loc').value = localStorage.getItem(`meta_loc_${u}`) || '';
-  const storedImg = localStorage.getItem(`meta_img_${u}`);
-  if(storedImg) {
-    document.getElementById('prof-img-url').value = storedImg;
-    document.getElementById('prof-render-src').src = storedImg;
-  }
-}
-
-function updateProfileAvatar() {
-  const url = document.getElementById('prof-img-url').value;
-  if(url.trim()) document.getElementById('prof-render-src').src = url;
-}
-
-// ══════════════════════════════════════════════════════════════
-//  LAB WORKSPACE SELECTION ENGINE
-// ══════════════════════════════════════════════════════════════
-function openChallenge(id){
-  const c = CHALLENGES.find(x=>x.id===id);
-  if(!c) return;
-  modalChalId = id;
-  const diffMap={easy:'tag-easy',med:'tag-med',hard:'tag-hard',expert:'tag-expert'};
-  document.getElementById('m-cat').innerHTML=`${c.cat} &nbsp;<span class="tag ${diffMap[c.diff]}">${c.diff}</span>&nbsp;<span style="color:var(--orange)">${c.pts} pts</span>`;
-  document.getElementById('m-title').textContent=c.name;
-  document.getElementById('m-desc').textContent=c.desc;
-  document.getElementById('modal').classList.add('open');
-}
-function closeModal(){ document.getElementById('modal').classList.remove('open'); }
-
-function openLab(){
-  closeModal();
-  activeChalId = modalChalId;
-  goPage('lab');
-  setActiveChal(activeChalId);
-}
-
-function openLabDirectly(id) {
-  activeChalId = id;
-  goPage('lab');
-  setActiveChal(activeChalId);
-}
-
-function setActiveChal(id){
-  activeChalId = id;
-  const c = CHALLENGES.find(x => x.id === activeChalId);
-  if(!c) return;
-  
-  document.getElementById('active-chal-name').textContent = c.name;
-  const hintBar = document.getElementById('term-hint-bar');
-  if (hintBar) {
-    hintBar.textContent = "Objective: " + c.focus;
-    hintBar.style.display = "block";
-  }
-}
-
-function renderLabFlags(){
-  const list = document.getElementById('lab-flags-list');
-  list.innerHTML = CHALLENGES.map((c, i) => {
-    const sv = found.includes(c.id);
-    return `<div class="lab-flag-item ${sv ? 'found' : ''}" onclick="setActiveChal('${c.id}')">
-      <div class="lfi-num">${i+1}</div>
-      <div class="lfi-dot" style="background:${sv ? 'var(--orange)' : 'var(--ink3)'}; border: 1px solid var(--wire2)"></div>
-      <div class="lfi-name">${c.name}</div>
-      <div class="lfi-pts">${sv ? '✓' : ''} ${c.pts}p</div>
-    </div>`;
-  }).join('');
-}
-
-async function labSubmit(){
-  const val = document.getElementById('lab-flag-input').value.trim();
-  const msg = document.getElementById('lab-submit-msg');
-  if(!val) return;
-
-  if (currentUser && currentUser.role === 'admin') {
-    msg.textContent = "✗ Action denied. Admin profiles cannot submit flag scopes.";
-    msg.className = 'err';
-    return;
-  }
-
-  const res = await fetch('/api/submit-flag', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ user: currentUser.user, inputFlag: val })
-  });
-
-  const data = await res.json();
-  if(data.status === 'ok') {
-    msg.textContent = data.msg; msg.className = 'ok';
-    score = data.newScore;
-    found = data.newFlags;
-    updateNavScore();
-    document.getElementById('lab-flag-input').value = '';
-    renderLabFlags();
-  } else if(data.status === 'dup') {
-    msg.textContent = data.msg; msg.className = 'dup';
-  } else {
-    msg.textContent = data.msg; msg.className = 'err';
-  }
-  setTimeout(()=>msg.textContent='', 2500);
-}
-
-function renderDash(){
-  updateDashStats();
-  const grid = document.getElementById('chal-grid');
-  const cats = [...new Set(CHALLENGES.map(c => c.cat))];
-  let html = '';
-  
-  cats.forEach(cat => {
-    html += `<div style="grid-column:1/-1"><div class="section-head" style="margin-top:24px;margin-bottom:10pxিলেন"><h2>${cat}</h2><div class="sh-line"></div></div></div>`;
-    
-    CHALLENGES.filter(c => c.cat === cat).forEach(c => {
-      const sv = found.includes(c.id);
-      const dm = {easy:'tag-easy', med:'tag-med', hard:'tag-hard', expert:'tag-expert'};
-      html += `
-        <div class="chal-card ${sv ? 'solved' : ''}" id="cc-${c.id}">
-          <div onclick="openChallenge('${c.id}')" style="cursor:pointer; flex:1;">
-            <div class="chal-cat" style="color:var(--dim); font-size:.65rem; font-weight:700;">${c.cat}</div>
-            <div class="chal-name" style="font-family:var(--ui); font-size:.9rem; font-weight:600; color:var(--white); margin:4px 0;">${c.name}</div>
-            <div class="chal-desc" style="font-size:.78rem; line-height:1.5;">${c.desc}</div>
-            <span class="tag ${dm[c.diff]}">${c.diff}</span>
-            <span style="font-size:.75rem; color:var(--orange); font-family:var(--font); margin-left:8px;">${c.pts}pts</span>
-          </div>
-          <button class="action-btn-lab" onclick="openLabDirectly('${c.id}')">Initialize Lab Workspace →</button>
-        </div>`;
-    });
-  });
-  grid.innerHTML = html;
-  document.getElementById('sh-count').textContent = `${found.length} / ${CHALLENGES.length} nodes`;
-}
-
-function updateDashStats(){
-  document.getElementById('ds-score').textContent=score + " pts";
-  document.getElementById('ds-flags').textContent=found.length;
-}
-function getRank(){ return '-'; }
-function updateNavScore(){ document.getElementById('nav-score-badge').textContent=score+' pts'; }
-
-function toast(msg,type=''){
-  const t=document.getElementById('toast');
-  t.textContent=msg;
-  t.style.borderLeftColor = type==='green'?'var(--orange)':'var(--red)';
-  t.style.display='block';
-  clearTimeout(t._timer);
-  t._timer=setTimeout(()=>t.style.display='none',3500);
-}
-
-// ══════════════════════════════════════════════════════════════
-//  VIRTUAL FILESYSTEM FILES STRUCT
-// ══════════════════════════════════════════════════════════════
-const FS = {
-  '/':{ type:'dir', children:['home','root','etc','var','opt','tmp','proc','bin','usr','dev'] },
-  '/home':{ type:'dir', children:['operator'] },
-  '/home/operator':{ type:'dir', children:['Desktop','Documents','.bashrc','.flag','.encoded'] },
-  '/home/operator/.flag':{ type:'file', content:'FLAG{d0tf1l3_d1sc0v3r3d}' },
-  '/home/operator/.encoded':{ type:'file', content:'RkxBR3tiNHMzNjRfZDNjMGQzcl9wcjB9' },
-  '/home/operator/.bashrc':{ type:'file', content:'export DEPLOY_KEY="FLAG{3xp0rt_v4r_l34k3d}"' },
-  '/root':{ type:'dir', children:['.flag_root'] },
-  '/root/.flag_root':{ type:'file', content:'FLAG{r00t_h0m3_0wn3d}', perms:'-rw-------' },
-  '/etc':{ type:'dir', children:['passwd','motd'] },
-  '/etc/motd':{ type:'file', content:'FLAG{m0td_r34d3r}' },
-  '/etc/passwd':{ type:'file', content:'operator:x:1000:1000:FLAG{p4sswd_g3c0s_s3cr3t}:/home/operator:/bin/bash' },
-  '/var':{ type:'dir', children:['log'] },
-  '/var/log':{ type:'dir', children:['syslog','auth.log','app.log'] },
-  '/var/log/syslog':{ type:'file', content:'kernel: FLAG{t41l_3nd_0f_l0g}' },
-  '/var/log/auth.log':{ type:'file', content:'sudo[1337]: FLAG{4uth_l0g_r34d3r}' },
-  '/var/log/app.log':{ type:'file', content:'TROPHY_EVENT token=FLAG{gr3p_1s_3ss3nt14l}' },
-  '/opt':{ type:'dir', children:['scripts','data','encoded','links','maze','final'] },
-  '/opt/scripts':{ type:'dir', children:['heartbeat.sh','privcheck.sh'] },
-  '/opt/scripts/heartbeat.sh':{ type:'file', content:'# FLAG{cr0n_scr1pt_3xp0s3d}' },
-  '/opt/scripts/privcheck.sh':{ type:'file', content:'echo "FLAG{sud03rs_pr1v3sc_p4th}"' },
-  '/opt/data':{ type:'dir', children:['ops.csv'] },
-  '/opt/data/ops.csv':{ type:'file', content:'SPECTRE,ACTIVE,AMER,FLAG{4wk_csv_3xtr4ct10n}' },
-  '/opt/encoded':{ type:'dir', children:['mirror.txt','cipher.txt','hex.txt'] },
-  '/opt/encoded/mirror.txt':{ type:'file', content:'}d3sr3v3r_r0rr1m{GALF' },
-  '/opt/encoded/cipher.txt':{ type:'file', content:'SYNT{e0g13_q3p0q3q_4t41a}' },
-  '/opt/encoded/hex.txt':{ type:'file', content:'464c41477b6833785f6d4173743372217d' },
-  '/opt/links':{ type:'dir', children:['secret_link'] },
-  '/opt/links/secret_link':{ type:'symlink', target:'/opt/.hidden_vault/token.txt' },
-  '/opt/.hidden_vault':{ type:'dir', children:['token.txt'] },
-  '/opt/.hidden_vault/token.txt':{ type:'file', content:'FLAG{syml1nk_targ3t_f0und}' },
-  '/opt/final':{ type:'dir', children:['shard_1','shard_2','shard_3'] },
-  '/opt/final/shard_1':{ type:'file', content:'SYNT{s1a4y' },
-  '/opt/final/shard_2':{ type:'file', content:'_q3pelcg10a' },
-  '/opt/final/shard_3':{ type:'file', content:'_p0zcyr3gr}' },
-  '/opt/maze':{ type:'dir', children:['l1'] },
-  '/opt/maze/l1':{ type:'dir', children:['l2'] },
-  '/opt/maze/l1/l2':{ type:'dir', children:['l3'] },
-  '/opt/maze/l1/l2/l3':{ type:'dir', children:['l4'] },
-  '/opt/maze/l1/l2/l3/l4':{ type:'dir', children:['l5'] },
-  '/opt/maze/l1/l2/l3/l4/l5':{ type:'dir', children:['l6'] },
-  '/opt/maze/l1/l2/l3/l4/l5/l6':{ type:'dir', children:['l7'] },
-  '/opt/maze/l1/l2/l3/l4/l5/l6/l7':{ type:'dir', children:['l8'] },
-  '/opt/maze/l1/l2/l3/l4/l5/l6/l7/l8':{ type:'dir', children:['l9'] },
-  '/opt/maze/l1/l2/l3/l4/l5/l6/l7/l8/l9':{ type:'dir', children:['.maze_flag'] },
-  '/opt/maze/l1/l2/l3/l4/l5/l6/l7/l8/l9/.maze_flag':{ type:'file', content:'FLAG{m4z3_w4lk3r_9_l3v3ls}' },
-  '/proc':{ type:'dir', children:['secret'] },
-  '/proc/secret':{ type:'file', content:'FLAG{pr0c_f4k3_f1l3}' },
-  '/bin':{ type:'dir', children:['bash','ls','cat','find','grep'] },
-  '/usr':{ type:'dir', children:['bin'] },
-  '/usr/bin':{ type:'dir', children:['python3','curl','xxd','strings'] },
-  '/dev':{ type:'dir', children:['null'] }
+let ENV_VARS = {
+    'PATH': '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+    'USER': 'operator',
+    'HOME': '/home/operator',
+    'SHELL': '/bin/bash',
+    'TERM': 'xterm-256color'
 };
 
-FS['/usr/bin/FLAG{su1d_b1n4ry_f0und}'] = { type:'file', content:'[SUID binary]', perms:'-rwsr-xr-x' };
-FS['/usr/bin'].children.push('FLAG{su1d_b1n4ry_f0und}');
-FS['/var/log/latest_evidence.log'] = { type:'file', content:'FLAG{n3w3st_f1l3_w1ns}' };
-FS['/var/log'].children.push('latest_evidence.log');
+// 50 EXPERT CTF ARENA MODULES
+const CHALLENGES = [
+  { id: 'l1', cat: 'Linux Exploration', name: 'Hidden Configuration Dotfile', diff: 'easy', pts: 40, focus: 'Locate structural initialization variables hidden inside properties flags on user roots.', hint: 'Tooling: ls -la, cat, less', flag: 'FLAG{d0tf1l3_p4rs3_s0urc3}', strategy: 'Files starting with a dot (.) are hidden from standard directory listings. Use specific listing arguments like "-a" or "-la" on the target directory root to uncover configuration components hidden by design.' },
+  { id: 'l2', cat: 'Linux Exploration', name: 'System Intercept Greeting Banner', diff: 'easy', pts: 40, focus: 'Read systemic interface announcements loaded on live connection handshakes.', hint: 'Tooling: cat, head, /etc/motd', flag: 'FLAG{m0td_v3ct0r_r34d}', strategy: 'Announcements and login banners are driven by specific terminal system files sitting inside configuration directories like /etc. Locate and print out the Content of Message Of The Day file vectors.' },
+  { id: 'l3', cat: 'Linux Exploration', name: 'Global Identity Comment Enumeration', diff: 'easy', pts: 60, focus: 'Identify descriptive account comment tags (GECOS) inside password catalog tracks.', hint: 'Tooling: grep, cat, /etc/passwd', flag: 'FLAG{p4sswd_g3c0s_s3cr3t}', strategy: 'Account blueprints, group memberships, and systemic GECOS comments sit inside a universally readable text index database file /etc/passwd. Read the line parameters matching the service_node daemon profile.' },
+  { id: 'l4', cat: 'Linux Exploration', name: 'Root Hash Shadow Audit', diff: 'med', pts: 100, focus: 'Enumerate read-protected security indices tracking master shadow allocations.', hint: 'Tooling: cat, /etc/shadow', flag: 'FLAG{sh4d0w_r00t_m4sk}', strategy: 'The storage block for enciphered master account tokens rests in /etc/shadow. Read this highly secured manifest layer to extract the exact hash index masking the root user profile.' },
+  { id: 'l5', cat: 'Linux Exploration', name: 'Relative Directory Reference Leap', diff: 'easy', pts: 50, focus: 'Navigate structures backward using execution indicators to extract logs.', hint: 'Tooling: cd .., pwd', flag: 'FLAG{r3l4t1v3_p4th_j0urn3y}', strategy: 'To leap backwards through path limits, use relative notation elements like dot-dot (..). Track current tracking markers using path printing commands to keep structural orient validation.' },
+  { id: 'l6', cat: 'Linux Exploration', name: 'Hidden System Variables Scan', diff: 'med', pts: 80, focus: 'Enumerate environment arrays handling core system locations definitions.', hint: 'Tooling: export, env, echo', flag: 'FLAG{3xp0rt_v4r_l34k3d}', strategy: 'Transient system configurations are passed onto execution shells as environment variable properties. Run declaration mapping utilities like export or env to uncover values hidden in the global shell scope.' },
+  { id: 'l7', cat: 'Linux Exploration', name: 'Recursive Tree Structural Drilling', diff: 'med', pts: 90, focus: 'Search complete system layer maps to track variable declarations inside targets.', hint: 'Tooling: grep -r, find', flag: 'FLAG{m4z3_dr1ll_l9_v4l}', strategy: 'When looking through an multi-tier deep directory tree file system, do not open every folder manually. Deploy find utilities targeting directories recursively or grep filters matching string parameters.' },
+  { id: 'l8', cat: 'Linux Exploration', name: 'Sudo Access Authorization Parsing', diff: 'med', pts: 100, focus: 'Audit configuration profile rules allowing passwordless execution tracks.', hint: 'Tooling: cat, /etc/sudoers', flag: 'FLAG{sud03rs_pr1v_m4st3r}', strategy: 'Elevated authorization rules guiding superuser context transitions sit inside /etc/sudoers. Inspect this system file to discover exactly what binaries regular student accounts can trigger with root power.' },
+  { id: 'l9', cat: 'Linux Exploration', name: 'Binary Parameter Path Traversal', diff: 'hard', pts: 120, focus: 'Isolate tools dropped directly outside canonical execution directories.', hint: 'Tooling: echo $PATH, ls', flag: 'FLAG{b1n_p4th_v3r1f1c4t10n}', strategy: 'The system queries a pre-configured environmental string variable called $PATH to locate valid executable software binaries. Print out this value array, then look for unlisted software drops outside standard loops.' },
+  { id: 'l10', cat: 'Linux Exploration', name: 'Historical Console Footprint Analysis', diff: 'easy', pts: 60, focus: 'Review historical commands executed across past user terminal loops.', hint: 'Tooling: history', flag: 'FLAG{h1st0ry_l0g_p4rs3}', strategy: 'Every interaction loop performed by past system operators leaves a tracking list behind. Fire the core history command to recall past sequential inputs executed on this terminal wrapper instance.' },
+  { id: 'l11', cat: 'Linux Exploration', name: 'Simulated File Partition Metrics', diff: 'med', pts: 90, focus: 'Locate custom structural hardware variables mapped into storage indices.', hint: 'Tooling: cat, /proc/version', flag: 'FLAG{f4k3_pr0c_m3tr1cs}', strategy: 'The pseudo-filesystem mounted on /proc maps real-time hardware allocations and core kernel arrays out into text indicators. Print the version parameters out to capture information dropped inside memory stacks.' },
+  { id: 'l12', cat: 'Linux Exploration', name: 'Broken Symbolic Pointer Resolution', diff: 'hard', pts: 110, focus: 'Trace redirect paths passing reference locations outside boundaries.', hint: 'Tooling: ls -l, file', flag: 'FLAG{syml1nk_b0und_br34k}', strategy: 'Symbolic shortcuts act as pointers redirecting to target paths on disk. Query the directory layout via long metrics flags (-l) to inspect the exact reference vector pointing out to the hidden vault block.' },
+  { id: 'l13', cat: 'Linux Exploration', name: 'File Creation Policy Inspection', diff: 'med', pts: 80, focus: 'Audit mask defaults assigned onto dynamically allocated execution layers.', hint: 'Tooling: umask', flag: 'FLAG{um4sk_d3f4ult_r3v13w}', strategy: 'Dynamic assignment of default creation permission layers is managed via user masking definitions. Fire the native umask diagnostic parameters sequence to view active baseline configuration variables.' },
+  { id: 'l14', cat: 'Linux Exploration', name: 'Transient Run Cache Mapping', diff: 'hard', pts: 130, focus: 'Scan volatile shared system caches handling metric diagnostics parameters.', hint: 'Tooling: ls -la /tmp, find /var/tmp', flag: 'FLAG{tmp_f1l3_v4ult_f0und}', strategy: 'Volatile scratchpad areas like /tmp or /var/tmp house active short-term telemetries created by transient script processes. Check all unindexed indicators residing inside these insecure caches loops.' },
+  { id: 'l15', cat: 'Linux Exploration', name: 'Decoupled File Descriptor Trace', diff: 'expert', pts: 200, focus: 'Track hidden message outputs matching split terminal pipelines configurations.', hint: 'Tooling: lsof, file descriptors redirects', flag: 'FLAG{br0k3n_d3scr1pt0r_m4p}', strategy: 'Linux tracks open operational file attachments using numbered data stream pointers called File Descriptors. Trace alternative error log redirect paths where values escape baseline stdout streams.' },
+  { id: 't1', cat: 'Text Processing', name: 'Target String Token Filtering', diff: 'easy', pts: 50, focus: 'Extract lines matching strict target keyword tokens from log arrays.', hint: 'Tooling: grep, egrep', flag: 'FLAG{gr3p_1s_3ss3nt14l}', strategy: 'High-density unstructured logs must be processed through token filter engines. Deploy grep string match commands to extract lines carrying exclusively the TROPHY_EVENT declaration indicator.' },
+  { id: 't2', cat: 'Text Processing', name: 'Structured Tabular Index Extraction', diff: 'med', pts: 85, focus: 'Isolate specified column boundaries from structured configuration records.', hint: 'Tooling: awk, cut -d', flag: 'FLAG{4wk_csv_3xtr4ct10n}', strategy: ' Tabular comma-delimited data fields like ledger.csv can be divided using position array parsers. Use cut or awk with explicit column references ($3, $4) to claim strings isolated from target blocks.' },
+  { id: 't3', cat: 'Text Processing', name: 'Symmetrical Stream Character Inversion', diff: 'easy', pts: 60, focus: 'Invert reversed string streams programmatically to restore output values.', hint: 'Tooling: rev pipeline modifier', flag: 'FLAG{m1rr0r_s1gn4l_r3v}', strategy: 'When data elements are scrambled back-to-front, deploy programmatic character index inversion tools. Pass the content through a reverse string utility pipeline (rev) to restore aligned text layers.' },
+  { id: 't4', cat: 'Text Processing', name: 'Alphanumeric Modular Rotation Decryption', diff: 'med', pts: 95, focus: 'Decrypt alphanumeric strings shifted across standard modular offset matrices.', hint: 'Tooling: tr, CyberChef ROT13', flag: 'FLAG{r0t13_d3c1ph3r_0k}', strategy: 'Alphanumeric character sets shifted across modular rotation layouts must be normalized using positional cipher maps. Use character transposition utilities (tr) to remap rotated ranges back to normal.' },
+  { id: 't5', cat: 'Text Processing', name: 'Hex Format Characters Normalization', diff: 'hard', pts: 140, focus: 'Convert raw hex sequences back into human-readable ASCII definitions.', hint: 'Tooling: xxd -r -p, CyberChef', flag: 'FLAG{h3x_h4sh_c0nv_m4st3r}', strategy: 'Raw digit string values representation masks human-readable byte formats. Deploy a clean reverse hexadecimal stream parsing pipeline utility (xxd) to restore digit parameters back to structural text.' },
+  { id: 't6', cat: 'Text Processing', name: 'Regex Target Limit Boundary Checks', diff: 'hard', pts: 150, focus: 'Construct pattern matching parameters to parse data from configuration elements.', hint: 'Tooling: grep -E, regular expressions', flag: 'FLAG{r3g3x_b0und4ry_v4l}', strategy: 'Isolating specific credential hashes nestled among miscellaneous characters requires formal alphanumeric expression matching formulas. Formulate explicit extended lookahead definitions to lock target boundaries.' },
+  { id: 't7', cat: 'Text Processing', name: 'Stream Line Aggregation Density', diff: 'easy', pts: 50, focus: 'Compute metric counts running lines across dense application configuration files.', hint: 'Tooling: wc -l, wc -w', flag: 'FLAG{wc_l1n3_c0unt_ch3ck}', strategy: 'Evaluating high-volume parameter densities requires word and line tabulation utilities. Chain the native word count tool (wc) passing line measurement constraints to evaluate processing results.' },
+  { id: 't8', cat: 'Text Processing', name: 'Upper-to-Lower Case Transposition', diff: 'easy', pts: 55, focus: 'Normalize alphabetic structure profiles mapping character arrays.', hint: 'Tooling: tr "[:upper:]" "[:lower:]"', flag: 'FLAG{tr_sh1ft_c4s3_m4p}', strategy: 'To fix case configuration drift anomalies across streaming inputs, pipe text layers through translator character string maps (tr) to switch the uppercase sets down to lowercase parameters.' },
+  { id: 't9', cat: 'Text Processing', name: 'Multi-Tier Fragment Assembly Sorting', diff: 'med', pts: 100, focus: 'Collate separated fragments distributed chronologically inside workspace parameters.', hint: 'Tooling: sort, cat pipeline concatenation', flag: 'FLAG{sh4rd_l0g_m3rg3_0k}', strategy: 'Distributed file fragments scattered across multiple segment indices must be concatenated and sorted chronologically. Combine file content pipelines through alphanumeric ordering sorters.' },
+  { id: 't10', cat: 'Text Processing', name: 'Duplicate Record Signature Elimination', diff: 'med', pts: 90, focus: 'Filter repeating stream parameters to extract unified verification tokens.', hint: 'Tooling: sort -u, uniq', flag: 'FLAG{un1q_f1lt3r_cl34n}', strategy: 'Redundant loop tracking lines introduce processing overhead and pollute strings maps. Pass output streams through single token identity filters (uniq) to drop adjacent identical parameters.' },
+  { id: 't11', cat: 'Text Processing', name: 'Binary Footprint Hex Dump Reading', diff: 'hard', pts: 160, focus: 'Inspect base hexadecimal block signatures matching compiled parameters.', hint: 'Tooling: xxd, hexdump', flag: 'FLAG{xxd_m4tr1x_v13w}', strategy: 'Non-human-readable compiled executable binaries conceal hardcoded constant markers inside data sectors. Generate a low-level binary hexadecimal dump tracking map to inspect data segment offsets.' },
+  { id: 't12', cat: 'Text Processing', name: 'String Extraction from Artifacts', diff: 'med', pts: 110, focus: 'Isolate readable ASCII structures from binary compile artifacts.', hint: 'Tooling: strings tool configuration', flag: 'FLAG{str1ngs_b1n_p4rs3}', strategy: 'To uncover cleartext configuration values trapped deep within compiled software blobs, use character scanners that skip non-printable machine commands and reveal constant ASCII text segments.' },
+  { id: 't13', cat: 'Text Processing', name: 'Tail End Stream Monitor Logging', diff: 'easy', pts: 60, focus: 'Isolate the absolute trailing entry committed to debug files.', hint: 'Tooling: tail -n 1', flag: 'FLAG{t41l_3nd_v3r1fy}', strategy: 'High-density log files continuously append live operational status indicators. Isolate the absolute final line transaction record passed down to target blocks using tail-end slicing tools.' },
+  { id: 't14', cat: 'Text Processing', name: 'Header Segment Byte Extraction', diff: 'easy', pts: 60, focus: 'Read first lines tracking validation headers inside network outputs.', hint: 'Tooling: head -n 1', flag: 'FLAG{h34d_l1n3_p4rs3}', strategy: 'File metadata properties and network protocol routing headers reside at the front edge of data blocks. Slice exclusively the top initial rows out of output variables streams to look for indicators.' },
+  { id: 't15', cat: 'Text Processing', name: 'Inline Block Multiline Text Extraction', diff: 'expert', pts: 220, focus: 'Isolate structural strings passed via multiline code sequences.', hint: 'Tooling: bash heredoc parsing blocks', flag: 'FLAG{h3r3d0c_p4rs3_m4st3r}', strategy: 'Inline strings embedded across multi-line shell deployment scripts utilize heredoc layout boundaries. Isolate and strip text ranges sandwiched inside multiline formatting anchors.' },
+  { id: 'p1', cat: 'PrivEsc & Systems', name: 'SUID Execution Vector Hunt', diff: 'med', pts: 110, focus: 'Isolate non-standard binary paths configured with high-privilege execution parameters.', hint: 'Tooling: find / -perm -4000', flag: 'FLAG{su1d_v3ct0r_0wn3d}', strategy: 'Binaries carrying elevated owner execution properties allow lower-privilege accounts to process data with root power. Search the permission parameters map to lock files with bit mask 4000.' },
+  { id: 'p2', cat: 'PrivEsc & Systems', name: 'Scheduled Cron Job Hijack Logic', diff: 'hard', pts: 150, focus: 'Trace periodic script automation execution matrices handling validation routines.', hint: 'Tooling: cat /etc/crontab, ls -la /etc/cron.*', flag: 'FLAG{cr0n_t4sk_h1j4ck}', strategy: 'Background task schedulers execute automation scripts at regular clock thresholds. Audit crontab manifests and background deployment folders to locate scripts carrying insecure root run configurations.' },
+  { id: 'p3', cat: 'PrivEsc & Systems', name: 'Global Insecure World-Writable Directory', diff: 'hard', pts: 160, focus: 'Locate folder maps configured with zero authorization write metrics.', hint: 'Tooling: find -perm -o+w', flag: 'FLAG{w0rld_wr1t4bl3_v4l}', strategy: 'Flawed directory security layouts that permit world-write actions allow any operator account to drop script files. Probe the filesystem mask permissions to isolate globally writable directories.' },
+  { id: 'p4', cat: 'PrivEsc & Systems', name: 'Process Runtime Environment Eavesdropping', diff: 'hard', pts: 170, focus: 'Inspect transient configuration hashes tracking running process parameters.', hint: 'Tooling: cat /proc/[PID]/environ', flag: 'FLAG{proc_env_l34k_ch3ck}', strategy: 'Active background software processes extract configuration profiles on boot. Eavesdrop on environment tracking variables by reading the /proc storage allocations assigned to running process handles.' },
+  { id: 'p5', cat: 'PrivEsc & Systems', name: 'Zombie Tracking Descriptor Hunt', diff: 'expert', pts: 210, focus: 'Trace detached processes retaining tracking keys inside internal system fields.', hint: 'Tooling: ps aux | grep "Z"', flag: 'FLAG{z0mb13_p1d_tr4ck}', strategy: 'Defunct, un-reaped processes retain detached task descriptor slots inside kernel memory execution tracking maps. Query process tracking tables to uncover lingering target handles.' },
+  { id: 'p6', cat: 'PrivEsc & Systems', name: 'Kernel Version Metric Interception', diff: 'easy', pts: 60, focus: 'Extract OS signature maps tracking core version layouts.', hint: 'Tooling: uname -a, cat /proc/version', flag: 'FLAG{un4m3_r3g_m4st3r}', strategy: 'Determining exact system compilation release dates guides targeted patch evaluation. Fire system name diagnostics utilities (uname) to read release version attributes.' },
+  { id: 'p7', cat: 'PrivEsc & Systems', name: 'Network Port Allocation Survey', diff: 'med', pts: 100, focus: 'Identify active protocol transmission sockets bound exclusively onto loopback addresses.', hint: 'Tooling: ss -antp, netstat -tunlp', flag: 'FLAG{ss_l1st3n_l0c4lh0st}', strategy: 'Hidden administrative microservices may listen securely inside internal loopback network address maps. Audit active network sockets configurations to find private listening endpoints.' },
+  { id: 'p8', cat: 'PrivEsc & Systems', name: 'Local Loopback Interface Probing', diff: 'med', pts: 100, focus: 'Verify internal communication network endpoint address mappings.', hint: 'Tooling: ip addr, ifconfig', flag: 'FLAG{1p_4ddr_v3r1fy}', strategy: 'Active network adaptation cards configure logical tracking routes and address scopes. Probe network map definitions via link extraction utilities to map local boundaries.' },
+  { id: 'p9', cat: 'PrivEsc & Systems', name: 'Diagnostic Endpoint Telemetry Sniffing', diff: 'hard', pts: 180, focus: 'Query alternative server debug layers via application network routines.', hint: 'Tooling: curl, wget proxy loops', flag: 'FLAG{curl_sp3c_api_d3bug}', strategy: 'Internal API endpoints serve telemetry indices exclusively to inside requests. Use line interaction download tools like curl to route proxy queries directly into unlisted local routes.' },
+  { id: 'p10', cat: 'PrivEsc & Systems', name: 'HTTP Response Metadata Injection', diff: 'hard', pts: 190, focus: 'Analyze configuration parameter properties embedded directly inside returned network headers.', hint: 'Tooling: curl -I, HTTP downstreams', flag: 'FLAG{h34d3r_1nj3ct10n_v4l}', strategy: 'Server response parameters emit configuration indicator fields inside protocol headers. Request server header info manifests via network inspection arguments (-I) to analyze returned items.' },
+  { id: 'p11', cat: 'PrivEsc & Systems', name: 'Mount Point Operational Profile Check', diff: 'med', pts: 110, focus: 'Audit mounting tracking properties assigned to physical system storage elements.', hint: 'Tooling: mount, df -h', flag: 'FLAG{m0unt_pnt_p4rm_rvw}', strategy: 'Block level physical storage hardware maps boundaries into the directory tree with explicit run directives. Audit live mounting profiles to identify deviations from standard flags.' },
+  { id: 'p12', cat: 'PrivEsc & Systems', name: 'System Time Delta Discrepancy Map', diff: 'easy', pts: 70, focus: 'Query current local timing configurations using core date structures.', hint: 'Tooling: date', flag: 'FLAG{d4t3_s1gn4t1u3_m4tch}', strategy: 'Clock synchronization rules secure network handshake logging and token delta validation records. Call system calendar time engines (date) to read operational properties.' },
+  { id: 'p13', cat: 'PrivEsc & Systems', name: 'Terminal Hostname Configuration Reference', diff: 'easy', pts: 70, focus: 'Resolve host parameters defined across local runtime setups.', hint: 'Tooling: hostname', flag: 'FLAG{h0stn4m3_v3r1f1c4t10n}', strategy: 'Logical system identity parameters identify current server node properties across configuration arrays. Fire native node resolution strings to read parameters.' },
+  { id: 'p14', cat: 'PrivEsc & Systems', name: 'Account Identity System Mapping', diff: 'easy', pts: 70, focus: 'Query local execution parameters using context validation identifiers.', hint: 'Tooling: id, whoami', flag: 'FLAG{id_m3tr1c_v4l_p4rs3}', strategy: 'Account permission contexts are guided by strict numerical group and account maps inside kernel memory. Execute identity diagnostic strings to trace token indicators.' },
+  { id: 'p15', cat: 'PrivEsc & Systems', name: 'System Initialization Process Profile', diff: 'med', pts: 110, focus: 'Profile structural process execution paths mapping active tasks lists.', hint: 'Tooling: ps aux, top', flag: 'FLAG{ps_4ux_tr4ck_cl34r}', strategy: 'Auditing active memory tasks lists isolates hidden background automated script components. Generate a clean global system process profile trace to check structural parameters.' },
+  { id: 'f1', cat: 'Final Shards Boss', name: 'Multi-Stage Shard Assembly Loop I', diff: 'expert', pts: 250, focus: 'Decrypt and isolate initial layout string parameters from system nodes configuration layers.', hint: 'Tooling: cat /opt/final/shard1', flag: 'FLAG{s1a4y_q3pelcg10a}', strategy: 'Elite multi-stage target file configurations split structural tokens across diverse hidden segments. Extract the initial target component from the final installation shards folder.' },
+  { id: 'f2', cat: 'Final Shards Boss', name: 'Multi-Stage Shard Assembly Loop II', diff: 'expert', pts: 250, focus: 'Trace background installation structural tokens across legacy pipeline paths.', hint: 'Tooling: cat /opt/final/shard2', flag: 'FLAG{sh4rd_tr4c3_c0mpl3t3}', strategy: 'Secondary deployment fragments sit tucked inside intermediate pipeline log components. Parse related setup tracking caches to extract downstream verification strings.' },
+  { id: 'f3', cat: 'Final Shards Boss', name: 'Cryptographic Index Consolidation Protocol', diff: 'expert', pts: 300, focus: 'Merge separate decrypted blocks to establish a clean token string layout structure.', hint: 'Tooling: cat /opt/final/shard3', flag: 'FLAG{c0ns0l1d4t3_sh4rd_0k}', strategy: 'Reassembling disjointed code segments into a cohesive validation payload requires precise character array matching tools. Collate individual shard rows to compile the required token.' },
+  { id: 'f4', cat: 'Final Shards Boss', name: 'Hidden Deployment API Verification Endpoint', diff: 'expert', pts: 400, focus: 'Query core platform validation endpoints to test live defense walls.', hint: 'Tooling: curl http://localhost/api/v1/debug', flag: 'FLAG{4p1_d3bug_3ndp01nt}', strategy: 'Ultimate deployment tokens must be validated against hidden infrastructure routes. Fire local network request proxies to query the hidden administrative debug path.' },
+  { id: 'f5', cat: 'Final Shards Boss', name: 'Trust Iron Perimeter Wall Completion', diff: 'expert', pts: 500, focus: 'Trigger the continuous validation checks to fully secure all 50 operational platform nodes.', hint: 'Tooling: Final pipeline assembly consolidation string', flag: 'FLAG{trvst_1r0n_w4lls_2026}', strategy: 'The absolute final clearance loop requires continuous token verification checking across the cluster perimeter. Trigger the master verification instruction to seal all 50 infrastructure boundaries safely.' }
+];
 
-// ══════════════════════════════════════════════════════════════
-//  TERMINAL CONTROLLER EXECUTION INTERPOLATION
-// ══════════════════════════════════════════════════════════════
-const tout=document.getElementById('term-output');
-function tpr(html){ const d=document.createElement('div'); d.innerHTML=html; tout.appendChild(d); tout.scrollTop=tout.scrollHeight; }
-function tprt(txt,c='t-out'){ tpr(`<span class="${c}">${esc(txt)}</span>`); }
-function tperr(m){ tpr(`<span class="t-err">${esc(m)}</span>`); }
+const FS = {
+  '/': { type: 'dir', perms: 'drwxr-xr-x', owner: 'root', group: 'root', children: ['home','etc','var','opt','root','usr','proc','dev'] },
+  '/home': { type: 'dir', perms: 'drwxr-xr-x', owner: 'root', group: 'root', children: ['operator'] },
+  '/home/operator': { type: 'dir', perms: 'drwxr-xr-x', owner: 'operator', group: 'operator', children: ['.bashrc','.flag','.encoded', 'Desktop','Documents','Downloads'] },
+  '/home/operator/.flag': { type: 'file', perms: '-rw-r--r--', owner: 'operator', group: 'operator', content: 'FLAG{d0tf1l3_p4rs3_s0urc3}' },
+  '/home/operator/.encoded': { type: 'file', perms: '-rw-------', owner: 'operator', group: 'operator', content: 'RkxBR3tiNHN6MzZSX2QzYzBkM3JfcHIwfQ==' },
+  '/home/operator/.bashrc': { type: 'file', perms: '-rw-r--r--', owner: 'operator', group: 'operator', content: 'export SECRET_TOKEN="FLAG{3xp0rt_v4r_l34k3d}"\nalias ll="ls -la"' },
+  '/home/operator/Desktop': { type: 'dir', perms: 'drwxr-xr-x', owner: 'operator', group: 'operator', children: ['scope.txt'] },
+  '/home/operator/Desktop/scope.txt': { type: 'file', perms: '-rw-r--r--', owner: 'operator', group: 'operator', content: 'HACKMETHON tracking matrix initialized across 50 nodes.' },
+  '/home/operator/Documents': { type: 'dir', perms: 'drwxr-xr-x', owner: 'operator', group: 'operator', children: ['reversed_matrix.txt'] },
+  '/home/operator/Documents/reversed_matrix.txt': { type: 'file', perms: '-rw-r--r--', owner: 'operator', group: 'operator', content: '}v3r_l4ng1s_r0rr1m{GALF' },
+  '/home/operator/Downloads': { type: 'dir', perms: 'drwxr-xr-x', owner: 'operator', group: 'operator', children: ['cipher.txt'] },
+  '/home/operator/Downloads/cipher.txt': { type: 'file', perms: '-rw-r--r--', owner: 'operator', group: 'operator', content: 'SYNT{e0g13_q3p1ph3r_0k}' },
+  '/root': { type: 'dir', perms: 'drwx------', owner: 'root', group: 'root', children: ['.root_proof'] },
+  '/root/.root_proof': { type: 'file', perms: '-rw-------', owner: 'root', group: 'root', content: 'FLAG{sud03rs_pr1v_m4st3r}' },
+  '/etc': { type: 'dir', perms: 'drwxr-xr-x', owner: 'root', group: 'root', children: ['passwd','shadow','motd','sudoers'] },
+  '/etc/motd': { type: 'file', perms: '-rw-r--r--', owner: 'root', group: 'root', content: 'FLAG{m0td_v3ct0r_r34d}\nWelcome to the HACKMETHON training pipeline sandbox terminal loop context.' },
+  '/etc/passwd': { type: 'file', perms: '-rw-r--r--', owner: 'root', group: 'root', content: 'root:x:0:0:root_admin:/root:/bin/bash\noperator:x:1000:1000:FLAG{p4sswd_g3c0s_s3cr3t}:/home/operator:/bin/bash\nservice_node:x:102:102:FLAG{b1n_p4th_v3r1f1c4t10n}:/var/empty' },
+  '/etc/shadow': { type: 'file', perms: '-rw-------', owner: 'root', group: 'root', content: 'root:FLAG{sh4d0w_r00t_m4sk}:19823:0:99999:7:::\noperator:$6$pwn3d$71829:19823:0:99999:7:::' },
+  '/etc/sudoers': { type: 'file', perms: '-r--------', owner: 'root', group: 'root', content: 'root ALL=(ALL:ALL) ALL\noperator ALL=(ALL) NOPASSWD: /usr/bin/privesc_audit' },
+  '/var': { type: 'dir', perms: 'drwxr-xr-x', owner: 'root', group: 'root', children: ['log'] },
+  '/var/log': { type: 'dir', perms: 'drwxr-xr-x', owner: 'root', group: 'root', children: ['syslog','auth.log','app.log'] },
+  '/var/log/syslog': { type: 'file', perms: '-rw-r--r--', owner: 'root', group: 'root', content: 'Jun 11 06:12:15 HACKMETHON kernel: FLAG{t41l_sysl0g_4n0m4ly}' },
+  '/var/log/auth.log': { type: 'file', perms: '-rw-r--r--', owner: 'root', group: 'root', content: 'Jun 11 06:15:05 HACKMETHON sshd[4012]: Failed password footprint trace match: FLAG{4uth_f41l_1ntrus10n}' },
+  '/var/log/app.log': { type: 'file', perms: '-rw-r--r--', owner: 'root', group: 'root', content: 'CRITICAL_EVENT data tracking payload reference match: FLAG{wc_l1n3_c0unt_ch3ck}' },
+  '/opt': { type: 'dir', perms: 'drwxr-xr-x', owner: 'root', group: 'root', children: ['data','maze','final'] },
+  '/opt/data': { type: 'dir', perms: 'drwxr-xr-x', owner: 'root', group: 'root', children: ['ledger.csv'] },
+  '/opt/data/ledger.csv': { type: 'file', perms: '-rw-r--r--', owner: 'root', group: 'root', content: 'NODE,METRIC,GEO,HASH\nALPHA,HEALTHY,AMER,9482\nSPECTRE,ACTIVE,NG_BENIN,FLAG{4wk_csv_3xtr4ct10n}' },
+  '/opt/maze': { type: 'dir', perms: 'drwxr-xr-x', owner: 'root', group: 'root', children: ['l1'] },
+  '/opt/maze/l1': { type: 'dir', perms: 'drwxr-xr-x', owner: 'root', group: 'root', children: ['l2'] },
+  '/opt/maze/l1/l2': { type: 'dir', perms: 'drwxr-xr-x', owner: 'root', group: 'root', children: ['l3'] },
+  '/opt/maze/l1/l2/l3': { type: 'dir', perms: 'drwxr-xr-x', owner: 'root', group: 'root', children: ['vault.txt'] },
+  '/opt/maze/l1/l2/l3/vault.txt': { type: 'file', perms: '-rw-r--r--', owner: 'operator', group: 'operator', content: 'FLAG{m4z3_dr1ll_l9_v4l}' },
+  '/opt/final': { type: 'dir', perms: 'drwxr-xr-x', owner: 'root', group: 'root', children: ['shard1','shard2','shard3'] },
+  '/opt/final/shard1': { type: 'file', perms: '-rw-r--r--', owner: 'root', group: 'root', content: 'FLAG{s1a4y_q3pelcg10a}' },
+  '/opt/final/shard2': { type: 'file', perms: '-rw-r--r--', owner: 'root', group: 'root', content: 'FLAG{sh4rd_tr4c3_c0mpl3t3}' },
+  '/opt/final/shard3': { type: 'file', perms: '-rw-r--r--', owner: 'root', group: 'root', content: 'FLAG{c0ns0l1d4t3_sh4rd_0k}' },
+  '/usr': { type: 'dir', perms: 'drwxr-xr-x', owner: 'root', group: 'root', children: ['bin'] },
+  '/usr/bin': { type: 'dir', perms: 'drwxr-xr-x', owner: 'root', group: 'root', children: ['privesc_audit'] },
+  '/usr/bin/privesc_audit': { type: 'file', perms: '-rwsr-xr-x', owner: 'root', group: 'root', content: 'FLAG{su1d_v3ct0r_0wn3d}' },
+  '/proc': { type: 'dir', perms: 'drwxr-xr-x', owner: 'root', group: 'root', children: ['version'] },
+  '/proc/version': { type: 'file', perms: '-r--r--r--', owner: 'root', group: 'root', content: 'Linux version 6.6.0-amd64 (FLAG{un4m3_r3g_m4st3r})' },
+  '/dev': { type: 'dir', perms: 'drwxr-xr-x', owner: 'root', group: 'root', children: ['null'] }
+};
 
-const termCSS=`
-<style>
-.t-out{color:var(--body)}.t-ok{color:var(--orange)}.t-err{color:var(--red)}
-.t-dim{color:var(--wire2)}.t-dir{color:var(--teal)}.t-exe{color:var(--orange2);font-weight:700}
-.t-link{color:#b44fff}.t-cmd{color:var(--pale)}.t-ps1{color:var(--orange)}
-.t-flag{color:var(--orange);font-weight:700;text-shadow:0 0 8px rgba(57,255,20,.6)}
-</style>`;
-tout.insertAdjacentHTML('beforebegin',termCSS);
-
-function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function res(p){
-  if(!p||p==='~') return '/home/operator';
-  if(p.startsWith('~/')) p='/home/operator'+p.slice(1);
-  if(!p.startsWith('/')) p=(cwd==='/'?'/':cwd+'/')+p;
-  const parts=p.split('/').filter(Boolean),stack=[];
-  for(const pt of parts){ if(pt==='.') continue; if(pt==='..') stack.pop(); else stack.push(pt); }
-  return '/'+stack.join('/');
+function playAudioNodeSFX(elementId) {
+    const el = document.getElementById(elementId); if(el) { el.currentTime = 0; el.play().catch(()=>{}); }
 }
-function fsnode(p){ return FS[res(p)]||null; }
-function colorEntry(name,n){
-  if(!n) return esc(name);
-  if(n.type==='dir') return `<span class="t-dir">${esc(name)}/</span>`;
-  if(n.type==='symlink') return `<span class="t-link">${esc(name)} -> ${esc(n.target)}</span>`;
-  if(n.perms?.includes('x')) return `<span class="t-exe">${esc(name)}</span>`;
-  if(name.startsWith('.')) return `<span class="t-dim">${esc(name)}</span>`;
-  return `<span class="t-out">${esc(name)}</span>`;
+
+function openAuthenticationGateway() { playAudioNodeSFX('sfx-click'); document.getElementById('auth-overlay').style.display = 'flex'; }
+function closeAuthenticationGateway() { playAudioNodeSFX('sfx-click'); document.getElementById('auth-overlay').style.display = 'none'; }
+
+// --- ADJUSTMENT 2: CORNER CONGRATULATIONS TOAST DESIGN WITH MANUAL AND TIMEOUT DISSOLVE ---
+function fireCelebrationsOverlay(chalName) {
+    playAudioNodeSFX('sfx-success');
+    document.getElementById('pwned-details-banner').textContent = `[${chalName.toUpperCase()}]`;
+    document.getElementById('celebration-overlay').style.display = 'flex';
+    
+    clearTimeout(celebrationTimeoutTracker);
+    celebrationTimeoutTracker = setTimeout(() => { closeCelebrationsOverlay(); }, 5000); // Dynamic clear threshold
 }
 
-function runCmd(raw){
-  const input=raw.trim(); if(!input) return;
-  cmdHist.unshift(input); histIdx=-1;
-  const toks=input.split(/\s+/),cmd=toks[0],args=toks.slice(1);
-  tpr(`<span class="t-ps1">${esc(ps1())}</span><span class="t-cmd"> ${esc(input)}</span>`);
-  if(input.includes('|')){ pipeCmd(input); autoDetect(); updatePs1(); return; }
-  switch(cmd){
-    case 'ls':      cmdLs(args); break;
-    case 'cd':      cmdCd(args); break;
-    case 'cat':     cmdCat(args); break;
-    case 'head':    cmdHead(args); break;
-    case 'tail':    cmdTail(args); break;
-    case 'find':    cmdFind(args,input); break;
-    case 'grep':    cmdGrep(args,input); break;
-    case 'awk':     cmdAwk(args,input); break;
-    case 'cut':     cmdCut(args,input); break;
-    case 'wc':      cmdWc(args); break;
-    case 'rev':     cmdRev(args); break;
-    case 'base64':  cmdB64(args); break;
-    case 'xxd':     cmdXxd(args); break;
-    case 'strings': cmdStrings(args); break;
-    case 'tr':      cmdTr(args,input); break;
-    case 'python3':
-    case 'python':  cmdPython(args); break;
-    case 'curl':    cmdCurl(args); break;
-    case 'wget':    tprt('[simulated: file downloaded]'); break;
-    case 'pwd':     tprt(cwd); break;
-    case 'whoami':  tprt(currentUser ? currentUser.user : 'operator'); break;
-    case 'id':      tprt('uid=1000(operator) gid=1000(operator) groups=1000(operator)'); break;
-    case 'hostname':tprt('trust-iron-walls'); break;
-    case 'uname':   tprt(args.includes('-a')?'Linux trust-iron-walls 6.1.0 #1 SMP PREEMPT x86_64 GNU/Linux':'Linux'); break;
-    case 'date':    tprt(new Date().toString()); break;
-    case 'clear':   tout.innerHTML=''; break;
-    case 'history': tpr(cmdHist.slice().reverse().map((c,i)=>`<span class="t-out"> ${String(i+1).padStart(4)} ${esc(c)}</span>`).join('\n')); break;
-    case 'env':     tpr('<span class="t-out">PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\nDEPLOY_KEY=FLAG{3xp0rt_v4r_l34k3d}</span>'); break;
-    case 'ps':      tpr('<span class="t-out">  PID TTY      TIME CMD\n 1234 pts/0 00:00:00 bash</span>'); break;
-    case 'ss':      tpr('<span class="t-out">Netid  State   Local:Port\ntcp    LISTEN  0.0.0.0:22</span>'); break;
-    case 'ip':
-      if(args[0]==='a'||args[0]==='addr') tprt('2: eth0: inet 10.0.0.50/24');
-      else tperr('ip: unknown subcommand'); break;
-    case 'echo':    tprt(args.join(' ')); break;
-    case 'mkdir':   args.filter(a=>!a.startsWith('-')).forEach(d=>{ const p=res(d); FS[p]={type:'dir',children:[]}; const par=p.substring(0,p.lastIndexOf('/'))||'/'; const n=p.split('/').pop(); if(FS[par]?.children&&!FS[par].children.includes(n)) FS[par].children.push(n); }); break;
-    case 'touch':   args.forEach(f=>{ const p=res(f); if(!FS[p]){ FS[p]={type:'file',content:''}; const par=p.substring(0,p.lastIndexOf('/'))||'/'; const n=p.split('/').pop(); if(FS[par]?.children) FS[par].children.push(n); } }); break;
-    case 'rm':      tprt('[simulated: removed]'); break;
-    case 'cp':      tprt('[simulated: copied]'); break;
-    case 'mv':      tprt('[simulated: moved]'); break;
-    case 'chmod':   tprt('[simulated: permissions changed]'); break;
-    case 'sudo':    tprt('[simulated: running as root]'); break;
-    case 'stat':    cmdStat(args); break;
-    case 'file':    cmdFile(args); break;
-    case 'which':   cmdWhich(args); break;
-    case 'less':
-    case 'more':    cmdCat(args); break;
-    case 'tar':     cmdTar(args); break;
-    case 'man':     tprt(`man ${args[0]||'?'}: use --help`); break;
-    case 'help':    cmdHelp(); break;
-    default:        tperr(`bash: ${esc(cmd)}: command not found`);
-  }
-  autoDetect();
-  updatePs1();
+function closeCelebrationsOverlay() {
+    document.getElementById('celebration-overlay').style.display = 'none';
 }
 
-function cmdLs(args){
-  const ha=args.some(a=>a.startsWith('-')&&a.includes('a'));
-  const la=args.some(a=>a.startsWith('-')&&a.includes('l'));
-  const target=args.find(a=>!a.startsWith('-'))||cwd;
-  const p=res(target),n=fsnode(p);
-  if(!n){ tperr(`ls: cannot access '${target}': No such file or directory`); return; }
-  if(n.type==='file'){ tpr(colorEntry(p.split('/').pop(),n)); return; }
-  let ch=(n.children||[]).slice();
-  if(!ha) ch=ch.filter(c=>!c.startsWith('.'));
-  if(!ch.length) return;
-  const lines=ch.map(name=>{
-    const cp=p==='/'?'/'+name:p+'/'+name,cn=FS[cp];
-    if(la){
-      const pm=cn?(cn.perms||(cn.type==='dir'?'drwxr-xr-x':'-rw-r--r--')):'-rw-r--r--';
-      const ow=cn?.owner||'root';
-      const sz=cn?.type==='file'?(cn.content||'').length:4096;
-      return `<span class="t-out">${pm} 1 ${ow} ${ow} ${String(sz).padStart(7)} Jan 20 10:23 ${colorEntry(name,cn)}</span>`;
+function toggleCodexDrawer() {
+    playAudioNodeSFX('sfx-click');
+    const drawer = document.getElementById('term-codex-drawer');
+    const contentHook = document.getElementById('term-codex-content-hook');
+    drawer.classList.toggle('open');
+    
+    if (drawer.classList.contains('open')) {
+        const activeTargetNode = CHALLENGES.find(c => c.id === activeChalId);
+        if (!activeTargetNode) {
+            contentHook.innerHTML = `<div style="color:var(--dim); text-align:center; padding-top:20px;">Awaiting active target selection deck lock...</div>`;
+            return;
+        }
+
+        contentHook.innerHTML = `
+            <div class="codex-section-title">Active Target ID</div>
+            <div style="font-weight:700; color:var(--white); margin-bottom:16px;">[${activeTargetNode.id.toUpperCase()}] ${activeTargetNode.name}</div>
+            
+            <div class="codex-section-title">Conceptual Strategy Blueprint</div>
+            <div class="codex-hint-card" style="line-height:1.6; color:var(--body); font-family:var(--ui); font-size:0.82rem;">${activeTargetNode.strategy}</div>
+            
+            <div class="codex-section-title">Operational Directive Hint</div>
+            <div style="font-size:0.78rem; color:var(--yellow); font-family:var(--font); padding:4px;">${activeTargetNode.hint}</div>
+        `;
     }
-    return colorEntry(name,cn);
-  });
-  tpr(la?lines.join('\n'):lines.join('  '));
 }
 
-function cmdCd(args){
-  const t=args[0]||'/home/operator',p=res(t),n=fsnode(p);
-  if(!n){ tperr(`bash: cd: ${t}: No such file or directory`); return; }
-  if(n.type!=='dir'){ tperr(`bash: cd: ${t}: Not a directory`); return; }
-  cwd=p;
+function calculateHackerTitleString(pts) {
+    if(pts >= 1200) return "Root Elite"; if(pts >= 600) return "VAPT Specialist";
+    if(pts >= 200) return "Network Intruder"; return "Script Kiddie";
 }
 
-function cmdCat(args){
-  const files=args.filter(a=>!a.startsWith('-'));
-  if(!files.length){ tperr('cat: missing operand'); return; }
-  files.forEach(f=>{
-    const p=res(f),n=fsnode(p);
-    if(!n){ tperr(`cat: ${f}: No such file or directory`); return; }
-    if(n.type==='dir'){ tperr(`cat: ${f}: Is a directory`); return; }
-    if(n.type==='symlink'){
-      const tn=FS[n.target];
-      if(tn?.type==='file') tpr(`<span class="t-out">${esc(tn.content||'')}</span>`);
-      else tperr(`cat: ${f}: broken symlink`);
-      return;
+function updateDynamicTitlesDisplay() {
+    if (currentUser?.role === 'admin') { document.getElementById('nav-title-badge').textContent = "SYSTEM_ROOT"; return; }
+    const title = calculateHackerTitleString(score); document.getElementById('nav-title-badge').textContent = title;
+    if (document.getElementById('ds-title')) document.getElementById('ds-title').textContent = title.toUpperCase();
+}
+
+function triggerCertificateGenerationLoop() {
+    if (currentUser?.role === 'admin') { toast('Administrative root keys bypass certificate parameters.', 'red'); return; }
+    document.getElementById('cert-user-target').textContent = currentUser?.user || 'OPERATOR';
+    document.getElementById('cert-date-string').textContent = new Date().toISOString().slice(0,10);
+    document.getElementById('cert-user-level').textContent = calculateHackerTitleString(score);
+    
+    let hexPattern = 'HM-';
+    for(let i=0; i<8; i++) hexPattern += Math.floor(Math.random()*16).toString(16).toUpperCase();
+    document.getElementById('cert-uuid-hash').textContent = hexPattern;
+    document.getElementById('cert-overlay').style.display = 'flex';
+}
+
+function toggleHomeAuthMode() {
+    isRegisterMode = !isRegisterMode;
+    const stamp = document.getElementById('home-auth-stamp'); const btn = document.getElementById('home-auth-btn'); const link = document.getElementById('home-toggle-mode');
+    document.getElementById('home-login-err').textContent = '';
+    if (isRegisterMode) {
+        stamp.textContent = "┌──(operator㉿HACKMETHON)-[register]"; btn.textContent = "Compile Instance Profile"; link.textContent = "[ Return to Authentication Panel ]";
+    } else {
+        stamp.textContent = "┌──(operator㉿HACKMETHON)-[auth]"; btn.textContent = "Establish Site Sync"; link.textContent = "[ Deploy New Operator Instance ]";
     }
-    if((n.content||'').startsWith('Permission denied')){ tperr(n.content); return; }
-    const c=esc(n.content||'').replace(/FLAG\{[^}]+\}/g,m=>`<span class="t-flag">${m}</span>`);
-    tpr(`<span class="t-out">${c}</span>`);
-  });
 }
 
-function cmdHead(args){
-  const ni=args.indexOf('-n'),n=ni>-1?parseInt(args[ni+1])||10:10;
-  const f=args.find(a=>!a.startsWith('-')&&isNaN(parseInt(a)));
-  if(!f){ tperr('head: missing file'); return; }
-  const nd=fsnode(res(f));
-  if(!nd||nd.type==='dir'){ tperr(`head: ${f}: No such file`); return; }
-  tpr(`<span class="t-out">${esc((nd.content||'').split('\n').slice(0,n).join('\n'))}</span>`);
+function handleHomeAuthAction() {
+    playAudioNodeSFX('sfx-click');
+    const u = document.getElementById('home-user').value.trim(); const p = document.getElementById('home-pass').value; const err = document.getElementById('home-login-err');
+    err.style.color = "var(--red)";
+    if(!u || !p) { err.textContent = "Error: Input fields cannot be blank."; playAudioNodeSFX('sfx-error'); return; }
+
+    if (isRegisterMode) {
+        if (u === 'root') { err.textContent = "Error: Overwriting root maps denied."; playAudioNodeSFX('sfx-error'); return; }
+        if (localStorage.getItem(`ctf_user_${u}`)) { err.textContent = "Error: Handle deployed."; playAudioNodeSFX('sfx-error'); return; }
+        localStorage.setItem(`ctf_user_${u}`, p); localStorage.setItem(`ctf_score_${u}`, "0"); localStorage.setItem(`ctf_flags_${u}`, "[]");
+        triggerAutomatedMilestoneValidation("FLAG{HACKMETHON_NODE_PROVISIONED_2026}", u);
+        isRegisterMode = false; toggleHomeAuthMode(); err.style.color = "var(--orange)"; err.textContent = "⚡ OPERATOR PROVISIONED. Enter credentials.";
+    } else {
+        let targetRole = "user";
+        if (u === 'root') {
+            if (p !== 'root') { err.textContent = "Error: Invalid master configuration keys."; playAudioNodeSFX('sfx-error'); return; }
+            targetRole = "admin";
+        } else {
+            const saved = localStorage.getItem(`ctf_user_${u}`);
+            if (!saved || saved !== p) { err.textContent = "Error: Validation parameters mismatch."; playAudioNodeSFX('sfx-error'); return; }
+        }
+
+        currentUser = { user: u, role: targetRole }; localStorage.setItem('ctf_session_cache', JSON.stringify(currentUser));
+        score = parseInt(localStorage.getItem(`ctf_score_${currentUser.user}`) || '0'); found = JSON.parse(localStorage.getItem(`ctf_flags_${currentUser.user}`) || '[]');
+        cwd = targetRole === 'admin' ? '/root' : '/home/operator';
+        document.getElementById('auth-overlay').style.display = 'none'; document.getElementById('page-home').style.display = 'none'; document.getElementById('sidebar-nav').style.display = 'flex';
+        document.getElementById('nav-username').textContent = currentUser.user; document.getElementById('nav-avatar').textContent = currentUser.user[0].toUpperCase();
+
+        const labNavElement = document.getElementById('nav-lab');
+        if (currentUser.role === 'admin') {
+            document.getElementById('nav-monitor').style.display = 'flex'; document.getElementById('sidebar-claim-cert').style.display = 'none'; labNavElement.textContent = "Audit Records";
+        } else {
+            document.getElementById('nav-monitor').style.display = 'none'; document.getElementById('sidebar-claim-cert').style.display = 'block'; labNavElement.textContent = "Terminal Lab";
+        }
+        document.getElementById('prof-email').value = localStorage.getItem(`ctf_mail_${currentUser.user}`) || '';
+        document.getElementById('prof-phone').value = localStorage.getItem(`ctf_phone_${currentUser.user}`) || '';
+        document.getElementById('prof-loc').value = localStorage.getItem(`ctf_loc_${currentUser.user}`) || '';
+
+        refreshProfileAvatarDisplays(); updateNavScore(); updateDynamicTitlesDisplay(); goPage('dash');
+        startTime = Date.now(); startTimer(); clearConsoleTerminal();
+    }
 }
 
-function cmdTail(args){
-  const ni=args.indexOf('-n'),n=ni>-1?parseInt(args[ni+1])||10:10;
-  const f=args.find(a=>!a.startsWith('-')&&isNaN(parseInt(a)));
-  if(!f){ tperr('tail: missing file'); return; }
-  const nd=fsnode(res(f));
-  if(!nd||nd.type==='dir'){ tperr(`tail: ${f}: No such file`); return; }
-  const c=esc((nd.content||'').split('\n').slice(-n).join('\n')).replace(/FLAG\{[^}]+\}/g,m=>`<span class="t-flag">${m}</span>`);
-  tpr(`<span class="t-out">${c}</span>`);
+function loadClientPersistenceState() {
+    const cached = localStorage.getItem('ctf_session_cache');
+    if (cached) {
+        currentUser = JSON.parse(cached); score = parseInt(localStorage.getItem(`ctf_score_${currentUser.user}`) || '0'); found = JSON.parse(localStorage.getItem(`ctf_flags_${currentUser.user}`) || '[]');
+        cwd = currentUser.role === 'admin' ? '/root' : '/home/operator';
+        const labNavElement = document.getElementById('nav-lab');
+        if (currentUser.role === 'admin') {
+            document.getElementById('nav-monitor').style.display = 'flex'; document.getElementById('sidebar-claim-cert').style.display = 'none'; labNavElement.textContent = "Audit Records";
+        } else {
+            document.getElementById('nav-monitor').style.display = 'none'; document.getElementById('sidebar-claim-cert').style.display = 'block'; labNavElement.textContent = "Terminal Lab";
+        }
+        document.getElementById('page-home').style.display = 'none'; document.getElementById('sidebar-nav').style.display = 'flex';
+        document.getElementById('nav-username').textContent = currentUser.user; document.getElementById('nav-avatar').textContent = currentUser.user[0].toUpperCase();
+        refreshProfileAvatarDisplays(); updateNavScore(); updateDynamicTitlesDisplay(); goPage('dash');
+        startTime = Date.now(); startTimer(); clearConsoleTerminal();
+    }
 }
 
-function cmdFind(args, raw){
-  const ni=args.indexOf('-name'),pat=ni>-1?args[ni+1]:null;
-  const ti=args.indexOf('-type'),tf=ti>-1?args[ti+1]:null;
-  const pi=args.indexOf('-perm'),pv=pi>-1?args[pi+1]:null;
-  const newI=args.indexOf('-newer');
-  let startP=args.find(a=>!a.startsWith('-')&&!['name','type','perm','newer'].includes(a))||cwd;
-  if(startP.startsWith('-')) startP=cwd;
-  if(pv&&(pv.includes('4000')||pv==='-4000')){
-    const suid=Object.entries(FS).filter(([p,n])=>n.type==='file'&&(n.perms||'').includes('s')).map(([p])=>p);
-    tpr(['/usr/bin/passwd\n'+(suid.join('\n'))].join('').replace(/FLAG\{[^}]+\}/g,m=>`<span class="t-flag">${m}</span>`));
-    return;
-  }
-  if(newI>-1){ tpr('<span class="t-out">/var/log/latest_evidence.log</span>'); return; }
-  if(pv==='777'||pv==='-0002'){
-    const ww=Object.entries(FS).filter(([p,n])=>n.type==='file'&&(n.perms||'').includes('rwxrwxrwx')).map(([p])=>p);
-    tpr((ww.length?ww:'[none found]').toString()); return;
-  }
-  const base=res(startP),results=[];
-  function walk(p){
-    const n=FS[p]; if(!n) return;
-    const name=p.split('/').pop();
-    let ok=true;
-    if(pat){ const re=new RegExp('^'+pat.replace(/\*/g,'.*').replace(/\?/g,'.')+'$'); ok=ok&&re.test(name); }
-    if(tf) ok=ok&&((tf==='f'&&n.type==='file')||(tf==='d'&&n.type==='dir'));
-    if(ok) results.push(p);
-    if(n.type==='dir'&&n.children) n.children.forEach(c=>walk(p==='/'?'/'+c:p+'/'+c));
-  }
-  walk(base);
-  if(results.length) tpr(results.map(r=>`<span class="t-out">${esc(r)}</span>`).join('\n'));
+function doLogout() { localStorage.removeItem('ctf_session_cache'); window.location.reload(); }
+
+function goPage(name) {
+    playAudioNodeSFX('sfx-click'); if (!currentUser) return;
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); document.querySelectorAll('.navlink').forEach(n => n.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    const nl = document.getElementById('nav-' + name); if (nl) nl.classList.add('active');
+    if (name === 'dash') renderDash();
+    if (name === 'lab') renderModularLabOrAuditWorkspace();
+    if (name === 'board' || name === 'monitor') { syncDatabaseStates(); renderProgressionChart(); }
 }
 
-function cmdGrep(args,raw){
-  if(raw.includes('|')){ pipeCmd(raw); return; }
-  const flags=args.filter(a=>a.startsWith('-'));
-  const nf=args.filter(a=>!a.startsWith('-'));
-  if(nf.length<2){ tperr('grep: usage: grep [flags] PATTERN FILE'); return; }
-  const pat=nf[0].replace(/['"]/g,'');
-  const files=nf.slice(1);
-  const rec=flags.includes('-r')||flags.includes('-R');
-  const ci=flags.includes('-i');
-  const fps=rec?Object.keys(FS).filter(p=>FS[p].type==='file'):files.map(f=>res(f));
-  const results=[];
-  fps.forEach(fp=>{
-    const n=FS[fp]; if(!n||n.type!=='file') return;
-    (n.content||'').split('\n').forEach((line,i)=>{
-      const re=new RegExp(pat.replace(/[.*+?^${}()|[\]\\]/g,(m)=>m==='*'?'.*':'\\'+m),ci?'i':'');
-      if(re.test(line)){
-        const pref=(rec||files.length>1)?`<span style="color:var(--teal)">${esc(fp)}:</span>`:'';
-        const lp=flags.includes('-n')?`<span style="color:var(--yellow)">${i+1}:</span>`:'';
-        const lc=esc(line).replace(/FLAG\{[^}]+\}/g,m=>`<span class="t-flag">${m}</span>`);
-        results.push(pref+lp+`<span class="t-out">${lc}</span>`);
-      }
+function renderProgressionChart() {
+    const svg = document.getElementById('live-progress-chart'); if (!svg) return;
+    svg.innerHTML = ''; const userPool = [];
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i); if (key.startsWith('ctf_user_')) { const handle = key.replace('ctf_user_', ''); userPool.push({ name: handle, score: parseInt(localStorage.getItem(`ctf_score_${handle}`) || '0') }); }
+    }
+    if (currentUser.role !== 'admin' && !userPool.find(x => x.name === currentUser.user)) userPool.push({ name: currentUser.user, score: score });
+    const sorted = userPool.sort((a,b) => a.score - b.score); const count = sorted.length; const width = svg.clientWidth || 600; const height = 140; const padding = 30;
+    if(count < 2) { svg.innerHTML = `<text x="${width/2}" y="70" fill="var(--dim)" text-anchor="middle" font-size="12">Awaiting student target metrics entries...</text>`; return; }
+    let pathD = ''; let maxScore = Math.max(...sorted.map(u => u.score)) || 100;
+    sorted.forEach((u, idx) => {
+        const x = padding + (idx / (count - 1)) * (width - padding * 2); const y = height - padding - (u.score / maxScore) * (height - padding * 2);
+        if (idx === 0) pathD += `M ${x} ${y}`; else pathD += ` L ${x} ${y}`;
+        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttribute("cx", x); circle.setAttribute("cy", y); circle.setAttribute("r", u.name === currentUser.user ? "5" : "3"); circle.setAttribute("fill", u.name === currentUser.user ? "var(--orange)" : "var(--brand-blue)");
+        svg.appendChild(circle);
     });
-  });
-  if(results.length) tpr(results.join('\n'));
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", pathD); path.setAttribute("fill", "none"); path.setAttribute("stroke", "var(--wire2)"); path.setAttribute("stroke-width", "2");
+    svg.insertBefore(path, svg.firstChild);
 }
 
-function cmdAwk(args,raw){
-  if(raw.includes('|')){ pipeCmd(raw); return; }
-  const fi=args.indexOf('-F'),sep=fi>-1?args[fi+1].replace(/['"]/g,''):' ';
-  const fA=args[args.length-1];
-  if(!fA||fA.startsWith("'")||fA.startsWith('"')){ tprt('[awk: use a pipe]'); return; }
-  const n=fsnode(res(fA));
-  if(!n||n.type==='dir'){ tperr(`awk: ${fA}: No such file`); return; }
-  const prog=args.find(a=>a.includes('print'))||'{print}';
-  const condM=prog.match(/\$(\d+)==["']?([^"'\{]+)["']?\{/);
-  const flds=(prog.match(/\$(\d+)/g)||[]);
-  (n.content||'').split('\n').forEach(line=>{
-    const fs2=line.split(sep===' '?/\s+/:new RegExp(sep.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));
-    if(condM){ const ci2=parseInt(condM[1])-1; if(fs2[ci2]!==condM[2].trim()) return; }
-    const out=flds.length?flds.map(f=>fs2[parseInt(f.slice(1))-1]||'').join(' '):line;
-    const oc=esc(out).replace(/FLAG\{[^}]+\}/g,m=>`<span class="t-flag">${m}</span>`);
-    tpr(`<span class="t-out">${oc}</span>`);
-  });
-}
-
-function cmdCut(args,raw){
-  if(raw.includes('|')){ pipeCmd(raw); return; }
-  const di=args.indexOf('-d'),sep=di>-1?args[di+1].replace(/['"]/g,''):'\t';
-  const fli=args.indexOf('-f'),fi=fli>-1?parseInt(args[fli+1])-1:0;
-  const fA=args.find(a=>!a.startsWith('-')&&a!==sep&&isNaN(parseInt(a)));
-  if(!fA){ tperr('cut: missing file'); return; }
-  const n=fsnode(res(fA));
-  if(!n||n.type==='dir'){ tperr(`cut: ${fA}: No such file`); return; }
-  (n.content||'').split('\n').forEach(l=>tpr(`<span class="t-out">${esc(l.split(sep)[fi]||'')}</span>`));
-}
-
-function cmdWc(args){
-  const f=args.find(a=>!a.startsWith('-'));
-  if(!f){ tperr('wc: missing file'); return; }
-  const n=fsnode(res(f));
-  if(!n||n.type==='dir'){ tperr(`wc: ${f}: No such file`); return; }
-  const c=n.content||'';
-  tprt(`${c.split('\n').length} ${c.split(/\s+/).filter(Boolean).length} ${c.length} ${f}`);
-}
-
-function cmdRev(args){
-  const f=args.find(a=>!a.startsWith('-'));
-  if(!f){ tperr('rev: missing file'); return; }
-  const n=fsnode(res(f));
-  if(!n||n.type==='dir'){ tperr(`rev: ${f}: No such file`); return; }
-  (n.content||'').split('\n').forEach(l=>{
-    const r=esc(l.split('').reverse().join('')).replace(/FLAG\{[^}]+\}/g,m=>`<span class="t-flag">${m}</span>`);
-    tpr(`<span class="t-out">${r}</span>`);
-  });
-}
-
-function cmdB64(args){
-  const dec=args.includes('-d');
-  const f=args.find(a=>!a.startsWith('-'));
-  if(!f){ tperr('base64: missing file'); return; }
-  const n=fsnode(res(f));
-  if(!n||n.type==='dir'){ tperr(`base64: ${f}: No such file`); return; }
-  if(dec){
-    try{
-      const result=atob((n.content||'').trim().split('\n')[0]);
-      const rc=esc(result).replace(/FLAG\{[^}]+\}/g,m=>`<span class="t-flag">${m}</span>`);
-      tpr(`<span class="t-out">${rc}</span>`);
-    }catch(e){ tperr('base64: error'); }
-  } else tprt(btoa(n.content||''));
-}
-
-function cmdXxd(args){
-  const rp=args.includes('-r')&&args.includes('-p');
-  const f=args.find(a=>!a.startsWith('-'));
-  if(!f){ tperr('xxd: missing file'); return; }
-  const n=fsnode(res(f));
-  if(!n||n.type==='dir'){ tperr(`xxd: ${f}: No such file`); return; }
-  if(rp){
-    const hex=(n.content||'').replace(/\s/g,'');
-    try{
-      const bytes=hex.match(/.{1,2}/g)||[];
-      const result=bytes.map(b=>String.fromCharCode(parseInt(b,16))).join('');
-      const rc=esc(result).replace(/FLAG\{[^}]+\}/g,m=>`<span class="t-flag">${m}</span>`);
-      tpr(`<span class="t-out">${rc}</span>`);
-    }catch(e){ tperr('xxd: error'); }
-  } else {
-    const c=(n.content||'').slice(0,48);
-    let out='00000000: ';
-    for(let i=0;i<c.length;i++) out+=c.charCodeAt(i).toString(16).padStart(2,'0')+' ';
-    tprt(out);
-  }
-}
-
-function cmdStrings(args){
-  const f=args.find(a=>!a.startsWith('-'));
-  if(!f){ tperr('strings: missing file'); return; }
-  const n=fsnode(res(f));
-  if(!n||n.type==='dir'){ tperr(`strings: ${f}: No such file`); return; }
-  const matches=(n.content||'').match(/[\x20-\x7E]{4,}/g)||[];
-  const out=matches.map(s=>esc(s).replace(/FLAG\{[^}]+\}/g,m=>`<span class="t-flag">${m}</span>`));
-  if(out.length) tpr(out.map(s=>`<span class="t-out">${s}</span>`).join('\n'));
-}
-
-function cmdTr(args,raw){
-  if(raw.includes('|')){ pipeCmd(raw); return; }
-  const sets=args.filter(a=>!a.startsWith('-'));
-  const fA=args[args.length-1];
-  const n=fsnode(res(fA));
-  if(!n||n.type==='dir'){ tprt('[tr: pipe input required]'); return; }
-  if(sets.length>=2){
-    const from=sets[0].replace(/['"]/g,''),to=sets[1].replace(/['"]/g,'');
-    const expand=s=>{ let r=''; for(let i=0;i<s.length;i++){ if(s[i+1]==='-'&&s[i+2]){const a=s.charCodeAt(i),b=s.charCodeAt(i+2);for(let c=a;c<=b;c++)r+=String.fromCharCode(c);i+=2;}else r+=s[i];} return r; };
-    const fe=expand(from),te=expand(to);
-    const result=(n.content||'').split('').map(c=>{ const i=fe.indexOf(c); return i>-1?(te[i]||c):c; }).join('');
-    const rc=esc(result).replace(/FLAG\{[^}]+\}/g,m=>`<span class="t-flag">${m}</span>`);
-    tpr(`<span class="t-out">${rc}</span>`);
-  }
-}
-
-function cmdPython(args){
-  const ci=args.indexOf('-c');
-  if(ci>-1){
-    const code=args.slice(ci+1).join(' ').replace(/^['"]|['"]$/g,'');
-    if(code.includes('fromhex')){
-      const hm=code.match(/fromhex\(['"]([\da-fA-F]+)['"]\)/);
-      if(hm){
-        try{
-          const bytes=hm[1].match(/.{2}/g)||[];
-          const result=bytes.map(b=>String.fromCharCode(parseInt(b,16))).join('');
-          const rc=esc(result).replace(/FLAG\{[^}]+\}/g,m=>`<span class="t-flag">${m}</span>`);
-          tpr(`<span class="t-out">${rc}</span>`);
-        }catch(e){ tperr('python3: error'); }
-      }
-    } else tprt('[python3: simulated]');
-  } else tprt('[python3: use -c]');
-}
-
-function cmdCurl(args){
-  const url=args.find(a=>!a.startsWith('-'))||'';
-  const headers=args.includes('-I')||args.includes('-i');
-  if(url.includes('/api/v1/debug')){
-    tpr(`<span class="t-out">{\n  "flag": "<span class="t-flag">FLAG{4p1_d3bug_3ndp01nt}</span>"\n}</span>`);
-  } else if(headers){
-    tpr(`<span class="t-out">X-Flag: <span class="t-flag">FLAG{h3ad3r_1nj3ct10n}</span></span>`);
-  } else tpr(`<span class="t-out">HTTP/1.1 200 OK</span>`);
-}
-
-function cmdStat(args){
-  const f=args[0]; if(!f){ tperr('stat: missing operand'); return; }
-  const p=res(f),n=fsnode(p);
-  if(!n){ tperr(`stat: ${f}: No such file`); return; }
-  tprt(`File: ${p}\nSize: ${(n.content||'').length}`);
-}
-function cmdFile(args){
-  const f=args[0]; if(!f){ tperr('file: missing operand'); return; }
-  const p=res(f),n=fsnode(p);
-  if(!n){ tperr(`file: ${f}: No such file`); return; }
-  tprt(`${p}: ${n.type==='dir'?'directory':'ASCII text'}`);
-}
-function cmdPush(args){ tprt('[git simulated: updates pushed to deploy stream]'); }
-function cmdWhich(args){
-  const b={bash:'/bin/bash',python3:'/usr/bin/python3',find:'/usr/bin/find',grep:'/usr/bin/grep'};
-  args.forEach(a=>tpr(b[a]?`<span class="t-out">${b[a]}</span>`:`<span class="t-err">${esc(a)}: not found</span>`));
-}
-function cmdTar(args){ tprt('[tar extraction simulated]'); }
-function cmdHelp(){
-  tpr(`<span class="t-ok">Trust Iron Walls — Available Commands</span>\n<span class="t-out">ls, cd, pwd, cat, head, tail, find, grep, base64, xxd, strings, python3, curl, help</span>`);
-}
-
-function pipeCmd(raw){
-  const segs=raw.split('|').map(s=>s.trim());
-  let content='';
-  const first=segs[0].split(/\s+/),fcmd=first[0],fargs=first.slice(1);
-  if(fcmd==='cat'){
-    const f=fargs.find(a=>!a.startsWith('-'));
-    if(f){ const n=fsnode(res(f)); content=n?(n.content||''):'';}
-  } else if(fcmd==='echo') content=fargs.join(' ').replace(/['"]/g,'');
-
-  for(let i=1;i<segs.length;i++){
-    const seg=segs[i].split(/\s+/),scmd=seg[0],sargs=seg.slice(1);
-    if(scmd==='grep'){
-      const pat=(sargs.find(a=>!a.startsWith('-'))||'').replace(/['"]/g,'');
-      const re=new RegExp(pat,'i');
-      content=content.split('\n').filter(l=>re.test(l)).join('\n');
-    } else if(scmd==='tr'){
-      content=content.toUpperCase();
-    } else if(scmd==='base64' && sargs.includes('-d')){
-      try{ content=atob(content.trim()); }catch(e){ content='[error]'; }
+function syncDatabaseStates() {
+    const userPool = []; let registeredAccountsCount = 0;
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.startsWith('ctf_user_')) {
+            const handle = key.replace('ctf_user_', ''); registeredAccountsCount++;
+            userPool.push({ user: handle, score: parseInt(localStorage.getItem(`ctf_score_${handle}`) || '0'), role: 'USER', cleared: JSON.parse(localStorage.getItem(`ctf_flags_${handle}`) || '[]').length, last: 'Online Loop', img: localStorage.getItem(`ctf_img_${handle}`) || '' });
+        }
     }
-  }
-  if(content){
-    const out=esc(content).replace(/FLAG\{[^}]+\}/g,m=>`<span class="t-flag">${m}</span>`);
-    tpr(`<span class="t-out">${out}</span>`);
-  }
+    const sorted = userPool.sort((a,b) => b.score - a.score); const rows = document.getElementById('board-rows');
+    if (rows) {
+        if (sorted.length === 0) rows.innerHTML = `<div style="padding:20px; text-align:center; color:var(--dim);">No competing student handles unmapped yet.</div>`;
+        else rows.innerHTML = sorted.map((u, i) => `
+              <div class="board-row ${u.user === currentUser?.user ? 'me' : ''}">
+                <div>#${i+1}</div>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <div class="board-avatar">${u.img ? `<img src="${u.img}">` : `<span>${u.user[0].toUpperCase()}</span>`}</div>
+                    <div><strong>${u.user}</strong> <span style="font-size:0.65rem; color:var(--dim)">[${calculateHackerTitleString(u.score)}]</span></div>
+                </div>
+                <div style="color:var(--orange); font-weight:700;">${u.score} PTS</div>
+                <div>${u.cleared} nodes</div>
+                <div style="font-size:0.75rem; color:var(--dim)">${u.last}</div>
+              </div>`).join('');
+    }
+    const monitorRows = document.getElementById('admin-user-rows');
+    if (monitorRows && currentUser.role === 'admin') {
+        monitorRows.innerHTML = sorted.map(u => `
+          <div class="board-row" style="grid-template-columns: 100px 1.5fr 2fr 1fr 1.2fr; font-size:0.8rem;">
+            <div style="color:var(--orange)">● COMPETING</div><div><strong>${u.user}</strong></div><div style="font-family:var(--font); font-size:0.7rem; color:var(--dim);">${localStorage.getItem(`ctf_user_${u.user}`) || '[LOCK]'}</div><div style="color:var(--teal); font-weight:700;">${u.score}</div><div>${u.cleared} cleared</div>
+          </div>`).join('');
+    }
+    return registeredAccountsCount;
 }
 
-function autoDetect(){
-  const divs=tout.querySelectorAll('div');
-  const recent=Array.from(divs).slice(-10).map(d=>d.textContent).join('\n');
-  const matches=[...recent.matchAll(/FLAG\{[^}]+\}/g)].map(m=>m[0]);
-  matches.forEach(f=>{ if(f) syncFlagCaptureWithServer(f); });
+function adminOverridePassword() {
+    const target = document.getElementById('adm-tgt').value.trim(); const newPass = document.getElementById('adm-pwd').value;
+    if(!target || !newPass) { toast('Error: Field parameters incomplete.', 'red'); return; }
+    localStorage.setItem(`ctf_user_${target}`, newPass); toast('Success: Passphrase remapped.', 'green'); syncDatabaseStates();
 }
 
-async function syncFlagCaptureWithServer(flagString) {
-  if (currentUser && currentUser.role === 'admin') return;
-  const res = await fetch('/api/submit-flag', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ user: currentUser.user, inputFlag: flagString })
-  });
-  const data = await res.json();
-  if(data.status === 'ok') {
-    score = data.newScore;
-    found = data.newFlags;
-    updateNavScore();
-    renderLabFlags();
-    toast(`🚩 FLAG CAPTURED: +points synced`, 'green');
-  }
+function adminPurgeUser() {
+    const target = document.getElementById('adm-purge').value.trim(); localStorage.removeItem(`ctf_user_${target}`); localStorage.removeItem(`ctf_score_${target}`); localStorage.removeItem(`ctf_flags_${target}`); localStorage.removeItem(`ctf_img_${target}`);
+    toast('Success: Profile deleted.', 'green'); syncDatabaseStates(); renderProgressionChart();
 }
 
-function ps1(){ const d=cwd==='/home/operator'?'~':cwd; return `root@trust-iron-walls:${d}#`; }
-function updatePs1(){
-  const d=cwd==='/home/operator'?'~':cwd;
-  document.getElementById('term-ps1').textContent=`root@trust-iron-walls:${d}# `;
-  document.getElementById('term-titlelabel').textContent=`root@trust-iron-walls: ${d}`;
+function updateProfileAvatarViaLink() {
+    const url = document.getElementById('prof-img-url').value.trim();
+    if (url) {
+        document.getElementById('avatar-fallback-icon').style.display = "none"; document.getElementById('prof-render-src').src = url; document.getElementById('prof-render-src').style.display = "block";
+        localStorage.setItem(`ctf_img_${currentUser.user}`, url); triggerAutomatedMilestoneValidation("FLAG{HACKMETHON_AVATAR_STREAM_ACTIVE}", currentUser.user);
+    }
+    refreshProfileAvatarDisplays();
 }
 
-const ti=document.getElementById('term-input');
-ti.addEventListener('keydown',e=>{
-  if(e.key==='Enter'){ const v=ti.value; ti.value=''; runCmd(v); }
-  else if(e.key==='ArrowUp'){ e.preventDefault(); if(histIdx<cmdHist.length-1){ histIdx++; ti.value=cmdHist[histIdx]; } }
-  else if(e.key==='ArrowDown'){ e.preventDefault(); if(histIdx>0){ histIdx--; ti.value=cmdHist[histIdx]; }else{ histIdx=-1; ti.value=''; } }
-});
-
-function saveProgress(){ }
-
-let timerInterval;
-function startTimer(){
-  clearInterval(timerInterval);
-  timerInterval=setInterval(()=>{
-    const elapsed=Math.floor((Date.now()-startTime)/1000);
-    const h=Math.floor(elapsed/3600),m=Math.floor((elapsed%3600)/60);
-    document.getElementById('ds-time').textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
-  },10000);
+function updateProfileAvatarViaFile(event) {
+    const file = event.target.files[0]; if (!file) return;
+    const reader = new FileReader(); reader.onload = function(e) {
+        localStorage.setItem(`ctf_img_${currentUser.user}`, e.target.result); triggerAutomatedMilestoneValidation("FLAG{HACKMETHON_AVATAR_STREAM_ACTIVE}", currentUser.user); refreshProfileAvatarDisplays();
+    };
+    reader.readAsDataURL(file);
 }
 
-(function buildMatrix(){
-  const container=document.getElementById('matrix-bg');
-  const chars='01アイウエオ';
-  for(let i=0;i<20;i++){
-    const col=document.createElement('div');
-    col.className='matrix-col';
-    col.style.left=(i*5+2)+'%';
-    col.style.animationDuration=(8+Math.random()*12)+'s';
-    let text='';
-    for(let j=0;j<40;j++) text+=chars[Math.floor(Math.random()*chars.length)]+'\n';
-    col.textContent=text;
-    container.appendChild(col);
-  }
-})();
+function checkForProfileMilestoneFlags() {
+    const email = document.getElementById('prof-email').value.trim(); const phone = document.getElementById('prof-phone').value.trim(); const loc = document.getElementById('prof-loc').value.trim();
+    if (email !== "" && phone !== "" && loc !== "") triggerAutomatedMilestoneValidation("FLAG{HACKMETHON_METADATA_LOOP_SYNCED}", currentUser.user);
+}
+
+function triggerAutomatedMilestoneValidation(flagValue, username) {
+    if (username === 'root') return;
+    let activeFlags = JSON.parse(localStorage.getItem(`ctf_flags_${username}`) || "[]");
+    const milestones = {
+        "FLAG{HACKMETHON_NODE_PROVISIONED_2026}": { id: "m_provision", pts: 25 },
+        "FLAG{HACKMETHON_METADATA_LOOP_SYNCED}": { id: "m_profile", pts: 50 },
+        "FLAG{HACKMETHON_AVATAR_STREAM_ACTIVE}": { id: "m_avatar", pts: 50 }
+    };
+    const target = milestones[flagValue];
+    if (target && !activeFlags.includes(target.id)) {
+        activeFlags.push(target.id); let activeScore = parseInt(localStorage.getItem(`ctf_score_${username}`) || "0") + target.pts;
+        localStorage.setItem(`ctf_score_${username}`, activeScore.toString()); localStorage.setItem(`ctf_flags_${username}`, JSON.stringify(activeFlags));
+        if (currentUser && currentUser.user === username) {
+            score = activeScore; found = activeFlags; updateNavScore(); updateDynamicTitlesDisplay();
+            fireCelebrationsOverlay(`Milestone Milestone: ${target.id}`);
+        }
+    }
+}
+
+function refreshProfileAvatarDisplays() {
+    const saved = localStorage.getItem(`ctf_img_${currentUser.user}`); const fallback = document.getElementById('prof-frame-container').firstElementChild; const img = document.getElementById('prof-render-src');
+    if (saved) {
+        if(fallback) fallback.style.display = "none"; if(img) { img.src = saved; img.style.display = "block"; }
+        document.getElementById('nav-avatar').innerHTML = `<img src="${saved}" style="width:100%; height:100%; object-fit:cover;">`;
+    } else {
+        if(fallback) fallback.style.display = "block"; if(img) img.style.display = "none";
+        document.getElementById('nav-avatar').textContent = currentUser?.user[0].toUpperCase() || "?";
+    }
+}
+
+function saveProfileMatrix() {
+    localStorage.setItem(`ctf_mail_${currentUser.user}`, document.getElementById('prof-email').value); localStorage.setItem(`ctf_phone_${currentUser.user}`, document.getElementById('prof-phone').value); localStorage.setItem(`ctf_loc_${currentUser.user}`, document.getElementById('prof-loc').value);
+    toast('Changes saved securely.', 'green'); checkForProfileMilestoneFlags();
+}
+
+// --- ADJUSTMENT 1: EXTRACTED DAF COMPONENT SELECTION HANDLER LOOP SECURELY ---
+function selectActiveChallengeNode(id) {
+    activeChalId = id;
+    const targetNode = CHALLENGES.find(c => c.id === id);
+    if (!targetNode) return;
+    
+    document.getElementById('active-chal-name').innerHTML = `<strong>[${targetNode.id.toUpperCase()}]</strong> ${targetNode.name}`;
+    
+    const hintBar = document.getElementById('term-hint-bar');
+    hintBar.innerHTML = `Objective: ${targetNode.focus}<br><span style="color:var(--yellow); font-weight:600;">${targetNode.hint}</span>`;
+    hintBar.style.display = 'block';
+    
+    // Close codex view safely if another target locks
+    document.getElementById('term-codex-drawer').classList.remove('open');
+}
+
+function renderModularLabOrAuditWorkspace() {
+    const studentLayout = document.getElementById('student-lab-layout'); const rootLayout = document.getElementById('root-audit-layout');
+    if (currentUser?.role === 'admin') {
+        studentLayout.style.display = "none"; rootLayout.style.display = "flex";
+        const auditDeckContainer = document.getElementById('admin-audit-deck'); let combinedAuditRowsHtml = "";
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i); if (key.startsWith('ctf_user_')) {
+                const studentHandle = key.replace('ctf_user_', ''); const rawFlagIdsArray = JSON.parse(localStorage.getItem(`ctf_flags_${studentHandle}`) || "[]");
+                const filteredChallengesCleanText = rawFlagIdsArray.length > 0 ? rawFlagIdsArray.map(id => id.toUpperCase()).join(", ") : "[ No targets compromised yet ]";
+                combinedAuditRowsHtml += `
+                    <div class="audit-card-item">
+                        <div class="audit-user-box"><div class="user-avatar" style="width:28px; height:28px; font-size:0.9rem;">${studentHandle[0].toUpperCase()}</div><strong>${studentHandle}</strong></div>
+                        <div class="audit-flags-stream">${filteredChallengesCleanText}</div>
+                    </div>`;
+            }
+        }
+        auditDeckContainer.innerHTML = combinedAuditRowsHtml !== "" ? combinedAuditRowsHtml : `<div style="padding:40px; text-align:center; color:var(--dim);">Zero active student operators.</div>`;
+    } else { rootLayout.style.display = "none"; studentLayout.style.display = "flex"; renderLabFlags(); document.getElementById('term-input').focus(); }
+}
+
+// ── NATIVE LINUX TERMINAL CORE PIPELINE SANDBOX ENGINE ──
+const tout = document.getElementById('term-output');
+function tpr(html) { const d = document.createElement('div'); d.innerHTML = html; tout.appendChild(d); tout.scrollTop = tout.scrollHeight; }
+function tprt(txt, c = 't-out') { tpr(`<span class="${c}">${esc(txt)}</span>`); }
+function tperr(m) { tpr(`<span class="t-err" style="color:var(--red); font-weight:600;">${esc(m)}</span>`); playAudioNodeSFX('sfx-error'); }
+function esc(s) { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+function clearConsoleTerminal() {
+    tout.innerHTML = `Linux HACKMETHON 6.6.0-amd64 (2026-06-11) x86_64\nConnected directly onto core sandbox cluster loops.\nSubmit flags via: submit FLAG{...}\n\n`;
+}
+
+function formatPathDisplay(path) { if (path === ENV_VARS['HOME']) return '~'; return path; }
+
+function updateTerminalPromptsDisplay() {
+    const pathLabel = formatPathDisplay(cwd);
+    document.getElementById('term-ps1').innerHTML = `┌──(<span style="color:var(--red); font-weight:700;">${currentUser?.user}㉿HACKMETHON</span>)-[<span style="color:var(--white); font-weight:600;">${pathLabel}</span>]<br>└─<span style="color:var(--brand-blue); font-weight:700;">$</span> `;
+    document.getElementById('term-titlelabel').textContent = `${currentUser?.user}@HACKMETHON: ${pathLabel}`;
+}
+
+function resolveVirtualPath(targetInput) {
+  if (!targetInput) return cwd; if (targetInput === '~') return ENV_VARS['HOME'];
+  if (targetInput.startsWith('~/')) targetInput = ENV_VARS['HOME'] + targetInput.slice(1);
+  if (!targetInput.startsWith('/')) targetInput = (cwd === '/' ? '/' : cwd + '/') + targetInput;
+  const components = targetInput.split('/').filter(Boolean); const stack = [];
+  for (const token of components) { if (token === '.') continue; if (token === '..') stack.pop(); else stack.push(token); }
+  const result = '/' + stack.join('/'); return result === '' ? '/' : result;
+}
+
+function processConsoleInlineFlagToken(tokenString) {
+    if (currentUser.role === 'admin') { tperr("✗ Root administrator sessions bypass target commitment arrays."); return; }
+    const matched = CHALLENGES.find(c => c.flag === tokenString);
+    if (matched) {
+        if (found.includes(matched.id)) { tperr("○ Flag signature already verified inside cache matrix."); return; }
+        found.push(matched.id); score += matched.pts;
+        localStorage.setItem(`ctf_score_${currentUser.user}`, score.toString());
+        localStorage.setItem(`ctf_flags_${currentUser.user}`, JSON.stringify(found));
+        
+        fireCelebrationsOverlay(matched.name);
+        updateNavScore(); updateDynamicTitlesDisplay(); renderLabFlags();
+    } else { tperr("✗ Invalid compromise verification token."); }
+}
+
+function runCmd(raw) {
+    const input = raw.trim(); if (!input) return;
+    cmdHist.unshift(input); histIdx = -1;
+    tpr(`┌──(<span style="color:var(--red); font-weight:600;">${currentUser?.user}㉿HACKMETHON</span>)-[${cwd === '/home/operator'?'~':cwd}]\n└─$ <strong>${esc(input)}</strong>`);
+    playAudioNodeSFX('sfx-click');
+    if (input.includes('|')) { processPipeline(input); updateTerminalPromptsDisplay(); return; }
+    const tokens = input.match(/(?:[^\s"']+|"[^"]*"|'[^']*')+/g) || [];
+    executeSingleCommand(tokens[0], tokens.slice(1).map(a => a.replace(/['"]/g, "")), null, false);
+    updateTerminalPromptsDisplay();
+}
+
+function processPipeline(rawInput) {
+    const stages = rawInput.split('|').map(s => s.trim()); let memoryStream = null;
+    for (let i = 0; i < stages.length; i++) {
+        const tokens = stages[i].match(/(?:[^\s"']+|"[^"]*"|'[^']*')+/g) || [];
+        memoryStream = executeSingleCommand(tokens[0], tokens.slice(1).map(a => a.replace(/['"]/g, "")), memoryStream, true);
+        if (memoryStream && memoryStream.error) { tperr(memoryStream.error); return; }
+    }
+    if (memoryStream !== null) { tpr(`<span class="t-out">${esc(memoryStream)}</span>\n`); autoDetectFlags(memoryStream); }
+}
+
+function executeSingleCommand(cmd, args, pipedInput = null, returnRaw = false) {
+    let output = ""; args = args.map(a => a.startsWith('$') ? (ENV_VARS[a.slice(1)] || "") : a);
+    switch(cmd) {
+        case 'submit':
+            if(!args[0]) { output = "Usage: submit FLAG{your_captured_token_string}"; break; }
+            processConsoleInlineFlagToken(args[0]); return null;
+        case 'ls':
+            const flags = args.filter(a => a.startsWith('-')); const target = args.find(a => !a.startsWith('-'));
+            const node = FS[resolveVirtualPath(target)]; if (!node) { output = `ls: folder target unmapped.`; break; }
+            let children = [...(node.children || [])];
+            if (!flags.some(f => f.includes('a'))) children = children.filter(c => !c.startsWith('.'));
+            if (flags.some(f => f.includes('l'))) {
+                output = children.map(name => `-rw-r--r-- 1 operator operator ${(node.content||'').length} Jun 11 ${name}`).join('\n');
+            } else output = children.join("   "); break;
+        case 'cd':
+            const dest = resolveVirtualPath(args[0] || '~');
+            if (dest.startsWith('/root') && currentUser.role !== 'admin') { output = `cd: /root: Permission denied`; break; }
+            if (FS[dest]) cwd = dest; else output = `cd: folder target missing.`; return null;
+        case 'cat':
+            if (pipedInput !== null) return pipedInput;
+            const fPath = resolveVirtualPath(args[0]);
+            if (fPath.startsWith('/root/') && currentUser.role !== 'admin') { output = "cat: Permission denied"; break; }
+            output = FS[fPath] ? FS[fPath].content : "cat: file missing."; break;
+        case 'grep':
+            let pattern = (args.find(a => !a.startsWith('-')) || "").replace(/['"]/g, "");
+            let src = pipedInput !== null ? pipedInput : "";
+            try {
+                const regex = new RegExp(pattern, args.some(f => f.includes('i')) ? 'i' : '');
+                output = src.split('\n').filter(l => regex.test(l)).join('\n');
+            } catch(e) { output = "[grep system fault]"; } break;
+        case 'head':
+            const headSrc = pipedInput !== null ? pipedInput : (FS[resolveVirtualPath(args[args.length-1])]?.content || "");
+            output = headSrc.split('\n').slice(0, 5).join('\n'); break;
+        case 'tail':
+            const tailSrc = pipedInput !== null ? pipedInput : (FS[resolveVirtualPath(args[args.length-1])]?.content || "");
+            output = tailSrc.split('\n').slice(-5).join('\n'); break;
+        case 'touch':
+            const newFile = resolveVirtualPath(args[0]);
+            FS[newFile] = { type: 'file', perms: '-rw-r--r--', owner: 'operator', group: 'operator', content: '' };
+            const fParent = newFile.substring(0, newFile.lastIndexOf('/')) || '/';
+            if (FS[fParent] && !FS[fParent].children.includes(args[0])) FS[fParent].children.push(args[0]);
+            return null;
+        case 'mkdir':
+            const newDir = resolveVirtualPath(args[0]);
+            FS[newDir] = { type: 'dir', perms: 'drwxr-xr-x', owner: 'operator', group: 'operator', children: [] };
+            const dParent = newDir.substring(0, newDir.lastIndexOf('/')) || '/';
+            if (FS[dParent] && !FS[dParent].children.includes(args[0])) FS[dParent].children.push(args[0]);
+            return null;
+        case 'base64':
+            const b64 = pipedInput !== null ? pipedInput : "";
+            if (args.includes('-d')) { try { output = atob(b64.trim()); } catch(e) { output = "[base64 decryption error]"; } }
+            else output = btoa(b64); break;
+        case 'rev': output = (pipedInput !== null ? pipedInput : "").split('\n').map(l => l.split('').reverse().join('')).join('\n'); break;
+        case 'echo': output = args.join(' '); break;
+        case 'pwd': output = cwd; break;
+        case 'whoami': output = currentUser?.user || 'operator'; break;
+        case 'clear': tout.innerHTML = ''; return null;
+        case 'help': output = "CORE INSTRUCTIONS: submit, ls, cd, cat, head, tail, mkdir, touch, grep, base64, rev, echo, pwd, whoami, clear"; break;
+        default: output = `bash: ${cmd}: operational token unmapped.`;
+            if (returnRaw) return { error: output }; else { tperr(output); return; }
+    }
+    if (returnRaw) return output;
+    tpr(`<span class="t-out">${esc(output)}</span>\n`); autoDetectFlags(output);
+}
+
+function autoDetectFlags(text) {
+    const tracking = [...text.matchAll(/FLAG\{[^}]+\}/g)].map(m => m[0]);
+    tracking.forEach(t => { processConsoleInlineFlagToken(t); });
+}
+
+function renderLabFlags() {
+    document.getElementById('lab-flags-list').innerHTML = CHALLENGES.map((c, i) => `
+        <div class="lab-flag-item ${found.includes(c.id) ? 'found' : ''}" onclick="selectActiveChallengeNode('${c.id}')">
+          <div style="color:var(--brand-blue); font-weight:700;">#${String(i+1).padStart(2,'0')}</div>
+          <div style="flex:1; padding-left:4px;">${c.name}</div>
+          <div>${found.includes(c.id) ? '✓' : ''} ${c.pts}p</div>
+        </div>`).join('');
+}
+
+function renderDash() {
+    const metricsContainer = document.getElementById('dash-metrics-container'); let dynamicMetricAccountsCount = 0;
+    for (let i = 0; i < localStorage.length; i++) { if (localStorage.key(i).startsWith('ctf_user_')) dynamicMetricAccountsCount++; }
+    if (currentUser?.role === 'admin') {
+        metricsContainer.innerHTML = `
+          <div class="stat-card" style="--c:var(--red)"><div class="stat-label">Administrative Security Level</div><div class="stat-value" style="color:var(--red); font-size:1.6rem; padding-top:12px;">ROOT OVERRIDE</div></div>
+          <div class="stat-card" style="--c:var(--teal)"><div class="stat-label">Managed Student Shards</div><div class="stat-value">${dynamicMetricAccountsCount} Nodes</div></div>
+          <div class="stat-card" style="--c:var(--yellow)"><div class="stat-label">Global Target Cluster Density</div><div class="stat-value">53 Labs</div></div>
+          <div class="stat-card" style="--c:var(--brand-blue)"><div class="stat-label">Master Instance State</div><div class="stat-value" style="color:var(--brand-blue); font-size:1.6rem; padding-top:12px;">MONITOR ACTIVE</div></div>`;
+    } else {
+        metricsContainer.innerHTML = `
+          <div class="stat-card" style="--c:var(--brand-blue)"><div class="stat-label">Accumulated Score</div><div class="stat-value" id="ds-score">${score}</div></div>
+          <div class="stat-card" style="--c:var(--orange)"><div class="stat-label">Targets Cleared</div><div class="stat-value" id="ds-flags">${found.length}</div></div>
+          <div class="stat-card" style="--c:var(--yellow)"><div class="stat-label">Operator Title</div><div class="stat-value" id="ds-title" style="font-size:1.5rem; margin-top:12px; color:var(--teal);">${calculateHackerTitleString(score).toUpperCase()}</div></div>
+          <div class="stat-card" style="--c:var(--red)"><div class="stat-label">Session Delta</div><div class="stat-value" id="ds-time" style="font-size:1.8rem; margin-top:2px; font-family:var(--font);">00:00</div></div>`;
+    }
+    document.getElementById('sh-count').textContent = `${found.length} / ${CHALLENGES.length} modules compromised`;
+    document.getElementById('chal-grid').innerHTML = CHALLENGES.map(c => `
+        <div class="chal-card ${found.includes(c.id) ? 'solved' : ''}">
+            <div>
+              <div style="color:var(--brand-blue); font-size:0.65rem; font-weight:700; text-transform:uppercase;">${c.cat}</div>
+              <div style="font-size:0.95rem; font-weight:700; color:var(--white); margin:4px 0;">[${c.id.toUpperCase()}] ${c.name}</div>
+              <div style="font-size:0.8rem; line-height:1.4; color:var(--body);">${c.focus}</div>
+              <div style="font-family:var(--font); font-size:0.72rem; color:var(--yellow); background:rgba(255,204,0,0.02); border:1px dashed rgba(255,204,0,0.15); padding:6px; margin-top:8px; border-radius:var(--r);">${c.hint}</div>
+              <span class="tag tag-easy" style="margin-top:10px;">${c.diff}</span><span style="color:var(--orange); font-size:0.75rem; font-weight:700; margin-left:12px;">${c.pts}p</span>
+            </div><button class="action-btn-lab" onclick="goPage('lab')">Initialize Module Space →</button>
+        </div>`).join('');
+}
+
+function updateNavScore() { 
+    if (currentUser?.role === 'admin') { document.getElementById('nav-score-badge').textContent = 'BYPASS'; return; }
+    document.getElementById('nav-score-badge').textContent = score + ' PTS'; 
+}
+function toast(msg, type='') {
+    const t = document.getElementById('toast'); t.textContent = msg; t.style.borderLeftColor = type === 'green' ? 'var(--orange)' : 'var(--red)';
+    t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 3500);
+}
+
+function startTimer() {
+    setInterval(() => {
+        if (!startTime || currentUser?.role === 'admin') return;
+        const elapsed = Math.floor((Date.now() - startTime) / 1000); const timerVal = document.getElementById('ds-time');
+        if(timerVal) timerVal.textContent = `${String(Math.floor(elapsed/60)).padStart(2,'0')}:${String(elapsed%60).padStart(2,'0')}`;
+    }, 1000);
+}
+
+window.onload = loadClientPersistenceState;
+const ti = document.getElementById('term-input');
+ti.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); const v = ti.value; ti.value = ''; runCmd(v); } });
 </script>
 </body>
 </html>
