@@ -497,40 +497,65 @@ let histIdx = -1;
 let cwd = '/home/operator';
 
 const CHALLENGES = [
-  {id:'w1',cat:'Web Recon',name:'View Source',diff:'easy',pts:50,desc:'Every hacker starts by reading the page source. Something valuable is hidden on the login page.'},
-  {id:'w2',cat:'Web Recon',name:'Inspect Element',diff:'easy',pts:75,desc:'The scoreboard chart element has a secret attribute. Browser DevTools → Elements tab.'},
-  {id:'w3',cat:'Web Recon',name:'Dashboard Source',diff:'easy',pts:75,desc:'The dashboard HTML source contains a hidden comment. You know what to do.'},
-  {id:'w4',cat:'Web Recon',name:'Cookie Monster',diff:'med',pts:125,desc:'The platform sets a session cookie with a suspicious value. Check your browser cookies.'},
-  {id:'w5',cat:'Web Recon',name:'Local Storage',diff:'med',pts:125,desc:'Something was stored in localStorage that should not be there. Check your browser storage.'},
-  {id:'w6',cat:'Web Recon',name:'robots.txt',diff:'easy',pts:75,desc:'The platform has a robots.txt. It lists paths that should not be indexed — including one with a flag.'},
-  {id:'w7',cat:'Web Recon',name:'API Endpoint',diff:'hard',pts:200,desc:'There is a hidden API debug endpoint. Call /api/v1/debug in the terminal with curl to retrieve the flag.'},
-  {id:'w8',cat:'Web Recon',name:'HTTP Headers',diff:'hard',pts:200,desc:'The server leaks a flag in a custom HTTP response header. Use curl -I to see response headers.'},
-  {id:'l1',cat:'Linux: Basics',name:'The Dotfile',diff:'easy',pts:50,desc:'A hidden file in /home/operator contains a flag. Hidden files start with a dot.'},
-  {id:'l2',cat:'Linux: Basics',name:'MOTD Message',diff:'easy',pts:50,desc:'The message of the day (/etc/motd) was customised by the sysadmin and hides a flag.'},
-  {id:'l3',cat:'Linux: Basics',name:'Passwd Comment',diff:'easy',pts:75,desc:'The GECOS field (field 5) of one entry in /etc/passwd contains a flag instead of a real name.'},
-  {id:'l4',cat:'Linux: Basics',name:'End of Log',diff:'easy',pts:75,desc:'/var/log/syslog has 900+ lines. The flag is on the very last line.'},
-  {id:'l5',cat:'Linux: Basics',name:'Root Home',diff:'easy',pts:100,desc:'Navigate to /root and list all files, including hidden ones. The flag is in a hidden file.'},
-  {id:'l6',cat:'Linux: Text',name:'Base64 Decode',diff:'med',pts:125,desc:'cat /home/operator/.encoded — the file contains base64 data. Decode it.'},
-  {id:'l7',cat:'Linux: Text',name:'Grep the Log',diff:'med',pts:125,desc:'1000 lines in /var/log/app.log. One line contains the word TROPHY. Use grep.'},
-  {id:'l8',cat:'Linux: Text',name:'AWK Fields',diff:'med',pts:150,desc:'/opt/data/ops.csv is a CSV. Extract field 6 from the row where field 2 equals SPECTRE.'},
-  {id:'l9',cat:'Linux: Text',name:'Reversed String',diff:'med',pts:125,desc:'/opt/encoded/mirror.txt contains the flag written backwards. Use rev to flip it.'},
-  {id:'l10',cat:'Linux: Text',name:'ROT13 Cipher',diff:'med',pts:150,desc:'/opt/encoded/cipher.txt is ROT13 encoded. Decode it with tr.'},
-  {id:'l11',cat:'Linux: Text',name:'Three Fragments',diff:'med',pts:175,desc:'The flag is split across /opt/fragments/alpha, beta, gamma. Concatenate them in order.'},
-  {id:'l12',cat:'Linux: Text',name:'Hex Decode',diff:'hard',pts:200,desc:'/opt/encoded/hex.txt contains a hex string. Decode it with xxd or python3.'},
-  {id:'l13',cat:'Linux: Advanced',name:'Deep Directory',diff:'hard',pts:200,desc:'A flag is hidden 9 directories deep inside /opt/maze. Use find or keep cd-ing.'},
-  {id:'l14',cat:'Linux: Advanced',name:'Cron Script',diff:'hard',pts:200,desc:'A cron job runs every minute. Find it in /etc/crontab and read the script it calls.'},
-  {id:'l15',cat:'Linux: Advanced',name:'SUID Binary',diff:'hard',pts:225,desc:'Find all SUID binaries on the system. One path is suspiciously named.'},
-  {id:'l16',cat:'Linux: Advanced',name:'Environment Leak',diff:'med',pts:150,desc:'A secret is exported inside /home/operator/.bashrc as an environment variable.'},
-  {id:'l17',cat:'Linux: Advanced',name:'World Writable',diff:'hard',pts:225,desc:'A world-writable file (chmod 777) contains a flag. Use find with -perm 777.'},
-  {id:'l18',cat:'Linux: Advanced',name:'Strings in Binary',diff:'hard',pts:225,desc:'/opt/bin/agent.elf looks like a binary. Use strings or grep to extract readable text.'},
-  {id:'l19',cat:'Linux: Advanced',name:'Auth Log',diff:'hard',pts:200,desc:'grep /var/log/auth.log for lines containing OPERATION — a flag is embedded.'},
-  {id:'l20',cat:'Linux: Advanced',name:'Symlink Target',diff:'hard',pts:225,desc:'/opt/links/ contains symlinks. One points to an unusual target that holds a flag.'},
-  {id:'l21',cat:'Linux: Expert',name:'/proc Secrets',diff:'expert',pts:300,desc:'A fake /proc entry contains a flag. Not all /proc files are kernel-generated.'},
-  {id:'l22',cat:'Linux: Expert',name:'Heredoc Flag',diff:'expert',pts:300,desc:'/opt/scripts/deploy.sh uses a heredoc. Read every line — the flag is inside the heredoc block.'},
-  {id:'l23',cat:'Linux: Expert',name:'Recursive Config',diff:'expert',pts:325,desc:'grep -r through /opt/config for the string MASTER_KEY. The flag is its value.'},
-  {id:'l24',cat:'Linux: Expert',name:'sudoers Vector',diff:'expert',pts:325,desc:'/etc/sudoers reveals a NOPASSWD command. Read that script — it contains a flag.'},
-  {id:'l25',cat:'Linux: Expert',name:'Newest File',diff:'expert',pts:300,desc:'Find the most recently modified file under /var using find -newer. It holds a flag.'},
-  {id:'f1',cat:'Final Boss',name:'THE FINAL DECRYPTION',diff:'expert',pts:500,desc:'Three files: /opt/final/shard_1, shard_2, shard_3. Each is ROT13 encoded. Decode each, then concatenate in order to get the flag.'},
+  // ── WEB RECONNAISSANCE (1-10) ──
+  {id:'w1',cat:'Web Recon',name:'Page Architecture View',diff:'easy',pts:50,desc:'Analyze static page markup configurations for unlinked comments.',focus:'Locate hidden developer notes or commented lines embedded inside the initial landing page markup framework.'},
+  {id:'w2',cat:'Web Recon',name:'DOM Attribute Inspection',diff:'easy',pts:75,desc:'Enumerate deep object properties inside interface canvas render matrices.',focus:'Analyze properties on structural UI nodes, particularly elements rendering live tracking metrics.'},
+  {id:'w3',cat:'Web Recon',name:'Asynchronous Layout Audit',diff:'easy',pts:75,desc:'Inspect localized frontend view configurations for client-side storage leaks.',focus:'Investigate hidden page elements or background containers that render exclusively during verified dashboard sessions.'},
+  {id:'w4',cat:'Web Recon',name:'Session Cookie Parameterization',diff:'med',pts:125,desc:'Analyze volatile state parameters passed inside ambient HTTP cookie headers.',focus:'Inspect active storage values issued by the application browser wrapper tracking your connection state.'},
+  {id:'w5',cat:'Web Recon',name:'Persistent Storage Enumeration',diff:'med',pts:125,desc:'Audit keys initialized within localStorage execution boundaries.',focus:'Enumerate all local persistent keys stored on disk inside the host browser configuration.'},
+  {id:'w6',cat:'Web Recon',name:'Index Indexing Analysis',diff:'easy',pts:75,desc:'Investigate public manifest policies governing crawl state parameters.',focus:'Check the system server instructions explicitly left behind for search engine crawler software paths.'},
+  {id:'w7',cat:'Web Recon',name:'API Parameter Fuzzing',diff:'hard',pts:200,desc:'Discover hidden structural application routes serving debugging states.',focus:'Find the active server route handling diagnostic variables or live telemetry exports.'},
+  {id:'w8',cat:'Web Recon',name:'Custom Response Headers',diff:'hard',pts:200,desc:'Intercept custom downstream environmental variable indicators emitted by backends.',focus:'Analyze the metadata returned by server network responses when requesting operational metrics.'},
+  {id:'w9',cat:'Web Recon',name:'Content Security Assessment',diff:'med',pts:150,desc:'Evaluate inline policy rules for cross-origin tracking vectors.',focus:'Evaluate inline source safety parameters or response attributes checking script permissions.'},
+  {id:'w10',cat:'Web Recon',name:'Hidden Form Input Audit',diff:'easy',pts:50,desc:'Enumerate hidden transaction states inside operational login structures.',focus:'Enumerate unlisted input nodes or legacy fields inside standard session entry parameters.'},
+
+  // ── LINUX BASICS (11-20) ──
+  {id:'l1',cat:'Linux: Basics',name:'Dotfile Discovery',diff:'easy',pts:50,desc:'Locate system initialization files hidden via leading file system indicators.',focus:'Locate an unindexed configuration profile hidden from plain view inside the operator user home directory root.'},
+  {id:'l2',cat:'Linux: Basics',name:'System Banner Parsing',diff:'easy',pts:50,desc:'Read custom environmental message structures pushed on terminal initialization.',focus:'Review the default greeting message generated dynamically by the host server logic.'},
+  {id:'l3',cat:'Linux: Basics',name:'User Directory GECOS Audit',diff:'easy',pts:75,desc:'Verify user account metadata parameters inside systemic identity catalogs.',focus:'Audit descriptive metadata comments assigned to system account identity logs.'},
+  {id:'l4',cat:'Linux: Basics',name:'Log Append Interception',diff:'easy',pts:75,desc:'Isolate anomalies appended directly to volatile log outputs.',focus:'Extract the final entry committed to standard kernel error tracking files.'},
+  {id:'l5',cat:'Linux: Basics',name:'Elevated Context Enumeration',diff:'easy',pts:100,desc:'Enumerate protected directory configurations for access privilege leaks.',focus:'Access the restricted superuser fallback zone and list all files saved inside.'},
+  {id:'l6',cat:'Linux: Basics',name:'Process Environment Scan',diff:'med',pts:125,desc:'Inspect exported environmental settings tracking operational runtime parameters.',focus:'Inspect active tracking profiles assigned to background shells monitoring software parameters.'},
+  {id:'l7',cat:'Linux: Basics',name:'Fake Kernel Interface Review',diff:'hard',pts:200,desc:'Audit non-standard parameters registered within simulated physical metrics.',focus:'Audit the active pseudo-filesystem nodes for data files written by system administrators.'},
+  {id:'l8',cat:'Linux: Basics',name:'System Path Enumeration',diff:'easy',pts:50,desc:'Scan systemic binary directories for unregistered terminal software.',focus:'Scan structural core binary paths to isolate execution tools dropped outside default locations.'},
+  {id:'l9',cat:'Linux: Basics',name:'Hidden History Inspection',diff:'easy',pts:75,desc:'Review tracking sequences generated by legacy bash interaction queues.',focus:'Review tracking sequences generated by historical terminal commands run by past console interactions.'},
+  {id:'l10',cat:'Linux: Basics',name:'Network Port Interception',diff:'med',pts:125,desc:'Map structural transmission protocols bound to internal local loopbacks.',focus:'Map structural transmission endpoints listening exclusively inside internal local system contexts.'},
+
+  // ── TEXT PROCESSING (21-30) ──
+  {id:'t1',cat:'Linux: Text',name:'Base64 Transport Decoding',diff:'med',pts:125,desc:'Decode raw encoded binary streams passed via cleartext storage.',focus:'Locate text lines stored using cleartext obfuscation algorithms and normalize the stream.'},
+  {id:'t2',cat:'Linux: Text',name:'Pattern Extraction Filter',diff:'med',pts:125,desc:'Filter high-density log streams to isolate explicit transaction identifiers.',focus:'Isolate the specific application log record carrying the TROPHY keyword attribute.'},
+  {id:'t3',cat:'Linux: Text',name:'Delimited CSV Extraction',diff:'med',pts:150,desc:'Extract explicit dimensional records from structured tabular layouts.',focus:'Audit high-density comma-separated operation records to find data bound to the SPECTRE unit.'},
+  {id:'t4',cat:'Linux: Text',name:'Symmetrical Mirror Inversion',diff:'easy',pts:50,desc:'Invert reversed payload parameters to restore functional strings.',focus:'Reverse text maps written backwards to recover the standard token string configuration.'},
+  {id:'t5',cat:'Linux: Text',name:'ROT13 Alpha Rotation',diff:'med',pts:150,desc:'Decrypt cipher configurations shifted using standard modular rotation alphabets.',focus:'Decode an alphabet-shifted string using an offset cipher matrix mapping.'},
+  {id:'t6',cat:'Linux: Text',name:'Fragment Aggregation Assembly',diff:'med',pts:175,desc:'Reconstruct separate files distributed chronologically across local memory fragments.',focus:'Merge separate consecutive code fragments scattered within the processing folder.'},
+  {id:'t7',cat:'Linux: Text',name:'Hexadecimal Format Inversion',diff:'hard',pts:200,desc:'Convert raw hexadecimal text maps back into normal structural bytes.',focus:'Convert raw hexadecimal digit sequences saved on disk back into functional text characters.'},
+  {id:'t8',cat:'Linux: Text',name:'Regex Boundary Validation',diff:'hard',pts:225,desc:'Construct explicit lookahead expressions to strip nested credential maps.',focus:'Isolate specific credential formats embedded inside chaotic alphanumeric configurations using explicit structural formulas.'},
+  {id:'t9',cat:'Linux: Text',name:'Stream Line Enumeration',diff:'easy',pts:50,desc:'Count dimensional parameters within high-volume config text files.',focus:'Evaluate high-volume parameters inside data objects to count the total lines processed.'},
+  {id:'t10',cat:'Linux: Text',name:'Character Set Inversion',diff:'med',pts:100,desc:'Transpose case configurations using explicit translator algorithms.',focus:'Transpose alphabetical layouts using software strings to switch text layers safely.'},
+
+  // ── ADVANCED SYSTEMS & ESCALATION (31-45) ──
+  {id:'a1',cat:'Linux: Advanced',name:'Deep Tree Traversal',diff:'hard',pts:200,desc:'Navigate deep, multi-tier hidden structures to uncover targeted evidence blocks.',focus:'Traverse a dense 9-tier directory maze to discover an unlisted evidence file.'},
+  {id:'a2',cat:'Linux: Advanced',name:'Automated Task Analysis',diff:'hard',pts:200,desc:'Identify scripts executed recurrently by scheduling engines.',focus:'Find background jobs scheduled to launch automatically every 60 seconds on the server.'},
+  {id:'a3',cat:'Linux: Advanced',name:'SUID Flag Investigation',diff:'hard',pts:225,desc:'Locate high-privilege context parameters assigned to anomalous path files.',focus:'Enumerate all file handles assigned elevated master context tokens during processing.'},
+  {id:'a4',cat:'Linux: Advanced',name:'World-Writable Directory Scan',diff:'hard',pts:225,desc:'Enumerate systemic objects configured with globally insecure file permissions.',focus:'Locate global write permission structures allowing any user to write text updates.'},
+  {id:'a5',cat:'Linux: Advanced',name:'Compiled Object String Extraction',diff:'hard',pts:225,desc:'Extract cleartext indicators embedded within binary compile footprints.',focus:'Parse compiled non-human-readable data blocks to discover text lines embedded in code.'},
+  {id:'a6',cat:'Linux: Advanced',name:'Symbolic Link Vector Track',diff:'hard',pts:225,desc:'Follow relative pointer endpoints mapping outside sandboxed boundaries.',focus:'Follow system shortcut pathways pointing to protected locations outside standard storage loops.'},
+  {id:'a7',cat:'Linux: Advanced',name:'Privileged Sudoer Matrix Analysis',diff:'expert',pts:325,desc:'Analyze nopasswd execution paths to determine root escalation opportunities.',focus:'Analyze authorization rules granting regular accounts access to execute commands without keys.'},
+  {id:'a8',cat:'Linux: Advanced',name:'Recursive Text Search Drill',diff:'expert',pts:325,desc:'Perform system-wide variable searching across all secure directories.',focus:'Recursively look through all configuration layers to find the MASTER_KEY parameter declaration.'},
+  {id:'a9',cat:'Linux: Advanced',name:'Timestamp Delta Isolation',diff:'expert',pts:300,desc:'Isolate the most recently initialized file configuration on the filesystem.',focus:'Perform time delta mapping to locate the newest modified file object inside variable storage folders.'},
+  {id:'a10',cat:'Linux: Advanced',name:'Hidden Heredoc Context Parsing',diff:'expert',pts:300,desc:'Locate text lines processed inside volatile block documentation script segments.',focus:'Analyze inline code blocks passed inside scripts via standard multiline container strings.'},
+  {id:'a11',cat:'Linux: Advanced',name:'Umask Default Configuration Review',diff:'med',pts:150,desc:'Audit creation permissions generated by legacy account execution groups.',focus:'Audit creation policies tracking default permissions assigned to dynamically populated file contexts.'},
+  {id:'a12',cat:'Linux: Advanced',name:'Broken Descriptor Analysis',diff:'hard',pts:200,desc:'Track hidden output streams mapping to decoupled file handles.',focus:'Investigate error routing parameters where logs are sent to alternative terminal streams.'},
+  {id:'a13',cat:'Linux: Advanced',name:'Shared Memory Telemetry Intercept',diff:'hard',pts:250,desc:'Inspect temporary operational buffers initialized within local RAM locations.',focus:'Audit systemic temporary files tracking short-term network metrics inside processing caches.'},
+  {id:'a14',cat:'Linux: Advanced',name:'Mount Point Parameter Audit',diff:'med',pts:150,desc:'Evaluate file execution rules configured across external system node configurations.',focus:'Isolate block hardware configurations mapped into live processing loops.'},
+  {id:'a15',cat:'Linux: Advanced',name:'Zombie Process Parameter Map',diff:'hard',pts:200,desc:'Track lingering process tracking tables for legacy network pointers.',focus:'Examine abandoned execution handles that retain background descriptors inside internal allocation fields.'},
+
+  // ── FINAL CRITICAL BOSS (46-50) ──
+  {id:'f1',cat:'Final Boss',name:'Multi-Stage Shard Assembly I',diff:'expert',pts:250,desc:'Decrypt and combine sequential ROT13 parameters from segment directory alpha.',focus:'Locate, isolate, and reverse early block shard maps tucked inside complex deployment segments.'},
+  {id:'f2',cat:'Final Boss',name:'Multi-Stage Shard Assembly II',diff:'expert',pts:250,desc:'Isolate secondary block configurations inside historical buffer parameters.',focus:'Trace background deployment fragments across final assembly locations.'},
+  {id:'f3',cat:'Final Boss',name:'Cryptographic Hash Consolidation',diff:'expert',pts:300,desc:'Consolidate multiple decrypted structural blocks into a unified system token.',focus:'Perform data collation across all isolated decryption parts to establish a clean token configuration.'},
+  {id:'f4',cat:'Final Boss',name:'Hidden API Verification Loop',diff:'expert',pts:400,desc:'Pass consolidated hashes through secret server endpoints to test system defenses.',focus:'Query the ultimate operational API endpoints to verify the consolidated token payload.'},
+  {id:'f5',cat:'Final Boss',name:'Core Perimeter Wall Completion',diff:'expert',pts:500,desc:'Initialize the complete structural verification protocol across all 50 operational nodes.',focus:'Trigger the full continuous validation system to secure the entire Trust Iron Walls structure.'}
 ];
 
 // ══════════════════════════════════════════════════════════════
@@ -687,7 +712,35 @@ function openLab(){
   renderLabFlags();
   goPage('lab');
 }
+function setActiveChal(id){
+  activeChalId = id;
+  const c = CHALLENGES.find(x => x.id === activeChalId);
+  if(!c) return;
+  
+  // Update header context title cleanly
+  document.getElementById('active-chal-name').textContent = c.name;
+  
+  // Render the specific "What-to-do" hint rule cleanly inside the teal box
+  const hintBar = document.getElementById('term-hint-bar');
+  if (hintBar) {
+    hintBar.textContent = "Objective: " + c.focus;
+    hintBar.style.display = "block";
+  }
+}
 
+function renderLabFlags(){
+  const list = document.getElementById('lab-flags-list');
+  // Full map ensures all 50 challenges populate the Lab view sidebar
+  list.innerHTML = CHALLENGES.map((c, i) => {
+    const sv = found.includes(c.id);
+    return `<div class="lab-flag-item ${sv ? 'found' : ''}" onclick="setActiveChal('${c.id}')">
+      <div class="lfi-num">${i+1}</div>
+      <div class="lfi-dot"></div>
+      <div class="lfi-name">${c.name}</div>
+      <div class="lfi-pts">${sv ? '✓' : ''} ${c.pts}p</div>
+    </div>`;
+  }).join('');
+}
 async function labSubmit(){
   const val = document.getElementById('lab-flag-input').value.trim();
   const msg = document.getElementById('lab-submit-msg');
