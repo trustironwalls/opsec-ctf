@@ -6,36 +6,36 @@
 <title>Trust Iron Walls Platform</title>
 <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ── DESIGN TOKENS ───────────────────────────── */
+/* ── DESIGN TOKENS (EMERALD MATRIX THEME) ────── */
 :root{
-  --ink:    #07090f;   /* near-black base */
-  --ink2:   #0e1118;
-  --ink3:   #141925;
-  --ink4:   #1c2333;
-  --wire:   #252f42;
-  --wire2:  #2e3a52;
-  --dim:    #4a5878;
-  --body:   #7f92b0;
-  --pale:   #b8c8de;
-  --white:  #e4edf8;
-  --orange: #e8622a;   /* blood orange — primary accent */
-  --orange2:#ff8c5a;
-  --orange3:rgba(232,98,42,.12);
-  --teal:   #1db8a8;
-  --teal2:  rgba(29,184,168,.1);
-  --red:    #e03535;
-  --yellow: #d4a017;
-  --green:  #2db37a;
+  --ink:    #030508;   /* Matrix Dark Void */
+  --ink2:   #090f14;   /* Deep Tech Charcoal */
+  --ink3:   #0f1922;   /* Terminal Backing Slate */
+  --ink4:   #152430;
+  --wire:   #1a3a2a;   /* Tactical Muted Green */
+  --wire2:  #285c3f;   /* Medium Structural Green */
+  --dim:    #55966e;   /* Soft Low-lit Bio-Green */
+  --body:   #a3d9b7;   /* Matrix Readout Text */
+  --pale:   #c2ebd3;
+  --white:  #e6f7ed;
+  --orange: #39ff14;   /* RADIOACTIVE NEON GREEN — Primary Accent */
+  --orange2:#76ff03;   /* Bright Lime */
+  --orange3:rgba(57,255,20,0.08);
+  --teal:   #00ffcc;   /* Cyber Cyan */
+  --teal2:  rgba(0,255,204,0.1);
+  --red:    #ff3333;   /* Critical Threat Red */
+  --yellow: #ffff00;   /* Warning Alert Yellow */
+  --green:  #39ff14;   /* Stable State Green */
   --font:   'Courier Prime', monospace;
   --ui:     'Inter', sans-serif;
   --display:'Bebas Neue', sans-serif;
-  --r:      3px;
+  --r:      2px;       /* Hard Technical Edges */
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;background:var(--ink);color:var(--body);font-family:var(--font);overflow:hidden}
-::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar{width:5px;height:5px}
 ::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--wire2);border-radius:2px}
+::-webkit-scrollbar-thumb{background:var(--wire2);border-radius:var(--r)}
 
 /* ── PAGES ───────────────────────────────────── */
 .page{
@@ -46,326 +46,155 @@ html,body{height:100%;background:var(--ink);color:var(--body);font-family:var(--
   position:absolute;
   top:50px;
   left:0;
-  padding:28px 24px;
+  padding:24px;
 }
 .page.active{display:flex;flex-direction:column;gap:16px;}
 
-/* ════════════════════════════════════════════
-   LOGIN PAGE
-═══════════════════════════════════════════════ */
+/* ── LOGIN ── */
 #page-login{
-  display:flex;
-  width:100%;
-  height:100vh;
-  position:fixed;
-  top:0;left:0;
-  background:var(--ink);
-  align-items:center;justify-content:center;
-  overflow:hidden;
-  z-index:1000;
+  display:flex;width:100%;height:100vh;position:fixed;
+  top:0;left:0;background:var(--ink);align-items:center;
+  justify-content:center;overflow:hidden;z-index:1000;
 }
 #page-login::before{
   content:'';position:absolute;inset:0;
   background-image:
-    linear-gradient(rgba(232,98,42,.04) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(232,98,42,.04) 1px,transparent 1px);
-  background-size:40px 40px;
+    linear-gradient(rgba(57,255,20,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(57,255,20,.03) 1px,transparent 1px);
+  background-size:30px 30px;
 }
-#page-login::after{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse 70% 70% at 50% 50%,transparent 40%,var(--ink) 100%);
-  pointer-events:none;
-}
-.login-wrap{position:relative;z-index:10;width:420px;}
+.login-wrap{position:relative;z-index:10;width:400px;}
 .classified-stamp{
-  font-family:var(--display);font-size:3.5rem;
-  color:var(--orange);letter-spacing:.25em;
-  border:4px solid var(--orange);
-  padding:4px 18px;display:inline-block;
-  transform:rotate(-8deg);margin-bottom:32px;
-  position:relative;opacity:.85;
-  text-shadow:2px 0 0 rgba(255,100,0,.4),-2px 0 0 rgba(0,200,255,.3);
-  animation:glitch 4s infinite;
+  font-family:var(--display);font-size:3.5rem;color:var(--orange);
+  letter-spacing:.2em;border:3px solid var(--orange);padding:4px 18px;
+  display:inline-block;transform:rotate(-4deg);margin-bottom:24px;
+  text-shadow:0 0 10px rgba(57,255,20,0.5);animation:glitch 5s infinite;
 }
 @keyframes glitch{
-  0%,92%,100%{transform:rotate(-8deg) skew(0);filter:none}
-  93%{transform:rotate(-8deg) skew(2deg);filter:hue-rotate(20deg)}
-  94%{transform:rotate(-8deg) skew(-1deg) translate(2px,0);filter:hue-rotate(-20deg)}
-  95%{transform:rotate(-8deg) skew(0)}
-  97%{transform:rotate(-8deg) translate(-2px,1px)}
-  98%{transform:rotate(-8deg) translate(0)}
+  0%,94%,100%{transform:rotate(-4deg) skew(0);filter:none}
+  95%{transform:rotate(-4deg) skew(3deg);filter:hue-rotate(90deg)}
+  97%{transform:rotate(-4deg) translate(-2px,1px)}
 }
-.login-box{
-  background:var(--ink2);border:1px solid var(--wire2);
-  border-top:2px solid var(--orange);padding:36px 32px;
-}
-.login-eyebrow{
-  font-family:var(--ui);font-size:.65rem;font-weight:700;
-  text-transform:uppercase;letter-spacing:.2em;color:var(--dim);margin-bottom:6px;
-}
-.login-title{
-  font-family:var(--display);font-size:2.2rem;
-  color:var(--white);letter-spacing:.06em;margin-bottom:4px;
-}
-.login-sub{font-size:.78rem;color:var(--dim);margin-bottom:28px;font-family:var(--ui);}
+.login-box{background:var(--ink2);border:1px solid var(--wire2);border-top:3px solid var(--orange);padding:32px;}
 .field{margin-bottom:16px}
-.field label{
-  display:block;font-family:var(--ui);font-size:.65rem;
-  font-weight:700;text-transform:uppercase;letter-spacing:.12em;
-  color:var(--dim);margin-bottom:6px;
+.field label{display:block;font-family:var(--ui);font-size:.65rem;font-weight:700;text-transform:uppercase;color:var(--dim);margin-bottom:6px;letter-spacing:0.1em;}
+.field input, .profile-grid input{
+  width:100%;background:var(--ink3);border:1px solid var(--wire);border-radius:var(--r);
+  color:var(--white);font-family:var(--font);font-size:.9rem;padding:10px 12px;outline:none;transition:all .2s;
 }
-.field input{
-  width:100%;background:var(--ink3);
-  border:1px solid var(--wire);border-radius:var(--r);
-  color:var(--white);font-family:var(--font);font-size:.9rem;
-  padding:10px 14px;outline:none;transition:border-color .2s;
-}
-.field input:focus{border-color:var(--orange)}
-.field input::placeholder{color:var(--wire2)}
-#login-err{font-family:var(--ui);font-size:.75rem;color:var(--red);margin-bottom:14px;min-height:18px;}
+.field input:focus, .profile-grid input:focus{border-color:var(--orange);box-shadow:0 0 8px rgba(57,255,20,0.2);}
+#login-err{font-family:var(--ui);font-size:.75rem;color:var(--red);margin-bottom:12px;min-height:18px;}
 .btn-primary{
-  width:100%;background:var(--orange);color:#fff;
-  font-family:var(--ui);font-size:.82rem;font-weight:700;
-  letter-spacing:.08em;text-transform:uppercase;
-  padding:11px;border:none;border-radius:var(--r);cursor:pointer;transition:background .15s;
+  width:100%;background:var(--wire);color:var(--orange);border:1px solid var(--orange);
+  font-family:var(--ui);font-size:.82rem;font-weight:700;text-transform:uppercase;
+  padding:11px;border-radius:var(--r);cursor:pointer;transition:all .15s;box-shadow:0 0 4px rgba(57,255,20,0.1);
 }
-.btn-primary:hover{background:var(--orange2)}
-.login-footer{margin-top:20px;font-family:var(--ui);font-size:.7rem;color:var(--dim);text-align:center;line-height:1.8;}
-.matrix-col{
-  position:absolute;top:0;font-family:var(--font);font-size:.7rem;
-  color:rgba(232,98,42,.07);white-space:pre;line-height:1.4;
-  animation:fall linear infinite;pointer-events:none;z-index:1;
-}
-@keyframes fall{from{transform:translateY(-100%)}to{transform:translateY(100vh)}}
+.btn-primary:hover{background:var(--orange);color:var(--ink);box-shadow:0 0 12px rgba(57,255,20,0.4);}
 
-/* ── SHARED NAV ───────────────────────────── */
+/* ── SHARED NAV ── */
 #topnav{
   background:var(--ink2);border-bottom:1px solid var(--wire);
-  height:50px;display:flex;align-items:center;
-  padding:0 20px;gap:0;flex-shrink:0;z-index:100;position:fixed;top:0;left:0;width:100%;
+  height:50px;display:flex;align-items:center;padding:0 20px;
+  position:fixed;top:0;left:0;width:100%;z-index:100;
 }
-#topnav::after{
-  content:'';position:absolute;bottom:0;left:0;
-  width:var(--active-w,0px);height:2px;background:var(--orange);
-  transition:all .25s ease;
-}
-.nav-logo{
-  font-family:var(--display);font-size:1.4rem;
-  color:var(--orange);letter-spacing:.06em;margin-right:28px;cursor:pointer;
-}
-.nav-logo span{color:var(--body);font-size:.9rem}
+.nav-logo{font-family:var(--display);font-size:1.5rem;color:var(--orange);letter-spacing:.05em;cursor:pointer;text-shadow:0 0 8px rgba(57,255,20,0.3);}
 .navlink{
-  font-family:var(--ui);font-size:.75rem;font-weight:600;
-  letter-spacing:.06em;text-transform:uppercase;
-  color:var(--dim);padding:0 14px;height:50px;
-  display:flex;align-items:center;cursor:pointer;
-  border-bottom:2px solid transparent;transition:all .15s;position:relative;
+  font-family:var(--ui);font-size:.72rem;font-weight:600;text-transform:uppercase;
+  color:var(--dim);padding:0 16px;height:50px;display:flex;align-items:center;cursor:pointer;transition:all .15s;
 }
-.navlink:hover{color:var(--pale)}
-.navlink.active{color:var(--orange);border-bottom-color:var(--orange)}
-.nav-spacer{flex:1}
-.nav-user{display:flex;align-items:center;gap:10px;font-family:var(--ui);font-size:.75rem;color:var(--dim);}
-.nav-avatar{
-  width:28px;height:28px;border-radius:50%;
-  background:var(--ink4);border:1px solid var(--wire2);
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--display);font-size:.9rem;color:var(--orange);
-}
-.nav-score-badge{
-  background:var(--orange3);border:1px solid var(--orange);
-  border-radius:var(--r);padding:2px 8px;
-  font-family:var(--font);font-size:.72rem;color:var(--orange);
-}
-.nav-btn{
-  font-family:var(--ui);font-size:.7rem;font-weight:600;
-  letter-spacing:.06em;text-transform:uppercase;
-  padding:5px 12px;border-radius:var(--r);border:none;cursor:pointer;transition:all .15s;
-}
-.nav-btn-ghost{background:transparent;color:var(--dim);border:1px solid var(--wire)}
-.nav-btn-ghost:hover{color:var(--pale);border-color:var(--wire2)}
+.navlink:hover{color:var(--white)}
+.navlink.active{color:var(--orange);border-bottom:2px solid var(--orange);background:var(--orange3);}
 
-/* ── DASHBOARD ────────────────────────────── */
-#page-dash{background:var(--ink)}
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px}
-.stat-card{background:var(--ink2);border:1px solid var(--wire);padding:16px 20px;position:relative;overflow:hidden;}
-.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--c,var(--orange));}
-.stat-label{font-family:var(--ui);font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--dim);margin-bottom:6px}
-.stat-value{font-family:var(--display);font-size:2.2rem;color:var(--white);letter-spacing:.02em;line-height:1}
-.stat-sub{font-family:var(--ui);font-size:.7rem;color:var(--dim);margin-top:4px}
-
-.section-head{display:flex;align-items:center;gap:12px;margin-bottom:4px;}
-.section-head h2{font-family:var(--display);font-size:1.3rem;color:var(--white);letter-spacing:.06em;}
-.section-head .sh-line{flex:1;height:1px;background:var(--wire)}
-.section-head .sh-count{font-family:var(--font);font-size:.7rem;color:var(--dim);white-space:nowrap;}
-
-.chal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:12px;}
-.chal-card{background:var(--ink2);border:1px solid var(--wire);padding:18px 20px;cursor:pointer;position:relative;transition:border-color .15s,transform .1s;overflow:hidden;}
-.chal-card::after{content:'';position:absolute;inset:0;background:var(--orange3);opacity:0;transition:opacity .15s;}
-.chal-card:hover{border-color:var(--wire2);transform:translateY(-1px)}
-.chal-card:hover::after{opacity:1}
-.chal-card.solved{border-left:3px solid var(--green)}
-.chal-card.solved::before{content:'SOLVED';position:absolute;top:10px;right:12px;font-family:var(--display);font-size:.7rem;letter-spacing:.12em;color:var(--green);opacity:.6;}
-.chal-cat{font-family:var(--ui);font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--dim);margin-bottom:6px;}
-.chal-name{font-family:var(--ui);font-size:.92rem;font-weight:600;color:var(--white);margin-bottom:8px;line-height:1.3;}
-.chal-desc{font-size:.78rem;color:var(--body);line-height:1.6;margin-bottom:12px}
-.chal-footer{display:flex;align-items:center;gap:8px}
-.diff-pip{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
-.dp-easy{background:var(--green)}.dp-med{background:var(--yellow)}
-.dp-hard{background:var(--orange)}.dp-expert{background:var(--red)}
-.chal-diff{font-family:var(--ui);font-size:.65rem;color:var(--dim);flex:1}
-.chal-pts{font-family:var(--font);font-size:.78rem;color:var(--orange);background:var(--orange3);padding:2px 7px;border-radius:var(--r);}
-.chal-card.solved .chal-pts{color:var(--green);background:rgba(45,179,122,.1)}
-
-/* ── OPERATOR MONITOR PANEL ──────────────── */
-#page-monitor{background:var(--ink)}
-.admin-card{background:var(--ink2);border:1px solid var(--wire);padding:20px;margin-bottom:12px;}
-.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:10px;}
-@media(max-width:768px){.admin-grid{grid-template-columns:1fr;}}
-.ctrl-group{background:var(--ink3);border:1px solid var(--wire2);padding:16px;border-radius:var(--r);}
-.ctrl-group h3{font-family:var(--ui);color:var(--white);font-size:.85rem;margin-bottom:12px;text-transform:uppercase;}
-
-/* ── TERMINAL LAB PAGE ────────────────────── */
+/* ── RESPONSIVE TERMINAL LAB ── */
 #page-lab{background:var(--ink);padding:0;}
-#lab-body{flex:1;display:flex;height:100%;overflow:hidden}
-#lab-sidebar{width:260px;flex-shrink:0;background:var(--ink2);border-right:1px solid var(--wire);display:flex;flex-direction:column;overflow:hidden;}
-#lab-sidebar-header{padding:14px 16px;border-bottom:1px solid var(--wire);flex-shrink:0;}
-#lab-sidebar-header h3{font-family:var(--ui);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--dim);margin-bottom:2px;}
-#active-chal-name{font-family:var(--display);font-size:1.1rem;color:var(--orange);letter-spacing:.04em;}
+#lab-body{flex:1;display:flex;height:100%;width:100%;overflow:hidden}
+#lab-sidebar{width:280px;flex-shrink:0;background:var(--ink2);border-right:1px solid var(--wire);display:flex;flex-direction:column;overflow:hidden;}
+#lab-sidebar-header{padding:14px 16px;border-bottom:1px solid var(--wire);background:var(--ink3);}
+#lab-sidebar-header h3{font-family:var(--ui);font-size:.65rem;font-weight:700;text-transform:uppercase;color:var(--dim);}
+#active-chal-name{font-family:var(--display);font-size:1.1rem;color:var(--teal);letter-spacing:.04em;margin-top:4px;}
 #lab-flags-list{flex:1;overflow-y:auto}
-.lab-flag-item{display:flex;align-items:center;gap:8px;padding:8px 14px;border-bottom:1px solid var(--wire);font-size:.75rem;cursor:pointer;transition:background .1s;}
-.lab-flag-item:hover{background:var(--ink3)}
-.lab-flag-item.found{background:rgba(45,179,122,.05)}
-.lfi-num{font-family:var(--display);font-size:.85rem;color:var(--dim);width:20px;flex-shrink:0}
-.lfi-name{flex:1;color:var(--body);line-height:1.3}
-.lab-flag-item.found .lfi-name{color:var(--green)}
-.lfi-pts{font-family:var(--font);font-size:.68rem;color:var(--dim)}
-.lab-flag-item.found .lfi-pts{color:var(--green)}
-.lfi-dot{width:6px;height:6px;border-radius:50%;background:var(--wire2);flex-shrink:0}
-.lab-flag-item.found .lfi-dot{background:var(--green)}
-#lab-submit{padding:10px 14px;border-top:1px solid var(--wire);flex-shrink:0;background:var(--ink3);}
-#lab-flag-input{width:100%;background:var(--ink);border:1px solid var(--wire);border-radius:var(--r);color:var(--teal);font-family:var(--font);font-size:.8rem;padding:7px 10px;outline:none;transition:border-color .2s;margin-bottom:6px;}
-#lab-flag-input:focus{border-color:var(--teal)}
-#lab-flag-input::placeholder{color:var(--wire2)}
-#lab-submit-row{display:flex;gap:6px}
-#lab-submit-btn{flex:1;background:var(--teal);color:var(--ink);font-family:var(--ui);font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:7px;border:none;border-radius:var(--r);cursor:pointer;}
-#lab-submit-btn:hover{background:#25d4c2}
-#lab-submit-msg{font-family:var(--ui);font-size:.68rem;margin-top:4px;min-height:14px;}
-#lab-submit-msg.ok{color:var(--green)}
-#lab-submit-msg.err{color:var(--red)}
-#lab-submit-msg.dup{color:var(--yellow)}
+.lab-flag-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--ink3);font-size:.75rem;cursor:pointer;transition:all .1s;}
+.lab-flag-item:hover{background:var(--ink4);color:var(--white);}
+.lab-flag-item.found{background:rgba(57,255,20,0.04);color:var(--green);}
 
-#lab-terminal{flex:1;display:flex;flex-direction:column;overflow:hidden}
-#term-topbar{background:var(--ink3);border-bottom:1px solid var(--wire);padding:7px 16px;display:flex;align-items:center;gap:8px;flex-shrink:0;}
-.tdot{width:10px;height:10px;border-radius:50%}
-.td-r{background:#ff5f57}.td-y{background:#ffbd2e}.td-g{background:#28ca41}
-#term-titlelabel{font-family:var(--ui);font-size:.7rem;color:var(--dim);flex:1;text-align:center;letter-spacing:.04em;}
-#term-hint-bar{background:rgba(29,184,168,.06);border-bottom:1px solid rgba(29,184,168,.15);padding:7px 16px;font-size:.75rem;color:var(--teal);flex-shrink:0;display:none;font-family:var(--ui);}
-#term-output{flex:1;overflow-y:auto;padding:12px 16px;font-size:.83rem;line-height:1.75;white-space:pre-wrap;word-break:break-all;background:#000;}
-#term-input-row{display:flex;align-items:center;padding:8px 16px;border-top:1px solid #1a1a1a;gap:6px;flex-shrink:0;background:#000;}
-#term-ps1{color:var(--orange);white-space:nowrap;font-size:.83rem;flex-shrink:0}
-#term-input{flex:1;background:transparent;border:none;outline:none;color:var(--white);font-family:var(--font);font-size:.83rem;caret-color:var(--orange);}
+#lab-terminal{flex:1;display:flex;flex-direction:column;overflow:hidden;background:#020305;}
+#term-topbar{background:var(--ink2);border-bottom:1px solid var(--wire);padding:8px 16px;display:flex;align-items:center;gap:8px;}
+#term-hint-bar{background:rgba(0,255,204,0.05);border-bottom:1px solid rgba(0,255,204,0.15);padding:10px 16px;font-size:.78rem;color:var(--teal);display:none;font-family:var(--ui);line-height:1.4;}
+#term-output{flex:1;overflow-y:auto;padding:16px;font-size:.85rem;line-height:1.6;white-space:pre-wrap;word-break:break-all;color:var(--body);}
+#term-input-row{display:flex;align-items:center;padding:10px 16px;border-top:1px solid var(--wire);background:var(--ink2);gap:8px;}
+#term-input{flex:1;background:transparent;border:none;outline:none;color:var(--white);font-family:var(--font);font-size:.85rem;caret-color:var(--orange);}
 
-/* ── SCOREBOARD & DATA GRIDS ──────────────── */
-#page-board{background:var(--ink)}
-.board-header-row{
-  display:grid;grid-template-columns:80px 1fr 120px 100px 140px;
-  gap:12px;padding:8px 16px;background:var(--ink3);
-  font-family:var(--ui);font-size:.62rem;font-weight:700;
-  text-transform:uppercase;letter-spacing:.12em;color:var(--dim);
-  border:1px solid var(--wire);margin-bottom:4px;
+/* ── PROFILE SYSTEM ── */
+.profile-container{display:grid;grid-template-columns:220px 1fr;gap:24px;background:var(--ink2);border:1px solid var(--wire);padding:24px;border-radius:var(--r);}
+.profile-avatar-box{display:flex;flex-direction:column;align-items:center;gap:12px;border-right:1px solid var(--wire);padding-right:24px;}
+.profile-image-frame{width:140px;height:140px;border:2px solid var(--wire2);background:var(--ink3);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;}
+.profile-image-frame img{width:100%;height:100%;object-fit:cover;}
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%;}
+
+/* ── CHALLENGE CARDS ── */
+.chal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}
+.chal-card{background:var(--ink2);border:1px solid var(--wire);padding:16px;position:relative;display:flex;flex-direction:column;justify-content:space-between;min-height:170px;}
+.chal-card.solved{border-left:3px solid var(--green);background:rgba(57,255,20,0.02);}
+.chal-card.solved::before{content:'SOLVED';position:absolute;top:12px;right:14px;font-family:var(--display);font-size:.75rem;color:var(--green);opacity:.6;letter-spacing:0.05em;}
+.action-btn-lab{
+  width:100%;background:rgba(0,255,204,0.05);color:var(--teal);border:1px solid var(--wire2);
+  padding:6px;font-family:var(--ui);font-size:.7rem;font-weight:700;text-transform:uppercase;
+  cursor:pointer;margin-top:12px;transition:all 0.15s;text-align:center;text-decoration:none;
 }
-.board-row{
-  display:grid;grid-template-columns:80px 1fr 120px 100px 140px;
-  gap:12px;padding:12px 16px;border:1px solid var(--wire);
-  background:var(--ink2);align-items:center;margin-bottom:4px;
-}
+.action-btn-lab:hover{background:var(--teal);color:var(--ink);box-shadow:0 0 8px var(--teal);}
+
+/* ── BOARDS & MONITOR TABLES ── */
+.board-header-row{display:grid;grid-template-columns:80px 1fr 120px 100px 140px;gap:12px;padding:10px 16px;background:var(--ink3);font-family:var(--ui);font-size:.65rem;font-weight:700;text-transform:uppercase;color:var(--dim);border:1px solid var(--wire);}
+.board-row{display:grid;grid-template-columns:80px 1fr 120px 100px 140px;gap:12px;padding:12px 16px;border:1px solid var(--wire);background:var(--ink2);align-items:center;font-size:.82rem;}
 .board-row.me{border-left:3px solid var(--orange);background:var(--orange3);}
-.board-rank{font-family:var(--display);font-size:1.3rem;color:var(--pale);}
-.board-name{display:flex;align-items:center;gap:10px}
-.board-avatar{
-  width:30px;height:30px;border-radius:50%;
-  background:var(--ink4);border:1px solid var(--wire2);
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--display);font-size:.9rem;color:var(--orange);flex-shrink:0;
+
+@media(max-width:900px){
+  #lab-body{flex-direction:column;}
+  #lab-sidebar{width:100%;height:220px;border-right:none;border-bottom:1px solid var(--wire);}
+  .profile-container{grid-template-columns:1fr;}
+  .profile-avatar-box{border-right:none;padding-right:0;border-bottom:1px solid var(--wire);padding-bottom:16px;}
+  .profile-grid{grid-template-columns:1fr;}
 }
-.board-username{font-family:var(--ui);font-size:.85rem;font-weight:600;color:var(--white)}
-.board-tag{font-family:var(--ui);font-size:.65rem;color:var(--dim);margin-top:1px}
-.board-score{font-family:var(--display);font-size:1.3rem;color:var(--orange);letter-spacing:.02em;}
-.board-flags{font-family:var(--font);font-size:.8rem;color:var(--body)}
-.board-last{font-family:var(--font);font-size:.72rem;color:var(--pale)}
-
-#score-chart-wrap{background:var(--ink2);border:1px solid var(--wire);padding:20px 24px;margin-bottom:12px;}
-#score-chart-wrap h3{font-family:var(--display);font-size:1.1rem;color:var(--white);letter-spacing:.06em;margin-bottom:16px;}
-#score-canvas{width:100%;height:120px;display:block}
-
-/* ── MODALS & TOASTS ──────────────────────── */
-#modal{display:none;position:fixed;inset:0;background:rgba(7,9,15,.85);z-index:500;align-items:center;justify-content:center;padding:20px;}
-#modal.open{display:flex}
-#mbox{background:var(--ink2);border:1px solid var(--wire2);border-top:2px solid var(--orange);max-width:560px;width:100%;padding:28px;animation:popIn .18s ease;}
-@keyframes popIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-#mbox h2{font-family:var(--display);font-size:1.4rem;color:var(--white);letter-spacing:.06em;margin-bottom:4px;}
-.m-cat{font-family:var(--ui);font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--orange);margin-bottom:14px;}
-.m-desc{font-size:.82rem;color:var(--body);line-height:1.8;margin-bottom:16px}
-.m-actions{display:flex;gap:8px;justify-content:flex-end}
-.mbtn{font-family:var(--ui);font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:7px 14px;border:none;border-radius:var(--r);cursor:pointer;}
-.mbtn-ghost{background:transparent;color:var(--dim);border:1px solid var(--wire)}
-.mbtn-ghost:hover{color:var(--pale);border-color:var(--wire2)}
-.mbtn-orange{background:var(--orange);color:#fff}
-.mbtn-orange:hover{background:var(--orange2)}
-
-#toast{display:none;position:fixed;bottom:20px;right:20px;z-index:2000;border-radius:var(--r);padding:12px 18px;font-family:var(--ui);font-size:.8rem;font-weight:600;border-left:3px solid var(--orange);background:var(--ink2);color:var(--white);box-shadow:0 4px 20px rgba(0,0,0,.5);animation:tSlide .25s ease;}
-#toast.t-green{border-left-color:var(--green);color:var(--green)}
-#toast.t-red{border-left-color:var(--red);color:var(--red)}
-@keyframes tSlide{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
-
-.tag{display:inline-block;font-family:var(--ui);font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:2px 6px;border-radius:var(--r);}
-.tag-easy{background:rgba(45,179,122,.15);color:var(--green)}
-.tag-med{background:rgba(212,160,23,.15);color:var(--yellow)}
-.tag-hard{background:rgba(232,98,42,.15);color:var(--orange)}
-.tag-expert{background:rgba(224,53,53,.15);color:var(--red)}
 </style>
 </head>
 <body>
 
 <div id="page-login" class="page active">
-  <div id="matrix-bg"></div>
   <div class="login-wrap">
     <div style="text-align:center;margin-bottom:8px">
-      <div class="classified-stamp">CLASSIFIED</div>
+      <div class="classified-stamp">SECURE MIGRATION</div>
     </div>
     <div class="login-box">
-      <div class="login-eyebrow">Operational Security Platform</div>
+      <div class="login-eyebrow">Defensive Cryptographic Perimeter</div>
       <div class="login-title">Trust Iron Walls</div>
-      <div class="login-sub">Authenticate to access the challenge environment.</div>
+      <div class="login-sub">Authenticate parameters to establish terminal handshake sync loops.</div>
       <div id="login-err"></div>
       <div class="field">
-        <label>Operator ID</label>
-        <input id="li-user" type="text" placeholder="username" autocomplete="off" spellcheck="false">
+        <label>Operator ID Handle</label>
+        <input id="li-user" type="text" placeholder="identity pointer" autocomplete="off" spellcheck="false">
       </div>
       <div class="field">
-        <label>Access Code</label>
-        <input id="li-pass" type="password" placeholder="password">
+        <label>Access Matrix Key</label>
+        <input id="li-pass" type="password" placeholder="passkey validation sequence">
       </div>
-      <button class="btn-primary" onclick="doLogin()">Authenticate</button>
-      <div class="login-footer">
-        Default credentials are in the <span style="color:var(--orange)">robots.txt</span><br>
-      </div>
+      <button class="btn-primary" onclick="doLogin()">Authenticate Node</button>
     </div>
   </div>
 </div>
 
 <nav id="topnav" style="display:none">
-  <div class="nav-logo" onclick="goPage('dash')">Trust Iron Walls<span></span></div>
+  <div class="nav-logo" onclick="goPage('dash')">Trust Iron Walls</div>
   <div class="navlink active" id="nav-dash" onclick="goPage('dash')">Dashboard</div>
   <div class="navlink" id="nav-lab" onclick="goPage('lab')">Terminal Lab</div>
   <div class="navlink" id="nav-board" onclick="goPage('board')">Scoreboard</div>
-  <div class="navlink" id="nav-monitor" onclick="goPage('monitor')" style="display:none; color:var(--orange);">Operator Monitor</div>
+  <div class="navlink" id="nav-profile" onclick="goPage('profile')">Profile</div>
+  <div class="navlink" id="nav-monitor" onclick="goPage('monitor')" style="display:none;">Operator Monitor</div>
   <div class="nav-spacer"></div>
   <div class="nav-user">
     <div class="nav-score-badge" id="nav-score-badge">0 pts</div>
     <div class="nav-avatar" id="nav-avatar">?</div>
-    <span id="nav-username" style="font-family:var(--ui);font-size:.75rem;color:var(--body)"></span>
-    <button class="nav-btn nav-btn-ghost" onclick="doLogout()">Logout</button>
+    <span id="nav-username" style="font-family:var(--ui);font-size:.75rem;color:var(--white)"></span>
+    <button class="nav-btn nav-btn-ghost" onclick="doLogout()">Disconnect</button>
   </div>
 </nav>
 
@@ -379,7 +208,7 @@ html,body{height:100%;background:var(--ink);color:var(--body);font-family:var(--
     <div class="stat-card" style="--c:var(--teal)">
       <div class="stat-label">Flags Found</div>
       <div class="stat-value" id="ds-flags">0</div>
-      <div class="stat-sub">of 33 total</div>
+      <div class="stat-sub">of 50 total</div>
     </div>
     <div class="stat-card" style="--c:var(--yellow)">
       <div class="stat-label">Rank</div>
@@ -393,37 +222,53 @@ html,body{height:100%;background:var(--ink);color:var(--body);font-family:var(--
     </div>
   </div>
 
+  <div id="admin-warning-banner" style="display:none; background:rgba(255,51,51,0.15); border:1px solid var(--red); color:var(--red); padding:12px; font-size:.8rem; margin-bottom:12px;">
+    ⚠️ SECURITY NOTICE: You are authenticated via root administrator scope. Progress metrics tracking and challenge node completion loops are suppressed for admin identities.
+  </div>
+
   <div class="section-head">
-    <h2>Challenges</h2>
+    <h2>Challenges Directory</h2>
     <div class="sh-line"></div>
-    <div class="sh-count" id="sh-count">0 / 33 solved</div>
+    <div class="sh-count" id="sh-count">0 / 50 solved</div>
   </div>
   <div class="chal-grid" id="chal-grid"></div>
+</div>
+
+<div id="page-profile" class="page">
+  <div class="profile-container">
+    <div class="profile-avatar-box">
+      <div class="profile-image-frame">
+        <img id="prof-render-src" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230f1922'/><circle cx='50' cy='40' r='20' fill='%23285c3f'/><path d='M20,85 C20,65 35,55 50,55 C65,55 80,65 80,85' fill='%23285c3f'/></svg>" alt="Avatar">
+      </div>
+      <input type="text" id="prof-img-url" placeholder="Paste image link URL" oninput="updateProfileAvatar()" style="background:var(--ink3); border:1px solid var(--wire); padding:6px; color:#fff; font-size:.7rem; width:100%; text-align:center;">
+    </div>
+    <div class="profile-grid">
+      <div class="field"><label>Secure Communication Email</label><input type="email" id="prof-email" placeholder="operator@internal.domain"></div>
+      <div class="field"><label>Encrypted Telephony Intercept</label><input type="text" id="prof-phone" placeholder="+234 80 ..."></div>
+      <div class="field"><label>Physical Geographic Coordinates</label><input type="text" id="prof-loc" placeholder="City, Country / State Node"></div>
+      <div class="field" style="display:flex; align-items:flex-end;"><button class="btn-primary" onclick="saveProfileMatrix()">Commit Metadata Changes</button></div>
+    </div>
+  </div>
 </div>
 
 <div id="page-monitor" class="page">
   <div class="admin-card">
     <div style="font-family:var(--display); font-size:1.5rem; color:var(--orange); margin-bottom:15px;">System Console Control Matrix</div>
-    
     <div class="admin-grid">
       <div class="ctrl-group">
         <h3>Remap Operator Access Key</h3>
-        <input id="adm-target-user" type="text" placeholder="Target Operator ID" style="width:100%; background:var(--ink); border:1px solid var(--wire); padding:8px; color:#fff; margin-bottom:10px; outline:none; font-family:var(--font);">
-        <input id="adm-new-pass" type="password" placeholder="New Access Code String" style="width:100%; background:var(--ink); border:1px solid var(--wire); padding:8px; color:#fff; margin-bottom:10px; outline:none; font-family:var(--font);">
-        <button class="btn-primary" onclick="executeAdminAction('reset_pass')" style="background:var(--yellow); color:#000;">Commit Key Reset</button>
+        <input id="adm-target-user" type="text" placeholder="Target Operator ID" style="margin-bottom:10px;">
+        <input id="adm-new-pass" type="password" placeholder="New Access Code String" style="margin-bottom:10px;">
+        <button class="btn-primary" onclick="executeAdminAction('reset_pass')" style="border-color:var(--yellow); color:var(--yellow);">Commit Key Reset</button>
       </div>
-
       <div class="ctrl-group">
         <h3>Purge Operator Account</h3>
-        <input id="adm-purge-user" type="text" placeholder="Target Operator ID" style="width:100%; background:var(--ink); border:1px solid var(--wire); padding:8px; color:#fff; margin-bottom:10px; outline:none; font-family:var(--font);">
-        <button class="btn-primary" onclick="executeAdminAction('delete')" style="background:var(--red);">Evict Profile From Database</button>
+        <input id="adm-purge-user" type="text" placeholder="Target Operator ID" style="margin-bottom:10px;">
+        <button class="btn-primary" onclick="executeAdminAction('delete')" style="border-color:var(--red); color:var(--red);">Evict Profile From Database</button>
       </div>
     </div>
   </div>
-
-  <div class="board-header-row">
-    <div>Identity</div><div>Operator Code</div><div>Current Score</div><div>Flags Popped</div><div>Last Intercept</div>
-  </div>
+  <div class="board-header-row"><div>Identity Status</div><div>Operator Details</div><div>Current Score</div><div>Flags Popped</div><div>Last Intercept</div></div>
   <div id="admin-monitor-rows"></div>
 </div>
 
@@ -431,31 +276,25 @@ html,body{height:100%;background:var(--ink);color:var(--body);font-family:var(--
   <div id="lab-body">
     <div id="lab-sidebar">
       <div id="lab-sidebar-header">
-        <h3>Active Challenge</h3>
-        <div id="active-chal-name">Select a challenge</div>
+        <h3>Active Target Frame</h3>
+        <div id="active-chal-name">Select node target</div>
       </div>
       <div id="lab-flags-list"></div>
       <div id="lab-submit">
         <input id="lab-flag-input" type="text" placeholder="FLAG{...}" spellcheck="false" autocomplete="off">
-        <div id="lab-submit-row">
-          <button id="lab-submit-btn" onclick="labSubmit()">Submit Flag</button>
-        </div>
+        <div id="lab-submit-row"><button id="lab-submit-btn" onclick="labSubmit()">Submit Flag Token</button></div>
         <div id="lab-submit-msg"></div>
       </div>
     </div>
     <div id="lab-terminal">
       <div id="term-topbar">
-        <div class="tdot td-r"></div>
-        <div class="tdot td-y"></div>
-        <div class="tdot td-g"></div>
+        <div class="tdot td-r"></div><div class="tdot td-y"></div><div class="tdot td-g"></div>
         <div id="term-titlelabel">root@trust-iron-walls:~</div>
       </div>
-
-      <div id="term-hint-bar" style="background:rgba(29,184,168,.06); border-bottom:1px solid rgba(29,184,168,.15); padding:7px 16px; font-size:.75rem; color:var(--teal); display:none; font-family:var(--ui);"></div>
-
+      <div id="term-hint-bar"></div>
       <div id="term-output"></div>
       <div id="term-input-row">
-        <div id="term-ps1">root@opsec:~# </div>
+        <div id="term-ps1">root@trust-iron-walls:~# </div>
         <input id="term-input" type="text" autocomplete="off" spellcheck="false">
       </div>
     </div>
@@ -467,25 +306,9 @@ html,body{height:100%;background:var(--ink);color:var(--body);font-family:var(--
     <h3>Score Progression</h3>
     <canvas id="score-canvas"></canvas>
   </div>
-  <div class="board-header-row">
-    <div>Rank</div><div>Operator</div><div>Score</div><div>Flags</div><div>Last Flag</div>
-  </div>
+  <div class="board-header-row"><div>Rank</div><div>Operator</div><div>Score</div><div>Flags</div><div>Last Flag</div></div>
   <div id="board-rows"></div>
 </div>
-
-<div id="modal">
-  <div id="mbox">
-    <div class="m-cat" id="m-cat"></div>
-    <h2 id="m-title"></h2>
-    <div class="m-desc" id="m-desc"></div>
-    <div class="m-actions">
-      <button class="mbtn mbtn-ghost" onclick="closeModal()">Close</button>
-      <button class="mbtn mbtn-orange" onclick="openLab()">Open in Lab →</button>
-    </div>
-  </div>
-</div>
-
-<div id="toast"></div>
 
 <script>
 'use strict';
@@ -550,7 +373,7 @@ const CHALLENGES = [
   {id:'a11',cat:'Linux: Advanced',name:'Umask Default Configuration Review',diff:'med',pts:150,desc:'Audit creation permissions generated by legacy account execution groups.',focus:'Audit creation policies tracking default permissions assigned to dynamically populated file contexts.'},
   {id:'a12',cat:'Linux: Advanced',name:'Broken Descriptor Analysis',diff:'hard',pts:200,desc:'Track hidden output streams mapping to decoupled file handles.',focus:'Investigate error routing parameters where logs are sent to alternative terminal streams.'},
   {id:'a13',cat:'Linux: Advanced',name:'Shared Memory Telemetry Intercept',diff:'hard',pts:250,desc:'Inspect temporary operational buffers initialized within local RAM locations.',focus:'Audit systemic temporary files tracking short-term network metrics inside processing caches.'},
-  {id:'a14',cat:'Linux: Advanced',name:'Mount Point Parameter Audit',diff:'med',pts:150,desc:'Evaluate file execution rules configured across external system node configurations.',focus:'Isolate block hardware configurations mapped into live processing loops.'},
+  {id(--> 'a14',cat:'Linux: Advanced',name:'Mount Point Parameter Audit',diff:'med',pts:150,desc:'Evaluate file execution rules configured across external system node configurations.',focus:'Isolate block hardware configurations mapped into live processing loops.'},
   {id:'a15',cat:'Linux: Advanced',name:'Zombie Process Parameter Map',diff:'hard',pts:200,desc:'Track lingering process tracking tables for legacy network pointers.',focus:'Examine abandoned execution handles that retain background descriptors inside internal allocation fields.'},
 
   // ── FINAL CRITICAL BOSS (46-50) ──
@@ -562,7 +385,7 @@ const CHALLENGES = [
 ];
 
 // ══════════════════════════════════════════════════════════════
-//  CONTROLLERS & API CONTEXT BRIDGE
+//  CORE ENGINE DISPATCHERS
 // ══════════════════════════════════════════════════════════════
 async function doLogin(){
   const u = document.getElementById('li-user').value.trim();
@@ -592,8 +415,10 @@ async function doLogin(){
   
   if (currentUser.role === 'admin') {
     document.getElementById('nav-monitor').style.display = 'flex';
+    document.getElementById('admin-warning-banner').style.display = 'block';
   } else {
     document.getElementById('nav-monitor').style.display = 'none';
+    document.getElementById('admin-warning-banner').style.display = 'none';
   }
   
   document.getElementById('page-login').style.display = 'none';
@@ -601,15 +426,15 @@ async function doLogin(){
   document.getElementById('nav-username').textContent = currentUser.user;
   document.getElementById('nav-avatar').textContent = currentUser.user[0].toUpperCase();
   
+  // Load local client profile metadata changes if stored
+  loadLocalProfileMetadata();
   updateNavScore();
   goPage('dash');
   startTimer();
 }
-document.getElementById('li-pass').addEventListener('keydown',e=>{ if(e.key==='Enter') doLogin(); });
-document.getElementById('li-user').addEventListener('keydown',e=>{ if(e.key==='Enter') document.getElementById('li-pass').focus(); });
 
 function doLogout(){
-  if(!confirm('End session and logout?')) return;
+  if(!confirm('Terminate terminal context link?')) return;
   currentUser = null; found = []; score = 0; startTime = null;
   window.location.reload();
 }
@@ -643,7 +468,7 @@ async function syncDatabaseStates() {
           <div><div class="board-username">${u.user}</div><div class="board-tag">${u.role.toUpperCase()}</div></div>
         </div>
         <div class="board-score">${u.score}</div>
-        <div class="board-flags">${u.flagsCount} / 33</div>
+        <div class="board-flags">${u.flagsCount} / 50</div>
         <div class="board-last">${u.last}</div>
       </div>
     `).join('');
@@ -652,23 +477,32 @@ async function syncDatabaseStates() {
 
   const adminRows = document.getElementById('admin-monitor-rows');
   if (adminRows && currentUser?.role === 'admin') {
-    adminRows.innerHTML = directory.map(u => `
-      <div class="board-row">
-        <div style="font-family:var(--ui); font-size:.7rem; font-weight:700; color:${u.flagsCount > 0 ? 'var(--teal)' : 'var(--dim)'}">
-          ${u.user === currentUser?.user ? '● ONLINE' : '○ STALE'}
+    adminRows.innerHTML = directory.map(u => {
+      // Pull metadata fields if local profile mutations are injected
+      const metaMail = localStorage.getItem(`meta_mail_${u.user}`) || 'Unset Node';
+      const metaPhone = localStorage.getItem(`meta_phone_${u.user}`) || 'Unset Intercept';
+      const metaLoc = localStorage.getItem(`meta_loc_${u.user}`) || 'Unset Coordinates';
+      
+      return `
+        <div class="board-row" style="grid-template-columns: 100px 1.5fr 1fr 1fr 1.2fr; font-size: 0.78rem;">
+          <div style="font-family:var(--ui); font-weight:700; color:${u.user === currentUser?.user ? 'var(--orange)' : 'var(--dim)'}">
+            ${u.user === currentUser?.user ? '● ONLINE' : '○ DISCONN'}
+          </div>
+          <div>
+            <div style="font-weight:700; color:#fff;">${u.user} (${u.role})</div>
+            <div style="font-size:0.68rem; color:var(--dim); margin-top:2px;">E: ${metaMail} | P: ${metaPhone} | L: ${metaLoc}</div>
+          </div>
+          <div class="board-score">${u.score}</div>
+          <div class="board-flags">${u.flagsCount} / 50</div>
+          <div class="board-last">${u.last}</div>
         </div>
-        <div>${u.user} (${u.role})</div>
-        <div class="board-score">${u.score}</div>
-        <div class="board-flags">${u.flagsCount} / 33</div>
-        <div class="board-last">${u.last}</div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
   }
 }
 
 async function executeAdminAction(action) {
   let payload = { adminUser: currentUser.user, action };
-  
   if (action === 'reset_pass') {
     payload.targetUser = document.getElementById('adm-target-user').value;
     payload.newPassword = document.getElementById('adm-new-pass').value;
@@ -694,6 +528,37 @@ async function executeAdminAction(action) {
 }
 
 // ══════════════════════════════════════════════════════════════
+//  PROFILE LOCAL STORAGE CACHING
+// ══════════════════════════════════════════════════════════════
+function saveProfileMatrix() {
+  if(!currentUser) return;
+  const u = currentUser.user;
+  localStorage.setItem(`meta_mail_${u}`, document.getElementById('prof-email').value);
+  localStorage.setItem(`meta_phone_${u}`, document.getElementById('prof-phone').value);
+  localStorage.setItem(`meta_loc_${u}`, document.getElementById('prof-loc').value);
+  localStorage.setItem(`meta_img_${u}`, document.getElementById('prof-img-url').value);
+  toast('Profile updates committed to local state metadata context.', 'green');
+}
+
+function loadLocalProfileMetadata() {
+  if(!currentUser) return;
+  const u = currentUser.user;
+  document.getElementById('prof-email').value = localStorage.getItem(`meta_mail_${u}`) || '';
+  document.getElementById('prof-phone').value = localStorage.getItem(`meta_phone_${u}`) || '';
+  document.getElementById('prof-loc').value = localStorage.getItem(`meta_loc_${u}`) || '';
+  const storedImg = localStorage.getItem(`meta_img_${u}`);
+  if(storedImg) {
+    document.getElementById('prof-img-url').value = storedImg;
+    document.getElementById('prof-render-src').src = storedImg;
+  }
+}
+
+function updateProfileAvatar() {
+  const url = document.getElementById('prof-img-url').value;
+  if(url.trim()) document.getElementById('prof-render-src').src = url;
+}
+
+// ══════════════════════════════════════════════════════════════
 //  CHALLENGE PRESENTATION LOGIC
 // ══════════════════════════════════════════════════════════════
 function openChallenge(id){
@@ -707,23 +572,29 @@ function openChallenge(id){
   document.getElementById('modal').classList.add('open');
 }
 function closeModal(){ document.getElementById('modal').classList.remove('open'); }
+
 function openLab(){
   closeModal();
   activeChalId = modalChalId;
   const c = CHALLENGES.find(x=>x.id===activeChalId);
-  if(c) document.getElementById('active-chal-name').textContent=c.name;
-  renderLabFlags();
-  goPage('lab');
+  if(c) {
+    goPage('lab');
+    setActiveChal(activeChalId);
+  }
 }
+
+function openLabDirectly(id) {
+  activeChalId = id;
+  goPage('lab');
+  setActiveChal(activeChalId);
+}
+
 function setActiveChal(id){
   activeChalId = id;
   const c = CHALLENGES.find(x => x.id === activeChalId);
   if(!c) return;
   
-  // Update header context title cleanly
   document.getElementById('active-chal-name').textContent = c.name;
-  
-  // Render the specific "What-to-do" hint rule cleanly inside the teal box
   const hintBar = document.getElementById('term-hint-bar');
   if (hintBar) {
     hintBar.textContent = "Objective: " + c.focus;
@@ -733,21 +604,27 @@ function setActiveChal(id){
 
 function renderLabFlags(){
   const list = document.getElementById('lab-flags-list');
-  // Full map ensures all 50 challenges populate the Lab view sidebar
   list.innerHTML = CHALLENGES.map((c, i) => {
     const sv = found.includes(c.id);
     return `<div class="lab-flag-item ${sv ? 'found' : ''}" onclick="setActiveChal('${c.id}')">
       <div class="lfi-num">${i+1}</div>
-      <div class="lfi-dot"></div>
+      <div class="lfi-dot" style="background:${sv ? 'var(--green)' : 'var(--wire)'}"></div>
       <div class="lfi-name">${c.name}</div>
       <div class="lfi-pts">${sv ? '✓' : ''} ${c.pts}p</div>
     </div>`;
   }).join('');
 }
+
 async function labSubmit(){
   const val = document.getElementById('lab-flag-input').value.trim();
   const msg = document.getElementById('lab-submit-msg');
   if(!val) return;
+
+  if (currentUser && currentUser.role === 'admin') {
+    msg.textContent = "✗ Action denied. Root admins cannot log scores.";
+    msg.className = 'err';
+    return;
+  }
 
   const res = await fetch('/api/submit-flag', {
     method: 'POST',
@@ -762,6 +639,7 @@ async function labSubmit(){
     found = data.newFlags;
     updateNavScore();
     document.getElementById('lab-flag-input').value = '';
+    if(activeChalId) renderDash();
   } else if(data.status === 'dup') {
     msg.textContent = data.msg; msg.className = 'dup';
   } else {
@@ -774,8 +652,6 @@ document.getElementById('lab-flag-input').addEventListener('keydown',e=>{ if(e.k
 function renderDash(){
   updateDashStats();
   const grid = document.getElementById('chal-grid');
-  
-  // Dynamically find all unique categories present across all 50 challenges
   const cats = [...new Set(CHALLENGES.map(c => c.cat))];
   let html = '';
   
@@ -786,23 +662,23 @@ function renderDash(){
       const sv = found.includes(c.id);
       const dm = {easy:'dp-easy', med:'dp-med', hard:'dp-hard', expert:'dp-expert'};
       html += `
-        <div class="chal-card ${sv ? 'solved' : ''}" id="cc-${c.id}" onclick="openChallenge('${c.id}')">
-          <div class="chal-cat">${c.cat}</div>
-          <div class="chal-name">${c.name}</div>
-          <div class="chal-desc">${c.desc.slice(0, 80)}...</div>
-          <div class="chal-footer">
-            <div class="diff-pip ${dm[c.diff]}"></div>
-            <div class="chal-diff">${c.diff}</div>
-            <div class="chal-pts">${sv ? '✓ ' : ''} ${c.pts}pts</div>
+        <div class="chal-card ${sv ? 'solved' : ''}" id="cc-${c.id}">
+          <div onclick="openChallenge('${c.id}')" style="cursor:pointer; flex:1;">
+            <div class="chal-cat">${c.cat}</div>
+            <div class="chal-name">${c.name}</div>
+            <div class="chal-desc">${c.desc.slice(0, 80)}...</div>
+            <div class="chal-footer" style="margin-top:8px;">
+              <div class="diff-pip ${dm[c.diff]}"></div>
+              <div class="chal-diff">${c.diff}</div>
+              <div class="chal-pts">${sv ? '✓ ' : ''} ${c.pts}pts</div>
+            </div>
           </div>
+          <button class="action-btn-lab" onclick="openLabDirectly('${c.id}')">Deploy in Terminal Lab →</button>
         </div>`;
     });
   });
   grid.innerHTML = html;
   document.getElementById('sh-count').textContent = `${found.length} / ${CHALLENGES.length} solved`;
-}
-  grid.innerHTML=html;
-  document.getElementById('sh-count').textContent=`${found.length} / ${CHALLENGES.length} solved`;
 }
 
 function updateDashStats(){
@@ -810,6 +686,10 @@ function updateDashStats(){
   document.getElementById('ds-flags').textContent=found.length;
   const rank=getRank();
   document.getElementById('ds-rank').textContent='#'+rank;
+}
+
+function getRank(){
+  return '-';
 }
 
 function updateNavScore(){
@@ -826,88 +706,40 @@ function toast(msg,type=''){
 }
 
 // ══════════════════════════════════════════════════════════════
-//  VIRTUAL TERMINAL INTERFACES
+//  VIRTUAL TERMINAL ENGINE & EMULATION LOGIC
 // ══════════════════════════════════════════════════════════════
-const FS = {
-  '/':{ type:'dir', children:['home','root','etc','var','opt','tmp','proc','bin','usr','dev'] },
-  '/home':{ type:'dir', children:['operator'] },
-  '/home/operator':{ type:'dir', children:['Desktop','Documents','.bashrc','.bash_history','.flag','.encoded','.ssh','.profile'] },
-  '/home/operator/.flag':{ type:'file', content:'FLAG{d0tf1l3_d1sc0v3r3d}' },
-  '/home/operator/.encoded':{ type:'file', content:'RkxBR3tiNHMzNjRfZDNjMGQzcl9wcjB9' },
-  '/home/operator/.bashrc':{ type:'file', content:'# /home/operator/.bashrc\nexport PATH=$PATH:/usr/local/bin\nalias ll="ls -la"\nalias grep="grep --color=auto"\n\nexport DEPLOY_KEY="FLAG{3xp0rt_v4r_l34k3d}"' },
-  '/home/operator/.bash_history':{ type:'file', content:'whoami\nid\nls -la\ncd /etc' },
-  '/home/operator/.profile':{ type:'file', content:'# operator .profile' },
-  '/home/operator/.ssh':{ type:'dir', children:['id_rsa'] },
-  '/home/operator/.ssh/id_rsa':{ type:'file', content:'-----BEGIN RSA PRIVATE KEY-----' },
-  '/home/operator/Desktop':{ type:'dir', children:['mission_brief.txt'] },
-  '/home/operator/Desktop/mission_brief.txt':{ type:'file', content:'Total flags: 33' },
-  '/home/operator/Documents':{ type:'dir', children:['notes.md'] },
-  '/home/operator/Documents/notes.md':{ type:'file', content:'# Op Notes' },
-  '/root':{ type:'dir', children:['.flag_root'] },
-  '/root/.flag_root':{ type:'file', content:'FLAG{r00t_h0m3_0wn3d}', perms:'-rw-------' },
-  '/etc':{ type:'dir', children:['passwd','crontab','motd'] },
-  '/etc/motd':{ type:'file', content:'FLAG{m0td_r34d3r}' },
-  '/etc/passwd':{ type:'file', content:'root:x:0:0::/root:/bin/bash\noperator:x:1000:1000:FLAG{p4sswd_g3c0s_s3cr3t}:/home/operator:/bin/bash' },
-  '/etc/crontab':{ type:'file', content:'* * * * * root /opt/scripts/heartbeat.sh' },
-  '/var':{ type:'dir', children:['log'] },
-  '/var/log':{ type:'dir', children:['syslog','auth.log','app.log'] },
-  '/var/log/syslog':{ type:'file', content:'Jan 20 23:59:59 opsec-ctf kernel: FLAG{t41l_3nd_0f_l0g}' },
-  '/var/log/auth.log':{ type:'file', content:'Jan 20 09:15:44 opsec-ctf sudo[1337]: OPERATION BLACKOUT — FLAG{4uth_l0g_r34d3r}' },
-  '/var/log/app.log':{ type:'file', content:'[INFO] req_00501 TROPHY_EVENT token=FLAG{gr3p_1s_3ss3nt14l}' },
-  '/opt':{ type:'dir', children:['scripts','data','encoded','fragments','config','bin','links','maze','final','writable'] },
-  '/opt/scripts':{ type:'dir', children:['heartbeat.sh','privcheck.sh','deploy.sh'] },
-  '/opt/scripts/heartbeat.sh':{ type:'file', content:'# FLAG{cr0n_scr1pt_3xp0s3d}' },
-  '/opt/scripts/privcheck.sh':{ type:'file', content:'echo "FLAG{sud03rs_pr1v3sc_p4th}"' },
-  '/opt/scripts/deploy.sh':{ type:'file', content:'flag: FLAG{h3r3d0c_1ns1d3}' },
-  '/opt/data':{ type:'dir', children:['ops.csv'] },
-  '/opt/data/ops.csv':{ type:'file', content:'003,SPECTRE,ACTIVE,AMER,TOP_SECRET,FLAG{4wk_csv_3xtr4ct10n}' },
-  '/opt/encoded':{ type:'dir', children:['mirror.txt','cipher.txt','hex.txt'] },
-  '/opt/encoded/mirror.txt':{ type:'file', content:'}d3sr3v3r_r0rr1m{GALF' },
-  '/opt/encoded/cipher.txt':{ type:'file', content:'SYNT{e0g13_q3p0q3q_4t41a}' },
-  '/opt/encoded/hex.txt':{ type:'file', content:'464c41477b6833785f6d4173743372217d' },
-  '/opt/fragments':{ type:'dir', children:['alpha','beta','gamma'] },
-  '/opt/fragments/alpha':{ type:'file', content:'FLAG{fr4gm3nts' },
-  '/opt/fragments/beta':{ type:'file', content:'_r3un1t3d' },
-  '/opt/fragments/gamma':{ type:'file', content:'}' },
-  '/opt/config':{ type:'dir', children:['secrets'] },
-  '/opt/config/secrets':{ type:'dir', children:['master.conf'] },
-  '/opt/config/secrets/master.conf':{ type:'file', content:'MASTER_KEY = FLAG{r3curs1v3_gr3p_m4st3r}' },
-  '/opt/bin':{ type:'dir', children:['agent.elf'] },
-  '/opt/bin/agent.elf':{ type:'file', content:'FLAG{str1ngs_0n_b1n4ry}' },
-  '/opt/links':{ type:'dir', children:['secret_link'] },
-  '/opt/links/secret_link':{ type:'symlink', target:'/opt/.hidden_vault/token.txt' },
-  '/opt/.hidden_vault':{ type:'dir', children:['token.txt'] },
-  '/opt/.hidden_vault/token.txt':{ type:'file', content:'FLAG{syml1nk_targ3t_f0und}' },
-  '/opt/writable':{ type:'dir', children:['community.txt'] },
-  '/opt/writable/community.txt':{ type:'file', content:'FLAG{777_p3rm_d4ng3r0us}', perms:'-rwxrwxrwx' },
-  '/opt/final':{ type:'dir', children:['shard_1','shard_2','shard_3'] },
-  '/opt/final/shard_1':{ type:'file', content:'SYNT{s1a4y' },
-  '/opt/final/shard_2':{ type:'file', content:'_q3pelcg10a' },
-  '/opt/final/shard_3':{ type:'file', content:'_p0zcyr3gr}' },
-  '/opt/maze':{ type:'dir', children:['l1'] },
-  '/opt/maze/l1':{ type:'dir', children:['l2'] },
-  '/opt/maze/l1/l2':{ type:'dir', children:['l3'] },
-  '/opt/maze/l1/l2/l3':{ type:'dir', children:['l4'] },
-  '/opt/maze/l1/l2/l3/l4':{ type:'dir', children:['l5'] },
-  '/opt/maze/l1/l2/l3/l4/l5':{ type:'dir', children:['l6'] },
-  '/opt/maze/l1/l2/l3/l4/l5/l6':{ type:'dir', children:['l7'] },
-  '/opt/maze/l1/l2/l3/l4/l5/l6/l7':{ type:'dir', children:['l8'] },
-  '/opt/maze/l1/l2/l3/l4/l5/l6/l7/l8':{ type:'dir', children:['l9'] },
-  '/opt/maze/l1/l2/l3/l4/l5/l6/l7/l8/l9':{ type:'dir', children:['.maze_flag'] },
-  '/opt/maze/l1/l2/l3/l4/l5/l6/l7/l8/l9/.maze_flag':{ type:'file', content:'FLAG{m4z3_w4lk3r_9_l3v3ls}' },
-  '/proc':{ type:'dir', children:['secret'] },
-  '/proc/secret':{ type:'file', content:'FLAG{pr0c_f4k3_f1l3}' },
-  '/tmp':{ type:'dir', children:['heartbeat'] },
-  '/bin':{ type:'dir', children:['bash','ls','cat','find','grep'] },
-  '/usr':{ type:'dir', children:['bin'] },
-  '/usr/bin':{ type:'dir', children:['python3','curl','xxd','strings'] },
-  '/dev':{ type:'dir', children:['null'] }
-};
+const tout=document.getElementById('term-output');
+function tpr(html){ const d=document.createElement('div'); d.innerHTML=html; tout.appendChild(d); tout.scrollTop=tout.scrollHeight; }
+function tprt(txt,c='t-out'){ tpr(`<span class="${c}">${esc(txt)}</span>`); }
+function tperr(m){ tpr(`<span class="t-err">${esc(m)}</span>`); }
 
-FS['/usr/bin/FLAG{su1d_b1n4ry_f0und}'] = { type:'file', content:'[SUID binary]', perms:'-rwsr-xr-x' };
-FS['/usr/bin'].children.push('FLAG{su1d_b1n4ry_f0und}');
-FS['/var/log/latest_evidence.log'] = { type:'file', content:'FLAG{n3w3st_f1l3_w1ns}' };
-FS['/var/log'].children.push('latest_evidence.log');
+const termCSS=`
+<style>
+.t-out{color:var(--body)}.t-ok{color:var(--orange)}.t-err{color:var(--red)}
+.t-dim{color:var(--wire2)}.t-dir{color:var(--teal)}.t-exe{color:var(--orange2);font-weight:700}
+.t-link{color:#b44fff}.t-cmd{color:var(--pale)}.t-ps1{color:var(--orange)}
+.t-flag{color:var(--orange);font-weight:700;text-shadow:0 0 8px rgba(57,255,20,.6)}
+</style>`;
+tout.insertAdjacentHTML('beforebegin',termCSS);
+
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function res(p){
+  if(!p||p==='~') return '/home/operator';
+  if(p.startsWith('~/')) p='/home/operator'+p.slice(1);
+  if(!p.startsWith('/')) p=(cwd==='/'?'/':cwd+'/')+p;
+  const parts=p.split('/').filter(Boolean),stack=[];
+  for(const pt of parts){ if(pt==='.') continue; if(pt==='..') stack.pop(); else stack.push(pt); }
+  return '/'+stack.join('/');
+}
+function fsnode(p){ return FS[res(p)]||null; }
+function colorEntry(name,n){
+  if(!n) return esc(name);
+  if(n.type==='dir') return `<span class="t-dir">${esc(name)}/</span>`;
+  if(n.type==='symlink') return `<span class="t-link">${esc(name)} -> ${esc(n.target)}</span>`;
+  if(n.perms?.includes('x')) return `<span class="t-exe">${esc(name)}</span>`;
+  if(name.startsWith('.')) return `<span class="t-dim">${esc(name)}</span>`;
+  return `<span class="t-out">${esc(name)}</span>`;
+}
 
 function runCmd(raw){
   const input=raw.trim(); if(!input) return;
@@ -936,10 +768,10 @@ function runCmd(raw){
     case 'curl':    cmdCurl(args); break;
     case 'wget':    tprt('[simulated: file downloaded]'); break;
     case 'pwd':     tprt(cwd); break;
-    case 'whoami':  tprt('root'); break;
-    case 'id':      tprt('uid=0(root) gid=0(root) groups=0(root)'); break;
-    case 'hostname':tprt('opsec-ctf'); break;
-    case 'uname':   tprt(args.includes('-a')?'Linux opsec-ctf 6.1.0-kali9-amd64 #1 SMP PREEMPT Debian x86_64 GNU/Linux':'Linux'); break;
+    case 'whoami':  tprt(currentUser ? currentUser.user : 'operator'); break;
+    case 'id':      tprt('uid=1000(operator) gid=1000(operator) groups=1000(operator)'); break;
+    case 'hostname':tprt('trust-iron-walls'); break;
+    case 'uname':   tprt(args.includes('-a')?'Linux trust-iron-walls 6.1.0 #1 SMP PREEMPT x86_64 GNU/Linux':'Linux'); break;
     case 'date':    tprt(new Date().toString()); break;
     case 'clear':   tout.innerHTML=''; break;
     case 'history': tpr(cmdHist.slice().reverse().map((c,i)=>`<span class="t-out"> ${String(i+1).padStart(4)} ${esc(c)}</span>`).join('\n')); break;
@@ -1249,13 +1081,14 @@ function cmdFile(args){
   if(!n){ tperr(`file: ${f}: No such file`); return; }
   tprt(`${p}: ${n.type==='dir'?'directory':'ASCII text'}`);
 }
+function cmdPush(args){ tprt('[git simulated: updates pushed to deploy stream]'); }
 function cmdWhich(args){
   const b={bash:'/bin/bash',python3:'/usr/bin/python3',find:'/usr/bin/find',grep:'/usr/bin/grep'};
   args.forEach(a=>tpr(b[a]?`<span class="t-out">${b[a]}</span>`:`<span class="t-err">${esc(a)}: not found</span>`));
 }
 function cmdTar(args){ tprt('[tar extraction simulated]'); }
 function cmdHelp(){
-  tpr(`<span class="t-ok">OPSEC CTF — Commands</span>\n<span class="t-out">ls, cd, pwd, cat, head, tail, find, grep, base64, xxd, strings, python3, curl, help</span>`);
+  tpr(`<span class="t-ok">Trust Iron Walls — Available Commands</span>\n<span class="t-out">ls, cd, pwd, cat, head, tail, find, grep, base64, xxd, strings, python3, curl, help</span>`);
 }
 
 function pipeCmd(raw){
@@ -1293,6 +1126,7 @@ function autoDetect(){
 }
 
 async function syncFlagCaptureWithServer(flagString) {
+  if (currentUser && currentUser.role === 'admin') return;
   const res = await fetch('/api/submit-flag', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -1307,11 +1141,11 @@ async function syncFlagCaptureWithServer(flagString) {
   }
 }
 
-function ps1(){ const d=cwd==='/home/operator'?'~':cwd; return `root@opsec:${d}#`; }
+function ps1(){ const d=cwd==='/home/operator'?'~':cwd; return `root@trust-iron-walls:${d}#`; }
 function updatePs1(){
   const d=cwd==='/home/operator'?'~':cwd;
-  document.getElementById('term-ps1').textContent=`root@opsec:${d}# `;
-  document.getElementById('term-titlelabel').textContent=`root@opsec-ctf: ${d}`;
+  document.getElementById('term-ps1').textContent=`root@trust-iron-walls:${d}# `;
+  document.getElementById('term-titlelabel').textContent=`root@trust-iron-walls: ${d}`;
 }
 
 const ti=document.getElementById('term-input');
@@ -1346,10 +1180,6 @@ function startTimer(){
     col.textContent=text;
     container.appendChild(col);
   }
-})();
-
-(function bootMsg(){
-  tpr(`<span class="t-dim">┌─────────────────────────────────────────────────────┐</span>\n<span class="t-dim">│</span>  <span class="t-ok">Trust Iron Walls Terminal v3.1</span>                         <span class="t-dim">│</span>\n└─────────────────────────────────────────────────────┘`);
 })();
 </script>
 </body>
