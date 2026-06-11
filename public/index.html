@@ -450,6 +450,9 @@ html,body{height:100%;background:var(--ink);color:var(--body);font-family:var(--
         <div class="tdot td-g"></div>
         <div id="term-titlelabel">root@trust-iron-walls:~</div>
       </div>
+
+      <div id="term-hint-bar" style="background:rgba(29,184,168,.06); border-bottom:1px solid rgba(29,184,168,.15); padding:7px 16px; font-size:.75rem; color:var(--teal); display:none; font-family:var(--ui);"></div>
+
       <div id="term-output"></div>
       <div id="term-input-row">
         <div id="term-ps1">root@opsec:~# </div>
@@ -770,26 +773,34 @@ document.getElementById('lab-flag-input').addEventListener('keydown',e=>{ if(e.k
 
 function renderDash(){
   updateDashStats();
-  const grid=document.getElementById('chal-grid');
-  const cats=[...new Set(CHALLENGES.map(c=>c.cat))];
-  let html='';
-  cats.forEach(cat=>{
-    html+=`<div style="grid-column:1/-1"><div class="section-head" style="margin-top:8px;margin-bottom:10px"><h2 style="font-size:1rem;color:var(--dim)">${cat}</h2><div class="sh-line"></div></div></div>`;
-    CHALLENGES.filter(c=>c.cat===cat).forEach(c=>{
-      const sv=found.includes(c.id);
-      const dm={easy:'dp-easy',med:'dp-med',hard:'dp-hard',expert:'dp-expert'};
-      html+=`<div class="chal-card ${sv?'solved':''}" id="cc-${c.id}" onclick="openChallenge('${c.id}')">
-        <div class="chal-cat">${c.cat}</div>
-        <div class="chal-name">${c.name}</div>
-        <div class="chal-desc">${c.desc.slice(0,80)}...</div>
-        <div class="chal-footer">
-          <div class="diff-pip ${dm[c.diff]}"></div>
-          <div class="chal-diff">${c.diff}</div>
-          <div class="chal-pts">${sv?'✓ ':''} ${c.pts}pts</div>
-        </div>
-      </div>`;
+  const grid = document.getElementById('chal-grid');
+  
+  // Dynamically find all unique categories present across all 50 challenges
+  const cats = [...new Set(CHALLENGES.map(c => c.cat))];
+  let html = '';
+  
+  cats.forEach(cat => {
+    html += `<div style="grid-column:1/-1"><div class="section-head" style="margin-top:24px;margin-bottom:10px"><h2 style="font-size:1rem;color:var(--dim)">${cat}</h2><div class="sh-line"></div></div></div>`;
+    
+    CHALLENGES.filter(c => c.cat === cat).forEach(c => {
+      const sv = found.includes(c.id);
+      const dm = {easy:'dp-easy', med:'dp-med', hard:'dp-hard', expert:'dp-expert'};
+      html += `
+        <div class="chal-card ${sv ? 'solved' : ''}" id="cc-${c.id}" onclick="openChallenge('${c.id}')">
+          <div class="chal-cat">${c.cat}</div>
+          <div class="chal-name">${c.name}</div>
+          <div class="chal-desc">${c.desc.slice(0, 80)}...</div>
+          <div class="chal-footer">
+            <div class="diff-pip ${dm[c.diff]}"></div>
+            <div class="chal-diff">${c.diff}</div>
+            <div class="chal-pts">${sv ? '✓ ' : ''} ${c.pts}pts</div>
+          </div>
+        </div>`;
     });
   });
+  grid.innerHTML = html;
+  document.getElementById('sh-count').textContent = `${found.length} / ${CHALLENGES.length} solved`;
+}
   grid.innerHTML=html;
   document.getElementById('sh-count').textContent=`${found.length} / ${CHALLENGES.length} solved`;
 }
